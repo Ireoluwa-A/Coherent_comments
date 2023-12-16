@@ -1,0 +1,2448 @@
+File,Comment,Code,Coherent
+USHibernateUtil.java,/** * A path to the Hibernate configuration file. */,"protected SessionFactory buildSessionFactory() {
+        try {
+            cz.filmtit.core.Configuration projectConfiguration = ConfigurationSingleton.conf();
+
+            // Create the SessionFactory from core.cfg.xml
+            Configuration hibernateConfiguration = new Configuration();
+
+            hibernateConfiguration.configure(getConfigurationFile());
+
+            hibernateConfiguration.setProperty(""hibernate.connection.username"", projectConfiguration.dbUser());
+            hibernateConfiguration.setProperty(""hibernate.connection.password"", projectConfiguration.dbPassword());
+            hibernateConfiguration.setProperty(""hibernate.connection.url"", projectConfiguration.dbConnector());
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(hibernateConfiguration.getProperties()).buildServiceRegistry();
+            sessionFactory = hibernateConfiguration.buildSessionFactory(serviceRegistry);
+            return sessionFactory;
+        }
+        catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            logger.error(""Initial SessionFactory creation failed."" + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }",0
+CTarget.java,/** * Overrides the standard grammar analysis so we can prepare the analyser * a little differently from the other targets. */,"@Override
+    protected void performGrammarAnalysis(CodeGenerator generator, Grammar grammar) {
+
+        // Check to see if the maximum inline DFA states is still set to
+        // the default size. If it is then whack it all the way up to the maximum that
+        // we can sensibly get away with.
+        //
+        if (CodeGenerator.MAX_ACYCLIC_DFA_STATES_INLINE == CodeGenerator.MADSI_DEFAULT) {
+
+            CodeGenerator.MAX_ACYCLIC_DFA_STATES_INLINE = 65535;
+        }
+
+        // Check to see if the maximum switch size is still set to the default
+        // and bring it up much higher if it is. Modern C compilers can handle
+        // much bigger switch statements than say Java can and if anyone finds a compiler
+        // that cannot deal with such big switches, all the need do is generate the
+        // code with a reduced -Xmaxswitchcaselabels nnn
+        //
+        if  (CodeGenerator.MAX_SWITCH_CASE_LABELS == CodeGenerator.MSCL_DEFAULT) {
+
+            CodeGenerator.MAX_SWITCH_CASE_LABELS = 3000;
+        }
+
+        // Check to see if the number of transitions considered a miminum for using
+        // a switch is still at the default. Because a switch is still generally faster than
+        // an if even with small sets, and given that the optimizer will do the best thing with it
+        // anyway, then we simply want to generate a switch for any number of states.
+        //
+        if (CodeGenerator.MIN_SWITCH_ALTS == CodeGenerator.MSA_DEFAULT) {
+
+            CodeGenerator.MIN_SWITCH_ALTS = 1;
+        }
+
+        // Now we allow the superclass implementation to do whatever it feels it
+        // must do.
+        //
+        super.performGrammarAnalysis(generator, grammar);
+    }",0
+Grammar.java,"/** If someone does PLUS='+' in the parser, must make sure we get *  ""PLUS : '+' */","public void defineLexerRuleForAliasedStringLiteral(String tokenID,
+													   String literal,
+													   int tokenType)
+	{
+		if ( getGrammarIsRoot() ) { // don't build lexers for delegates
+			//System.out.println(""defineLexerRuleForAliasedStringLiteral: ""+literal+"" ""+tokenType);
+			lexerGrammarST.setAttribute(""literals.{ruleName,type,literal}"",
+										tokenID,
+										Utils.integer(tokenType),
+										literal);
+		}
+		// track this lexer rule's name
+		composite.lexerRules.add(tokenID);
+	}",0
+Grammar.java,"/** A label on a rule is useless if the rule has no return value, no *  tree or template output, and it is not referenced in an action. */","protected void removeUselessLabels(Map ruleToElementLabelPairMap) {
+		if ( ruleToElementLabelPairMap==null ) {
+			return;
+		}
+		Collection labels = ruleToElementLabelPairMap.values();
+		List kill = new ArrayList();
+		for (Iterator labelit = labels.iterator(); labelit.hasNext();) {
+			LabelElementPair pair = (LabelElementPair) labelit.next();
+			Rule refdRule = getRule(pair.elementRef.getText());
+			if ( refdRule!=null && !refdRule.getHasReturnValue() && !pair.actionReferencesLabel ) {
+				//System.out.println(pair.label.getText()+"" is useless"");
+				kill.add(pair.label.getText());
+			}
+		}
+		for (int i = 0; i < kill.size(); i++) {
+			String labelToKill = (String) kill.get(i);
+			// System.out.println(""kill ""+labelToKill);
+			ruleToElementLabelPairMap.remove(labelToKill);
+		}
+	}",0
+Tool.java,"/** If the tool needs to panic/exit, how do we do that? */","public void panic() {
+        throw new Error(""ANTLR panic"");
+    }",0
+DonovanDriveTrain.java,/* * A FAILED attempt at driving straight. */,"public void forwardInchesCharlie(int inches) {
+    encoderRight.reset();
+    encoderLeft.reset();
+    double lm;
+    double rm;
+    int i = 0;
+    while ((getAvgDistance() < inches) && donnie.isAutonomous() && donnie.isEnabled()) {
+    /*if(i%10 == 0)
+    System.out.println(""diff: "" + (encoderLeft.get()-encoderRight.get()));
+    else if(i%50 == 0)
+    System.out.println(""left: "" + encoderLeft.get() + ""  right: "" + encoderRight.get());
+     * */
+    
+    lm = .5 + ((encoderRight.get() - encoderLeft.get()) / (SCALE));
+    rm = .5 + ((encoderLeft.get() - encoderRight.get()) / SCALE);
+    tankDrive((-1*lm), (-1*rm));
+    i++;
+    }
+    tankDrive(0, 0);
+    }",0
+DonovanDriveTrain.java,"/* * A SO FAR UNSUCCESSFUL attempt at drive straight code, ported from Michael1. */","public void forwardInchesMike(int inches){
+    resetEncoders();
+    donnie.gyro.reset();
+    double p, i, d, err, lastErr;
+    double multiplier = 0.3;
+    p = i = d = err = 0;
+    lastErr =  donnie.gyro.getAngle();
+    while(getAvgDistance() < inches && donnie.isAutonomous() && donnie.isEnabled()) {
+    err = donnie.gyro.getAngle();
+    p = err;
+    i = i + err * FWD_T;
+    d = (err-lastErr)/FWD_T;
+    lastErr = err;
+    double diff = p*FWD_P + d*FWD_D + i*FWD_I;
+    if (getAvgDistance() > inches - 7) {
+    multiplier = (inches - getAvgDistance()) / 14;
+    if (multiplier < .2)  {
+    multiplier = 0.2;
+    }
+    }
+    donnie.dt.tankDrive((multiplier - diff), (multiplier + diff));
+    Timer.delay(FWD_T);
+
+
+    }
+    donnie.dt.tankDrive(0, 0);
+
+    }",0
+ATKMonitorService.java,/** * Only valid on API >= 8 */,"private long getUidTxBytes(int uid){
+    	 String className = ""android.net.TrafficStats"";
+  		String methodName = ""getUidTxBytes"";
+  		try {
+  			Class<?> handler = Class.forName(className);
+  			Method m = handler.getDeclaredMethod(methodName, int.class);
+  			long result = (Long) m.invoke(handler.newInstance(),uid);
+  			return result;
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			return -1;
+  		}
+     }",0
+ATKMonitorService.java,/** * Only valid on API >= 8 */,"private long getTotalTxBytes() {
+ 		String className = ""android.net.TrafficStats"";
+ 		String methodName = ""getTotalTxBytes"";
+ 		try {
+ 			Class<?> handler = Class.forName(className);
+ 			Method m = handler.getDeclaredMethod(methodName, (Class[]) null);
+ 			long result = (Long) m.invoke(handler.newInstance());
+ 			return result;
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 			return -1;
+ 		}
+ 	}",0
+TestApk.java,/** * Black Box Test  Method */,"public void testDisplayBlackBox() throws Throwable {  
+       String exitCommand="""";
+		//getting commands from remote service  and execute them
+		do {
+			if(remoteConnection!=null) {
+				try  {
+					 cmd=serviceb.getEvent();
+					 if(cmd!=null){
+						 exitCommand=cmd[0];
+						 if(!cmd[0].equalsIgnoreCase(""ExitSolo"")) {
+							 executeSoloCommand.execute(cmd);
+							 Log.d(logTag, cmd[0]);
+							}
+					 }
+					
+				} catch (RemoteException e) {
+					Log.d(logTag,e.getMessage(),e);	
+				}
+			}
+		} while(!exitCommand.equalsIgnoreCase(""ExitSolo""));
+
+
+	}",0
+MyDisplayJAI.java,/** * constructor */,"public MyDisplayJAI(ComparaisonCouple couple, Model model, boolean isTest) {
+		super();
+		model.addObserver(this);
+		mask=couple.getMaskSum();
+		this.isTest=isTest;
+		me = this;
+		this.model = model;
+		try {
+			if (isTest){
+				img = ImageIO.read(couple.getImgTest());
+			}else{
+				img = ImageIO.read(model.getRefImage(couple.getImgRefId()).getImage());	
+			}
+			w = img.getWidth();
+			h = img.getHeight();
+			bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			Graphics g = bi.getGraphics();
+
+			Dimension dim = new Dimension(w,h);
+			setPreferredSize(dim);
+			setMinimumSize(dim);
+			g.drawImage(img, 0, 0, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		diff = couple.getDifWithMask();
+	}",0
+CreateGraph.java,/** * A new tcpdump line has been received */,"public void newTcpDumpLine(String line) {
+		Date theDate = NetworkAnalysisUtils.extractTcpdumpLineDate(line);
+		String url = NetworkAnalysisUtils.extractTcpdumpLineUrl(line);
+		if (theDate != null && url != null) {
+			GraphMarker urlMarker = mapAction.get(""URL"");
+			if (urlMarker != null) {
+				urlMarker.addEvent(""Type"", url, theDate, theDate);
+				// Set marker to hidden if urlMarkers checkbox is not checked
+				if (urlMarkersDisplayed == false) {
+					urlMarker.removeMarker();
+				}
+				mapAction.put(""URL"", urlMarker);
+			}
+		}
+	}",0
+JATKInterpreter.java,/** * Entry point of the interpreter */,"public Object visit(ASTStart node, Object data) {
+		// Start of interpreter
+		Boolean res = (Boolean) node.childrenAccept(this, Boolean.TRUE);
+		// End of interpreter
+		// test if StopMainLog has been called
+		/*if (getMainLogger().isAlive()) {
+			getMainLogger()
+					.addErrorToDocumentLogger(STOPMAIN_HAS_NOT_BEEN_CALLED, 0, null);
+			getMainLogger().interrupt();
+			return Boolean.FALSE;
+		}*/
+		if (res == null) {
+			// Logger.getLogger(this.getClass() ).warn(""res == null"");
+			return Boolean.FALSE;
+		}
+		return res;
+	}",0
+SurroundLoopVisitor.java,"/** * if data not null, it's the position in parent node (int) */","public Object visit(SimpleNode node, Object data) {
+	
+		if( treepathdepth >= firsttreepath.size() )
+			return false;
+		
+		
+		if (treepathdepth == firsttreepath.size()-1 ){
+			int firstposition = firsttreepath.get(treepathdepth);
+		
+			
+			ASTLOOP loop = new ASTLOOP(ATKScriptParserTreeConstants.JJTLOOP);
+
+			loop.jjtAddChild(nbloop, 0);
+			
+			for (int i=0 ; i <= lasttreepathindex-firstposition ; i++){
+				loop.jjtAddChild(node.jjtGetChild(firstposition), i+1);
+				node.jjtRemoveChild(firstposition);
+			}
+			node.jjtInsertChild(loop, firstposition);
+			return true;
+			
+			
+		} else {
+			//cross node depending the PathTree
+					
+			Node child = node.jjtGetChild( firsttreepath.get(treepathdepth));
+			treepathdepth++;
+			child.jjtAccept(this,null);
+		}
+		
+		return  true;
+	}",0
+ATKScriptParser.java,/* * SECTION 4 - THE GRAMMAR */,"final public ASTStart start() throws ParseException {
+                           /*@bgen(jjtree) Start */
+  ASTStart jjtn000 = new ASTStart(JJTSTART);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      parseFile();
+                       jjtree.closeNodeScope(jjtn000, true);
+                       jjtc000 = false;
+                       {if (true) return jjtn000;}
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+    throw new Error(""Missing return statement in function"");
+  }",0
+ScriptController.java,/** * Method call by RecordPhoneEventListener */,"public void addEvent(String code) {
+		//		Logger.getLogger(this.getClass() ).debug(""/********controler.append(""+action+"",""+parameters[0]+"")********/"");
+		if (ignoreFirstMessageFromPhone){
+			ignoreFirstMessageFromPhone=false;
+		}
+		else{
+			ATKScriptParser parse = new ATKScriptParser(new StringReader(code));
+			ASTStart newnodes = new ASTStart(ATKScriptParserTreeConstants.JJTSTART);
+			try {
+				newnodes = parse.start();
+			} catch (ParseException e) {
+				Logger.getLogger(this.getClass() ).warn(""WARNING : unknow code for :""+code+""\r\n""+e.getMessage());
+			}
+
+			//insert the nodes at the last place
+			for( int i=0; i< newnodes.jjtGetNumChildren() ;i++) {
+				SimpleNode functionode = (SimpleNode) newnodes.jjtGetChild(i);
+				ast.jjtInsertChild(functionode, ast.jjtGetNumChildren());
+			}	
+
+			if(!code.toLowerCase().startsWith(""sleep""))
+				ui.updateScript();
+		}
+	}",0
+OrderResource.java,/** * Order Version 1. */,"@ContextualActionSet
+    public Set<String> getContextualActionSet() {
+        Set<String> result = new HashSet<String>();
+        result.add(""refresh"");
+        switch (order.getStatus()) {
+            case RECEIVED:
+                result.add(""review"");       // @Action's value
+                result.add(""cancel"");       // @Action's value
+                result.add(""update"");       // @Action's value
+                break;
+            case REVIEWED:
+                result.add(""cancel"");       // @Action's value
+                result.add(""pay"");          // @Action's value
+                result.add(""update"");       // @Action's value
+                break;
+            case CANCELED:
+                break;
+            case PAYED:
+                result.add(""ship"");         // @Action's value
+                result.add(""update"");       // @Action's value
+                break;
+            case SHIPPED:
+                break;
+        }
+        return result;
+    }",0
+ProductResource.java,/** * Product Version 1. */,"@ContextualActionSet
+    public Set<String> getContextualActionSet() {
+        Set<String> result = new HashSet<String>();
+        result.add(""refresh"");
+        result.add(""update"");    
+        switch (product.getStatus()) {
+            case OUT_OF_STOCK:
+                result.add(""discontinue"");      // @Action's value
+                break;
+        }
+        return result;
+    }",0
+CDIExtension.java,"/* * Called after the WebApplication and ResourceConfig have been set,  */","void lateInitialize() {
+        try {
+            for (InitializedLater object : toBeInitializedLater) {
+                object.later();
+            }
+        }
+        finally {
+            // clear the JNDI reference as soon as possible
+            if (!lookupExtensionInBeanManager) {
+                try {
+                    InitialContext ic = InitialContextHelper.getInitialContext();
+                    if (ic != null) {
+                        lookupJerseyConfigJNDIContext(ic).unbind(JNDI_CDIEXTENSION_NAME);
+                    }
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+    }",0
+ServletContainerTest.java,/** * JERSEY-780: Malformed URL returns a 500 instead of a 400. */,"public void testInvalidUrl() throws Exception {
+        startServer(HelloWorldResource.class);
+
+        final URL url = new URL(getUri().path(""helloworld"").build().toString() + ""^"");
+        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod(""GET"");
+
+        connection.connect();
+
+        final int responseCode = connection.getResponseCode();
+        final String responseMessage = connection.getResponseMessage();
+
+        connection.disconnect();
+
+        stopServer();
+
+        assertTrue(responseCode == Response.Status.BAD_REQUEST.getStatusCode());
+        assertTrue(Response.Status.BAD_REQUEST.getReasonPhrase().equals(responseMessage));
+    }",0
+EntityTypesTest.java,"/** * TODO, the unmarshalling fails. */","public void _testJAXBListRepresentationFastInfoset() {
+        initiateWebApplication(JAXBListResourceFastInfoset.class);
+        WebResource r = resource(""/"");
+
+        Collection<JAXBBean> a = r.get(
+                new GenericType<Collection<JAXBBean>>(){});
+        Collection<JAXBBean> b = r.post(new GenericType<Collection<JAXBBean>>(){}, 
+                new GenericEntity<Collection<JAXBBean>>(a){});
+        
+        assertEquals(a, b);
+        
+        b = r.path(""type"").post(new GenericType<Collection<JAXBBean>>(){},
+                new GenericEntity<Collection<JAXBBean>>(a){});
+        assertEquals(a, b);
+    }",0
+EntityUtil.java,"/** * Assumes that the key in <key, value> pairs is an Object to which a regular equals() is applicable. */","public static boolean deepEqual(Map<?, ? extends Entity> o1, Map<?, ? extends Entity> o2) {
+		if (o1.keySet().size() != o2.keySet().size()) return false;
+		for (Entry<?,? extends Entity> entry : o1.entrySet()) {
+			Object actualKey = findMatchingKey(entry.getKey(), o2.keySet());
+			if (actualKey == null) return false;
+			if (!deepEqual(entry.getValue(), o2.get(actualKey)))
+				return false;
+		}
+		return true;
+	}",0
+TreatmentCategorizationWizardPresentationTest.java,/* * Regression test for bug #566 */,"@Test
+	public void testDoNotReuseDefaultDose() {
+		TreatmentCategorizationWizardPresentation pm1 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		TreatmentCategorizationWizardPresentation pm2 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		pm1.getDoseUnit().setScaleModifier(ScaleModifier.MEGA);
+		assertFalse(pm2.getDoseUnit().equals(pm1.getDoseUnit()));
+	}",0
+FirefoxProfile.java,/** * Internal method This is liable to change at a moment's notice. */,"@Beta
+  protected Reader onlyOverrideThisIfYouKnowWhatYouAreDoing() {
+    URL resource = Resources.getResource(FirefoxProfile.class, defaultPrefs);
+    try {
+      return new InputStreamReader(resource.openStream());
+    } catch (IOException e) {
+      throw new WebDriverException(e);
+    }
+  }",0
+HtmlUnitDriver.java,/** * Allows HtmlUnit's about:blank to be loaded in the constructor */,"protected void get(URL fullUrl) {
+    try {
+      getWebClient().getPage(fullUrl);
+      // A ""get"" works over the entire page
+      currentWindow = getCurrentWindow().getTopWindow();
+    } catch (UnknownHostException e) {
+      getCurrentWindow().getTopWindow().setEnclosedPage(new UnexpectedPage(
+          new StringWebResponse(""Unknown host"", fullUrl),
+          getCurrentWindow().getTopWindow()
+      ));
+    } catch (ConnectException e) {
+      // This might be expected
+    } catch (SocketTimeoutException e) {
+      throw new TimeoutException(e);
+    } catch (Exception e) {
+      throw new WebDriverException(e);
+    }
+
+    gotPage = true;
+    pickWindow();
+    resetKeyboardAndMouseState();
+  }",0
+RemoteWebDriver.java,/** * Override this to be notified at key points in the execution of a command. */,"protected void log(SessionId sessionId, String commandName, Object toLog, When when) {
+    String text = """" + toLog;
+    if (commandName.equals(DriverCommand.EXECUTE_SCRIPT)
+        || commandName.equals(DriverCommand.EXECUTE_ASYNC_SCRIPT)) {
+      if (text.length() > 100 && Boolean.getBoolean(""webdriver.remote.shorten_log_messages"")) {
+        text = text.substring(0, 100) + ""..."";
+      }
+    }
+    switch(when) {
+      case BEFORE:
+        logger.log(level, ""Executing: "" + commandName + "" "" + text);
+        break;
+      case AFTER:
+        logger.log(level, ""Executed: "" + text);
+        break;
+      case EXCEPTION:
+        logger.log(level, ""Exception: "" + text);
+        break;
+      default:
+        logger.log(level, text);
+        break;
+    }
+  }",0
+ErrorsTest.java,/** * Regression test for Selenium RC issue 363. */,"@JavascriptEnabled
+  @Ignore(value = {IE, MARIONETTE}, reason = ""IE does not support onerror"")
+  @Test
+  public void testShouldNotGenerateErrorsWhenOpeningANewPage() {
+    driver.get(pages.errorsPage);
+    Object result = ((JavascriptExecutor) driver).
+        executeScript(""return window.ERRORS.join('\\n');"");
+    assertEquals(""Should have no errors"", """", result);
+  }",0
+BaseRemoteProxy.java,/** * Internal use only */,"public void forceSlotCleanerRun() {
+    cleanUpThread.cleanUpAllSlots();
+  }",0
+GridNodeConfiguration.java,"/** * add config, but overwrite capabilities. */","private void loadFromJSON(String resource) {
+    try {
+      JSONObject base = JSONConfigurationUtils.loadJSON(resource);
+
+      if (base.has(""capabilities"")) {
+        capabilities = new ArrayList<DesiredCapabilities>();
+        JSONArray a = base.getJSONArray(""capabilities"");
+        for (int i = 0; i < a.length(); i++) {
+          JSONObject cap = a.getJSONObject(i);
+          DesiredCapabilities c = new DesiredCapabilities();
+          for (Iterator iterator = cap.keys(); iterator.hasNext();) {
+            String name = (String) iterator.next();
+            c.setCapability(name, cap.get(name));
+          }
+        }
+      }
+
+      JSONObject o = base.getJSONObject(""configuration"");
+      for (Iterator iterator = o.keys(); iterator.hasNext();) {
+        String key = (String) iterator.next();
+        Object value = o.get(key);
+        if (value instanceof JSONArray) {
+          JSONArray a = (JSONArray) value;
+          List<String> as = new ArrayList<String>();
+          for (int i = 0; i < a.length(); i++) {
+            as.add(a.getString(i));
+          }
+          configuration.put(key, as);
+        } else {
+          configuration.put(key, o.get(key));
+        }
+      }
+
+    } catch (Throwable e) {
+      throw new GridConfigurationException(""Error with the JSON of the config : "" + e.getMessage(),
+          e);
+    }
+  }",0
+FirefoxChromeLauncher.java,/** * Wrapper to allow for stubbed-out testing * */,"protected void killFirefoxProcess() {
+    log.info(""Killing Firefox..."");
+    int exitValue = process.destroy();
+    if (exitValue == 0) {
+      log.warning(""Firefox seems to have ended on its own (did we kill the real browser???)"");
+    }",0
+MockBrowserLauncher.java,/** *  This browser configuration is not supported for IE */,"public void launchRemoteSession(String url) {
+    browser = new Thread(this); // Thread safety reviewed
+    browser.setName(""mockbrowser"");
+    if (null != url) {
+      browser.start();
+    } else {
+      log.info(""launching a mock unresponsive browser"");
+    }
+  }",0
+StaticContentHandler.java,/** * This will force jetty to return the document anyway. */,"private void hackRemoveLastModifiedSince(HttpRequest req) {
+    if (null == req.getField(HttpFields.__IfModifiedSince)) {
+      return;
+    }
+    try {
+      Field f = HttpMessage.class.getDeclaredField(""_header"");
+      f.setAccessible(true);
+      HttpFields header = (HttpFields) f.get(req);
+      header.remove(HttpFields.__IfModifiedSince);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }",0
+ParallelTest.java,/** * a proxy than can host up to 5 tests at the same time. */,"@BeforeClass
+  public static void prepareReqRequest() {
+
+    Map<String, Object> config = new HashMap<String, Object>();
+    app1.put(APP, ""app1"");
+    app1.put(MAX_INSTANCES, 5);
+
+    app2.put(APP, ""app2"");
+    app2.put(MAX_INSTANCES, 1);
+
+    config.put(REMOTE_HOST, ""http://machine1:4444"");
+    config.put(MAX_SESSION, 5);
+
+    req = new RegistrationRequest();
+    req.addDesiredCapability(app1);
+    req.addDesiredCapability(app2);
+    req.setConfiguration(config);
+  }",0
+CommandQueueUnitTest.java,"/** * In PI Mode, open replies ""OK"", but then we asynchronously receive ""closed!"" */","@Test
+  public void testPIOpenSingleThreaded() throws Exception {
+    injectCommandAsIfWaiting(""open"", ""blah.html"", """");
+    expectCommand(""open"", ""blah.html"", """");
+    cq.handleCommandResultWithoutWaitingForACommand(""OK"");
+    cq.declareClosed();
+    assertEquals(""OK"", cq.peekAtResult());
+  }",0
+IniPreferences.java,/** * Implements the childrenNamesSpi method as per the specification in *  java.util.prefs.AbstractPreferences#childrenNamesSpi(). */,"@Override protected String[] childrenNamesSpi() throws BackingStoreException
+    {
+        List<String> names = new ArrayList<String>();
+
+        for (String name : _ini.keySet())
+        {
+            if (name.indexOf(_ini.getPathSeparator()) < 0)
+            {
+                names.add(name);
+            }
+        }
+
+        return names.toArray(EMPTY);
+    }",0
+IniPreferences.java,/** * Implements the childSpi method as per the specification in *  java.util.prefs.AbstractPreferences#childSpi(String). */,"@Override protected SectionPreferences childSpi(String name)
+    {
+        Ini.Section sec = _ini.get(name);
+        boolean isNew = sec == null;
+
+        if (isNew)
+        {
+            sec = _ini.add(name);
+        }
+
+        return new SectionPreferences(this, sec, isNew);
+    }",0
+VuzeActivitiesEntry.java,/** * Not needed if you #setDownloadManager(DownloadManager). This will * be written the map. */,"public void setTorrent(TOTorrent torrent) {
+		this.torrent = torrent;
+
+		try {
+			assetHash = torrent.getHashWrapper().toBase32String();
+		} catch (Exception e) {
+		}
+	}",0
+SMConfigurationAdapterImpl.java,/** * One of the above constants */,"public float getEstimateType() {
+            return limitEstimateType;
+        }",0
+SMConfigurationAdapterImpl.java,/** * Don't call this method. */,"public int[][] getSegments() {
+            return new int[0][];
+        }",0
+UPnPPlugin.java,/** * Provided for use by other plugins. */,"public void refreshMappings() {
+		refreshMappings(false);
+	}",0
+UPnPPlugin.java,/** * Provided for use by other plugins. */,"public void refreshMappings(boolean force) {
+		if (force) {
+			closeDown(true);
+			startUp();
+		}
+		else {
+			this.upnp.reset();
+		}
+	}",0
+NatPMPImpl.java,/** * Azureus framework methods  **/,"public void addPortMapping( 
+                    boolean tcp,        // false -> UDP
+                    int port,
+                    String description ) 
+                    throws UPnPException 
+    {
+        try{
+            /* use public port for internal port */
+            natDevice.addPortMapping( tcp, port, port );
+        } catch( Exception e) {
+            throw( new UPnPException( ""addPortMapping failed"", e ));
+        }
+        
+        synchronized( this ){
+	        /* Find and remove old mapping, if any */
+	        Iterator it = mappings.iterator();
+	        while( it.hasNext() ) {
+	            portMapping m = (portMapping)it.next();
+	                
+	            if (m.getExternalPort() == port && m.isTCP() == tcp) 
+	                it.remove() ;
+	        }
+	        /* add new port to list */   
+	        mappings.add(   new portMapping( port, tcp, 
+	                        natDevice.getLocalAddress().getHostAddress(), 
+	                        description) );
+        }
+    }",0
+AttCertIssuer.java,/** * Don't use this one if you are trying to be RFC 3281 compliant. */,"public AttCertIssuer(
+        GeneralNames  names)
+    {
+        obj = names;
+        choiceObj = obj.getDERObject();
+    }",0
+AEMonitor2.java,/* * Try and obtain it */,"public boolean
+	enter(
+		int	max_millis )
+	{
+		try{
+			if ( lock.tryLock( max_millis, TimeUnit.MILLISECONDS )){
+								
+				return( true );
+				
+			}else{
+				
+				return( false );
+			}
+		}catch( Throwable e ){
+			
+			Debug.out( e );
+			
+			return( false );
+		}
+	}",0
+AEThread2.java,"/** * entry 0 is debug object, 1 is Long mono-time it was set */","public static Object[] getDebug(
+            Thread t) {
+        if (t instanceof threadWrapper) {
+
+            return (((threadWrapper) t).getDebug());
+        }
+
+        return (null);
+    }",0
+ByteArrayHashMap.java,/** * Bit inefficient at the moment */,"public ByteArrayHashMap<T>
+    duplicate()
+    {
+    	ByteArrayHashMap<T>	res = new ByteArrayHashMap<T>(size,loadFactor);
+    	
+        for (int j = 0; j < table.length; j++) {
+	         Entry<T> e = table[j];
+	         while( e != null ){
+              	res.put( e.key, e.value );
+               	
+               e = e.next;
+	        }
+	    }
+       
+       return( res );
+    }",0
+ByteFormatter.java,/** * Note this has a truncation limit at 1024 chars.... */,"public static String
+  encodeString(
+  	byte[]		bytes )
+  {
+  	return( nicePrint( bytes, true ));
+  }",0
+DebugLight.java,/** * Used in environments where full debug may not be available * @param e */,"public static void
+	printStackTrace(
+		Throwable e )
+	{
+		try{
+			Debug.printStackTrace( e );
+			
+		}catch( Throwable f ){
+			
+			e.printStackTrace();
+		}
+	}",0
+MD4Hasher.java,/** * Uses bouncy castle provider * */,"public 
+	MD4Hasher()
+    {
+    	try{
+    		md4 = MessageDigest.getInstance(""MD4"", BouncyCastleProvider.PROVIDER_NAME );
+    		  		
+    	}catch( Throwable e ){
+    		
+    			// should never get here
+    		
+    		Debug.printStackTrace( e );
+    	}
+    }",0
+ApplicationConfig.java,/** * It is automatically generated by NetBeans REST support. */,"private Set<Class<?>> getRestResourceClasses() {
+        Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
+        resources.add(org.javaee7.websocket.websocket.vs.rest.MyRestEndpoint.class);
+        return resources;
+    }",0
+ExactMatcher.java,/** just copy code from wiki */,"private static int editDistance(String str1, String str2) {
+		int[][] distance = new int[str1.length() + 1][str2.length() + 1];        
+		 
+        for (int i = 0; i <= str1.length(); i++)                                 
+            distance[i][0] = i;                                                  
+        for (int j = 1; j <= str2.length(); j++)                                 
+            distance[0][j] = j;                                                  
+ 
+        for (int i = 1; i <= str1.length(); i++)                                 
+            for (int j = 1; j <= str2.length(); j++)                             
+                distance[i][j] = minimum(                                        
+                        distance[i - 1][j] + 1,                                  
+                        distance[i][j - 1] + 1,                                  
+                        distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+ 
+        return distance[str1.length()][str2.length()];
+	}",0
+QuestionSet.java,/** * constructor */,"public QuestionSet() {
+		this.qs = new ArrayList<Question>();
+	}",0
+SoundPullEventListener.java,/** * Constructor */,"public SoundPullEventListener(Context context) {
+		mContext = context;
+		mSoundMap = new HashMap<State, Integer>();
+	}",0
+PullToRefreshBase.java,/** * Called when the UI has been to be updated to be in the *  State#RELEASE_TO_REFRESH state. */,"protected void onReleaseToRefresh() {
+		switch (mCurrentMode) {
+			case PULL_FROM_END:
+				mFooterLayout.releaseToRefresh();
+				break;
+			case PULL_FROM_START:
+				mHeaderLayout.releaseToRefresh();
+				break;
+			default:
+				// NO-OP
+				break;
+		}
+	}",0
+PullToRefreshBase.java,/** * Called when the UI has been to be updated to be in the *  State#RESET state. */,"protected void onReset() {
+		mIsBeingDragged = false;
+		mLayoutVisibilityChangesEnabled = true;
+
+		// Always reset both layouts, just in case...
+		mHeaderLayout.reset();
+		mFooterLayout.reset();
+
+		smoothScrollTo(0);
+	}",0
+PullToRefreshBase.java,/** * Helper method which just calls scrollTo() in the correct scrolling * direction. */,"protected final void setHeaderScroll(int value) {
+		if (DEBUG) {
+			Log.d(LOG_TAG, ""setHeaderScroll: "" + value);
+		}
+
+		// Clamp value to with pull scroll range
+		final int maximumPullScroll = getMaximumPullScroll();
+		value = Math.min(maximumPullScroll, Math.max(-maximumPullScroll, value));
+
+		if (mLayoutVisibilityChangesEnabled) {
+			if (value < 0) {
+				mHeaderLayout.setVisibility(View.VISIBLE);
+			} else if (value > 0) {
+				mFooterLayout.setVisibility(View.VISIBLE);
+			} else {
+				mHeaderLayout.setVisibility(View.INVISIBLE);
+				mFooterLayout.setVisibility(View.INVISIBLE);
+			}
+		}
+
+		if (USE_HW_LAYERS) {
+			/**
+			 * Use a Hardware Layer on the Refreshable View if we've scrolled at
+			 * all. We don't use them on the Header/Footer Views as they change
+			 * often, which would negate any HW layer performance boost.
+			 */
+			ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
+					: View.LAYER_TYPE_NONE);
+		}
+
+		switch (getPullToRefreshScrollDirection()) {
+			case VERTICAL:
+				scrollTo(0, value);
+				break;
+			case HORIZONTAL:
+				scrollTo(value, 0);
+				break;
+		}
+	}",0
+PullToRefreshScrollView.java,/** * Taken from the AOSP ScrollView source */,"private int getScrollRange() {
+			int scrollRange = 0;
+			if (getChildCount() > 0) {
+				View child = getChildAt(0);
+				scrollRange = Math.max(0, child.getHeight() - (getHeight() - getPaddingBottom() - getPaddingTop()));
+			}
+			return scrollRange;
+		}",0
+Glob.java,/*  have this as a known  entry-point to be forwards-compatible with compiled * resources. */,"public static DirLight amblight(RenderList rl) {
+	return(((MapView)((PView.WidgetContext)rl.state().get(PView.ctx)).widget()).amb);
+    }",0
+HashDirCache.java,/* blocking interruptions until complete should be perfectly * okay. */,"private static LockedFile lock2(File path) throws IOException {
+	boolean intr = false;
+	try {
+	    while(true) {
+		try {
+		    RandomAccessFile fp = null;
+		    try {
+			fp = new RandomAccessFile(path, ""rw"");
+			FileLock lk = fp.getChannel().lock();
+			LockedFile ret = new LockedFile(fp, lk);
+			fp = null;
+			return(ret);
+		    } finally {
+			if(fp != null)
+			    fp.close();
+		    }
+		} catch(FileLockInterruptionException e) {
+		    Thread.currentThread().interrupted();
+		    intr = true;
+		}
+	    }
+	} finally {
+	    if(intr)
+		Thread.currentThread().interrupt();
+	}
+    }",0
+TerrainTile.java,"/* XXX: Some strange javac bug seems to make it resolve the * trans() references to the wrong signature, thus the name * distinction. */","public void _faces(MapMesh m, int z, Tile trans, MPart d) {
+	Tex ttex = trans.tex();
+	float tl = ttex.tcx(0), tt = ttex.tcy(0), tw = ttex.tcx(ttex.sz().x) - tl, th = ttex.tcy(ttex.sz().y) - tt;
+	TexGL gt;
+	if(ttex instanceof TexGL)
+	    gt = (TexGL)ttex;
+	else if((ttex instanceof TexSI) && (((TexSI)ttex).parent instanceof TexGL))
+	    gt = (TexGL)((TexSI)ttex).parent;
+	else
+	    throw(new RuntimeException(""Cannot use texture for transitions: "" + ttex));
+	AlphaTex alpha;
+	synchronized(transtex) {
+	    if((alpha = transtex.get(gt)) == null)
+		transtex.put(gt, alpha = new AlphaTex(gt, 0.01f));
+	}
+	Blend b = m.data(blend);
+	Surface.MeshVertex[] mv = new Surface.MeshVertex[d.v.length];
+	for(int i = 0; i < var.length + 1; i++) {
+	    if(b.en[i][b.es.o(d.lc)]) {
+		GLState mat = (i == 0)?base:(var[i - 1].mat);
+		mat = d.mcomb(GLState.compose(mat, new MapMesh.MLOrder(z, i), alpha));
+		MeshBuf buf = MapMesh.Model.get(m, mat);
+		MeshBuf.Vec2Layer cc = buf.layer(AlphaTex.lclip);
+		for(int o = 0; o < d.v.length; o++) {
+		    mv[o] = b.lvfac[i].make(buf, d, o);
+		    cc.set(mv[o], new Coord3f(tl + (tw * d.tcx[o]), tt + (th * d.tcy[o]), 0));
+		}
+		for(int fi = 0; fi < d.f.length; fi += 3)
+		    buf.new Face(mv[d.f[fi]], mv[d.f[fi + 1]], mv[d.f[fi + 2]]);
+	    }
+	}
+    }",0
+SkelSprite.java,/*  It's ugly to snoop inside a wrapping */,"private Rendered animwrap(GLState.Wrapping wrap) {
+	if(!(wrap.r instanceof FastMesh))
+	    return(wrap);
+	FastMesh m = (FastMesh)wrap.r;
+	for(MeshAnim.Anim anim : manims) {
+	    if(anim.desc().animp(m)) {
+		Rendered ret = wrap.st().apply(new MorphedMesh(m, mmorph));
+		if(bonedb)
+		    ret = morphed.apply(ret);
+		return(ret);
+	    }
+	}
+	Rendered ret;
+	if(PoseMorph.boned(m)) {
+	    String bnm = PoseMorph.boneidp(m);
+	    if(bnm == null) {
+		ret = wrap.st().apply(new MorphedMesh(m, pmorph));
+		if(bonedb)
+		    ret = morphed.apply(ret);
+	    } else {
+		ret = pose.bonetrans2(skel.bones.get(bnm).idx).apply(wrap);
+		if(bonedb)
+		    ret = rigid.apply(ret);
+	    }
+	} else {
+	    ret = wrap;
+	    if(bonedb)
+		ret = unboned.apply(ret);
+	}
+	return(ret);
+    }",0
+TexI.java,/* these may not be  entirely correct They should be corrected if oddities are * detected. */,"public static int detectfmt(BufferedImage img) {
+	ColorModel cm = img.getColorModel();
+	if(!(img.getSampleModel() instanceof PixelInterleavedSampleModel))
+	    return(-1);
+	PixelInterleavedSampleModel sm = (PixelInterleavedSampleModel)img.getSampleModel();
+	int[] cs = cm.getComponentSize();
+	int[] off = sm.getBandOffsets();
+	/*
+	System.err.print(this + "": "" + cm.getNumComponents() + "", ("");
+	for(int i = 0; i < off.length; i++)
+	    System.err.print(((i > 0)?"" "":"""") + off[i]);
+	System.err.print(""), ("");
+	for(int i = 0; i < off.length; i++)
+	    System.err.print(((i > 0)?"" "":"""") + cs[i]);
+	System.err.print("")"");
+	System.err.println();
+	*/
+	if((cm.getNumComponents() == 4) && (off.length == 4)) {
+	    if(((cs[0] == 8) && (cs[1] == 8) && (cs[2] == 8) && (cs[3] == 8)) &&
+	       (cm.getTransferType() == DataBuffer.TYPE_BYTE) &&
+	       (cm.getTransparency() == java.awt.Transparency.TRANSLUCENT)) {
+		if((off[0] == 0) && (off[1] == 1) && (off[2] == 2) && (off[3] == 3))
+		    return(GL.GL_RGBA);
+		if((off[0] == 2) && (off[1] == 1) && (off[2] == 0) && (off[3] == 3))
+		    return(GL.GL_BGRA);
+	    }
+	} else if((cm.getNumComponents() == 3) && (off.length == 3)) {
+	    if(((cs[0] == 8) && (cs[1] == 8) && (cs[2] == 8)) &&
+	       (cm.getTransferType() == DataBuffer.TYPE_BYTE) &&
+	       (cm.getTransparency() == java.awt.Transparency.OPAQUE)) {
+		if((off[0] == 0) && (off[1] == 1) && (off[2] == 2))
+		    return(GL.GL_RGB);
+		if((off[0] == 2) && (off[1] == 1) && (off[2] == 0))
+		    return(GL2.GL_BGR);
+	    }
+	}
+	return(-1);
+    }",0
+Utils.java,/*  they should do for these simple purposes. */,"public static String odformat(double num, int md) {
+	if(num < 0)
+	    return(""-"" + odformat(-num, md));
+	long dm = 1;
+	for(int i = 0; i < md; i++) dm *= 10;
+	long raw = (long)Math.round(num * dm);
+	long ip = raw / dm;
+	long dp = raw % dm;
+	if(dp == 0)
+	    return(Long.toString(ip));
+	StringBuilder buf = new StringBuilder();
+	buf.append(ip);
+	buf.append('.');
+	for(dm /= 10; dm > dp; dm /= 10) buf.append('0');
+	while((dp % 10) == 0) dp /= 10;
+	buf.append(dp);
+	return(buf.toString());
+    }",0
+Utils.java,/* These are not actually correct */,"public static int floordiv(float a, float b) {
+	float q = a / b;
+	return((q < 0)?(((int)q) - 1):((int)q));
+    }",0
+VertexBuf.java,/* It would be terribly nice if GLArray could be a * multiply inhereted class and these could be put in it * instead */,"private GLBuffer bufobj;
+	private int bufmode = GL.GL_STATIC_DRAW;
+	private boolean update = false;
+
+	public void bindvbo(GOut g) {
+	    BGL gl = g.gl;
+	    synchronized(this) {
+		if((bufobj != null) && (bufobj.cur != g.curgl))
+		    dispose();
+		if(bufobj == null) {
+		    bufobj = new GLBuffer(g);
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		    Buffer data = data();
+		    data.rewind();
+		    gl.glBufferData(GL.GL_ARRAY_BUFFER, data.remaining() * elsize(), data, bufmode);
+		    GOut.checkerr(gl);
+		    update = false;
+		} else if(update) {
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		    Buffer data = data();
+		    data.rewind();
+		    gl.glBufferData(GL.GL_ARRAY_BUFFER, data.remaining() * elsize(), data, bufmode);
+		    update = false;
+		} else {
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		}
+	    }
+	}",0
+GooglePlaces.java,/** * Searching places * */,"public PlacesList search(double latitude, double longitude, double radius, String types)
+			throws Exception {
+
+		this._latitude = latitude;
+		this._longitude = longitude;
+		this._radius = radius;
+
+		try {
+
+			HttpRequestFactory httpRequestFactory = createRequestFactory(HTTP_TRANSPORT);
+			HttpRequest request = httpRequestFactory
+					.buildGetRequest(new GenericUrl(PLACES_SEARCH_URL));
+			request.getUrl().put(""key"", API_KEY);
+			request.getUrl().put(""location"", _latitude + "","" + _longitude);
+			request.getUrl().put(""radius"", _radius); // in meters
+			request.getUrl().put(""sensor"", ""false"");
+			if(types != null)
+				request.getUrl().put(""types"", types);
+
+			PlacesList list = request.execute().parseAs(PlacesList.class);
+			// Check log cat for places response status
+			Log.d(""Places Status"", """" + list.status);
+			return list;
+
+		} catch (HttpResponseException e) {
+			Log.e(""Error:"", e.getMessage());
+			return null;
+		}
+
+	}",0
+MasterServer.java,"/** * Receive, from worker, ip and port for Socket connection */","private synchronized void processInfoForCopyLog(String info,String topicOfWorker){
+
+		//parse message to get ip e port for logs
+		String [] split=info.split("","");
+
+		String iPaddress="""";
+		String port="""";
+
+		for(String x: split){
+			if(x.contains(""ip"")) 
+				iPaddress=x.split("":"")[1];
+			if(x.contains(""portcopylog""))
+				port=x.split("":"")[1];
+
+
+		}
+		Address address=new Address(iPaddress, port);
+		workerListForCopyLogs.put(topicOfWorker, address);
+	}",0
+MasterServer.java,/** * From simulation configuration field division */,"private HashMap<String/*idtopic*/, List<CellType>> divideForUniform(int rows,int cols,HashMap<String, Integer> slots,HashMap<String/*idtopic*/, List<CellType>> workerlist, int assignedLP){
+		ArrayList<String> workerID=new ArrayList<String>(slots.keySet());
+		int w=0;
+		int lastIndex=-1;
+		boolean goNext=false;
+		for(int i=0; i < rows; i++){
+			goNext=false; lastIndex=-1;
+			for(int j=0; j < cols;){
+
+				if(slots.get(workerID.get(w)) > 0)
+				{
+					slots.put(workerID.get(w), slots.get(workerID.get(w))-1);
+					List<CellType> cells=workerlist.get(workerID.get(w))==null?new ArrayList<CellType>():workerlist.get(workerID.get(w));
+					cells.add(new CellType(i,j));
+					workerlist.put(workerID.get(w),cells);
+					assignedLP--;
+					goNext=true;
+
+				}
+				if(goNext){
+					j++;
+					goNext=false;
+					lastIndex=-1;
+				}
+				else{
+					if(lastIndex==w)
+						System.err.println(""errore""); 
+					//	throw new DMasonException(""Error! Not enough slots on the workers for the given partitioning."");
+
+					if(lastIndex==-1) lastIndex=w;
+				}
+				w=(w+1)%slots.size();
+				if(assignedLP < 1) break;
+			}
+		}
+		return workerlist;
+	}",0
+ZipDirectory.java,/** * Zip it */,"private static void zipDirectory(String zipFile){
+
+		byte[] buffer = new byte[1024];
+
+		try{
+
+			FileOutputStream fos = new FileOutputStream(zipFile);
+			ZipOutputStream zos = new ZipOutputStream(fos);
+
+			System.out.println(""Output to Zip : "" + zipFile);
+
+			for(String file : fileList){
+
+				System.out.println(""File Added : "" + file);
+				ZipEntry ze= new ZipEntry(file);
+				zos.putNextEntry(ze);
+
+				FileInputStream in = 
+						new FileInputStream(SOURCE_FOLDER + File.separator + file);
+
+				int len;
+				while ((len = in.read(buffer)) > 0) {
+					zos.write(buffer, 0, len);
+				}
+
+				in.close();
+			}
+
+			zos.closeEntry();
+			//remember close it
+			zos.close();
+
+			System.out.println(""Done"");
+		}catch(IOException ex){
+			ex.printStackTrace();   
+		}
+	}",0
+Wizard.java,/** * Introduction */,"protected JPanel step1_setup()
+	{
+		JTextArea introText = new JTextArea();
+			introText.setLineWrap(true);
+			introText.setWrapStyleWord(true);
+			introText.setEditable(false);
+			introText.setMargin(new Insets(10, 10, 10, 10));
+			introText.setAutoscrolls(true);
+			introText.setText(
+				""Welcome to D-Mason.\n""
+				+ ""\n""
+				+ ""This wizard will help you launching D-Mason on a single ""
+				+ ""machine for testing purposes. D-Mason is made of four ""
+				+ ""\""components\"" that must be executed in order to run a ""
+				+ ""simulation.\n""
+				+ ""\n""
+				+ ""Please hit the \""Next\"" button below to continue.""
+			);
+			
+		JScrollPane sclIntroText = new JScrollPane(introText);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(sclIntroText);
+		
+		return panel;
+	}",0
+Wizard.java,/** * Wrapper */,"protected JPanel step2_setup()
+	{
+		JTextArea introText = new JTextArea();
+			introText.setLineWrap(true);
+			introText.setWrapStyleWord(true);
+			introText.setEditable(false);
+			introText.setMargin(new Insets(10, 10, 10, 10));
+			introText.setAutoscrolls(true);
+			introText.setText(
+				""The first component to launch is the communication server.\n""
+				+ ""\n""
+				+ ""D-Mason uses Apache ActiveMQ as messaging service server. ""
+				+ ""ActiveMQ is embodied in a special D-Mason's component, ""
+				+ ""called \""Wrapper\"" that allows starting, stopping and ""
+				+ ""resetting the server using the master console (another ""
+				+ ""D-Mason component that we will launch later).\n""
+				+ ""\n""
+				+ ""Click the button below to start the Wrapper and go to ""
+				+ ""the next step.""
+			);
+			
+		JScrollPane sclIntroText = new JScrollPane(introText);
+			
+		btnWrapper = new JButton(""Launch the Wrapper"");
+			btnWrapper.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {	launchWrapper(); }});
+		
+		JPanel pnlButtons = new JPanel();
+			pnlButtons.setLayout(new FlowLayout(FlowLayout.LEFT));
+			pnlButtons.add(btnWrapper);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout(10, 10));
+			panel.add(sclIntroText, BorderLayout.CENTER);
+			panel.add(pnlButtons, BorderLayout.SOUTH);
+	
+		return panel;
+	}",0
+Wizard.java,/** * Master */,"protected JPanel step4_setup()
+	{
+		JTextArea introText = new JTextArea();
+		introText.setLineWrap(true);
+		introText.setWrapStyleWord(true);
+		introText.setEditable(false);
+		introText.setMargin(new Insets(10, 10, 10, 10));
+		introText.setAutoscrolls(true);
+		introText.setText(
+			""Almost done! It's time to launch the Master console, that\n""
+			+ ""will allow you to select a simulation to run and set its ""
+			+ ""parameters.\n""
+			+ ""\n""
+			+ ""Click the button below to start the Master and go to ""
+			+ ""the next step.""
+		);
+		
+		JScrollPane sclIntroText = new JScrollPane(introText);
+			
+		btnMaster = new JButton(""Launch the Master"");
+		btnMaster.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {	launchMaster(); }});
+		
+		JPanel pnlButtons = new JPanel();
+			pnlButtons.setLayout(new FlowLayout(FlowLayout.LEFT));
+			pnlButtons.add(btnMaster);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout(10, 10));
+			panel.add(sclIntroText, BorderLayout.CENTER);
+			panel.add(pnlButtons, BorderLayout.SOUTH);
+	
+		return panel;
+	}",0
+Wizard.java,/** * Inspector */,"protected JPanel step5_setup()
+	{
+		JTextArea introText = new JTextArea();
+		introText.setLineWrap(true);
+		introText.setWrapStyleWord(true);
+		introText.setEditable(false);
+		introText.setMargin(new Insets(10, 10, 10, 10));
+		introText.setAutoscrolls(true);
+		introText.setText(
+			""The last, optional, component is the Global Inspector.\n""
+			+ ""It allows you to get information on the the running ""
+			+ ""simulation.\n""
+			+ ""\n""
+			+ ""Click the button below to start the Global Inspector ""
+			+ ""and go to the next step.""
+		);
+		
+		JScrollPane sclIntroText = new JScrollPane(introText);
+			
+		btnInspector = new JButton(""Launch the Inspector"");
+		btnInspector.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {	launchInspector(); }});
+		
+		JPanel pnlButtons = new JPanel();
+			pnlButtons.setLayout(new FlowLayout(FlowLayout.LEFT));
+			pnlButtons.add(btnInspector);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout(10, 10));
+			panel.add(sclIntroText, BorderLayout.CENTER);
+			panel.add(pnlButtons, BorderLayout.SOUTH);
+	
+		return panel;
+	}",0
+Wizard.java,/** * Finish */,"protected JPanel step6_setup()
+	{
+		JTextArea introText = new JTextArea();
+		introText.setLineWrap(true);
+		introText.setWrapStyleWord(true);
+		introText.setEditable(false);
+		introText.setMargin(new Insets(10, 10, 10, 10));
+		introText.setAutoscrolls(true);
+		introText.setText(
+			""That's all.\n""
+			+ ""It allows you to get information on the the running ""
+			+ ""simulation.\n""
+			+ ""\n""
+			+ ""Click the button below to start the Global Inspector ""
+			+ ""and go to the next step.""
+		);
+		
+		JScrollPane sclIntroText = new JScrollPane(introText);
+					
+		JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout(10, 10));
+			panel.add(sclIntroText, BorderLayout.CENTER);
+			
+		return panel;
+	}",0
+MessageListenerGlobals.java,/** *	It's called when a message is listen */,"@Override
+	public void onMessage(javax.jms.Message arg0) 
+	{	
+		//System.out.println(""MessageListenerGlobal ONMESSAGE"");
+		try
+		{
+			//System.out.println(System.currentTimeMillis() +"",-1,onMessage"");
+			MyHashMap bo = (MyHashMap)parseMessage(arg0);
+			//System.out.println(System.currentTimeMillis() +"",-1,parseMessage"");
+			RemoteSnap obj = (RemoteSnap)bo.get(""GLOBALS"");
+			//System.out.println(System.currentTimeMillis() +"",-1,get"");
+			for (DistributedField2D field : fields)
+			{
+				//DistributedRegionInterface obj = (DistributedRegionInterface)bo.get(field.getID());
+				//field.getGlobals().put(obj.getStep(), obj);
+				field.getGlobals().put(obj.step, obj);
+				//System.out.println(""MessageListenerGlobal: PUT GLOBALS. STEP "" + obj.getStep());
+				//System.out.println(System.currentTimeMillis() +"","" +obj.step + "",onMessage put globals"");
+			}
+				
+		} catch (JMSException e) { 
+			e.printStackTrace(); 
+		}				
+	}",0
+DAntsForage.java,/** * AntsForage */,"public DAntsForage(GeneralParam params, String prefix)
+	{ 
+		super(params,new DistributedMultiSchedule<Int2D>(),prefix,params.getConnectionType());
+		this.topicPrefix=prefix;
+		this.MODE=params.getMode();
+		GRID_WIDTH=params.getWidth();
+		GRID_HEIGHT=params.getHeight();
+
+		numAnts = params.getNumAgents();
+
+
+		FXMIN = (FOOD_XMIN * GRID_WIDTH)/100;
+		FYMIN = (FOOD_YMIN * GRID_HEIGHT)/100;
+		FXMAX = (FOOD_XMAX * GRID_WIDTH)/100;
+		FYMAX = (FOOD_YMAX * GRID_HEIGHT)/100;
+
+		HXMIN = (HOME_XMIN * GRID_WIDTH)/100;
+		HYMIN = (HOME_YMIN * GRID_HEIGHT)/100;
+		HXMAX = (HOME_XMAX * GRID_WIDTH)/100;
+		HYMAX = (HOME_YMAX * GRID_HEIGHT)/100;
+
+
+
+	}",0
+DParticles.java,/** * DParticles */,"public DParticles(GeneralParam params,List<EntryParam<String,Object>>list,String prefix)
+    {    	
+    	super(params,new DistributedMultiSchedule<Int2D>(),prefix,params.getConnectionType());
+    	this.MODE=params.getMode();
+    	gridWidth=params.getWidth();
+    	gridHeight=params.getHeight();
+    	topicPrefix=prefix;
+    
+    }",0
+DGameOfLife.java,/** * Constructor */,"public DGameOfLife(GeneralParam params, String prefix) {
+		super(params, new DistributedMultiSchedule<Int2D>(), prefix, params.getConnectionType());
+		this.MODE = params.getMode();
+		gridWidth = params.getWidth();
+		gridHeight = params.getHeight();
+		this.topicPrefix = prefix;
+	}",0
+VirtualConnectionNFieldsWithVirtualJMS.java,/** *  a customized listener for every (or many) topic. */,"@Override
+	public boolean asynchronousReceive(String key, MyMessageListener listener) {
+		try {
+			// subscribers.get(key).setMessageListener(listener);
+			ArrayList<VirtualMessageListener> lists = vsubscribers.get(key);
+			lists = (lists == null) ? new ArrayList<VirtualMessageListener>(): lists;
+			lists.add((VirtualMessageListener) listener);
+			accesstotopic.addSubscriber();
+			return vsubscribers.put(key, lists) != null;
+
+			// return true;
+		} catch (Exception e) {
+			System.err.println(""Failed to enable asynchronous reception."");
+			e.printStackTrace();
+			return false;
+		}
+	}",0
+RecycleBin.java,/** * Makes sure that the size of scrapViews does not exceed the size of activeViews. */,"private void pruneScrapViews() {
+        final int maxViews = activeViews.length;
+        final int viewTypeCount = this.viewTypeCount;
+        final SparseArray<View>[] scrapViews = this.scrapViews;
+        for (int i = 0; i < viewTypeCount; ++i) {
+            final SparseArray<View> scrapPile = scrapViews[i];
+            int size = scrapPile.size();
+            final int extras = size - maxViews;
+            size--;
+            for (int j = 0; j < extras; j++) {
+                scrapPile.removeAt(size--);
+            }
+        }
+    }",0
+HomeIndexFragment.java,/** * ListView */,"private void initListView() {
+        topicAdapter = new TopicAdapter(this.getActivity(), data);
+        listView.setAdapter(topicAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(TAG, view.getTag().toString());
+                Intent intent = new Intent();
+                intent.setClass(HomeIndexFragment.this.getActivity(), DetailActivity.class);
+                intent.putExtra(""BUNDLE_KEY_DISPLAY_TYPE"", 0);
+                intent.putExtra(""detailId"", data.get(position).getThemeId());
+                intent.putExtra(""circleId"", """");
+                startActivity(intent);
+            }
+        });
+    }",0
+AbstractStage.java,/** * This method is threadsafe. */,"public StageState getCurrentState() {
+		return currentState;
+	}",0
+AbstractStage.java,/** * May not be invoked outside of IPipe implementations */,"@SuppressWarnings(""PMD.DataflowAnomalyAnalysis"")
+	public void onSignal(final ISignal signal, final InputPort<?> inputPort) {
+		Class<? extends ISignal> signalClass = signal.getClass();
+
+		Set<InputPort<?>> signalReceivedInputPorts;
+		if (signalMap.containsKey(signalClass)) {
+			signalReceivedInputPorts = signalMap.get(signalClass);
+		} else {
+			signalReceivedInputPorts = new HashSet<InputPort<?>>();
+			signalMap.put(signalClass, signalReceivedInputPorts);
+		}
+
+		if (!signalReceivedInputPorts.add(inputPort)) {
+			this.logger.warn(""Received more than one signal - "" + signal + "" - from input port: "" + inputPort);
+			return;
+		}
+
+		if (signal.mayBeTriggered(signalReceivedInputPorts, getInputPorts())) {
+			try {
+				signal.trigger(this);
+				checkSuperCalls(signal);
+			} catch (Exception e) {
+				this.logger.error(""Could not trigger signal."", e);
+				this.getOwningContext().abortConfigurationRun();
+			}
+			for (OutputPort<?> outputPort : outputPorts.getOpenedPorts()) {
+				outputPort.sendSignal(signal);
+			}
+		}
+	}",0
+TestBSTMapExtra.java,"/* * Sanity test for keySet, only here because it's optional */","@Test
+    public void sanityKeySetTest() {
+    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+        HashSet<String> values = new HashSet<String>();
+        for (int i = 0; i < 455; i++) {
+            b.put(""hi"" + i, 1);   
+            values.add(""hi"" + i);
+        }
+        assertEquals(455, b.size()); //keys are there
+        Set<String> keySet = b.keySet();
+        assertTrue(values.containsAll(keySet));
+        assertTrue(keySet.containsAll(values));
+    }",0
+RayHandler.java,/** * Expert functionality */,"public Texture getLightMapTexture() {
+                return this.lightMap.frameBuffer.getColorBufferTexture();
+        }",0
+HumanTaskCoordinationTest.java,/** * Setup */,"private void setupTestClients() throws Exception {
+		init();
+		requestSender.waitForProcessDeployment(backEndUrl + HumanTaskTestConstants.CLAIM_APPROVAL_PROCESS_SERVICE);
+		requestSender.waitForProcessDeployment(backEndUrl + HumanTaskTestConstants.CLAIM_SERVICE);
+		log.info(""BPEL and Humantask services are up and running"");
+		// Need to re-initialize since we have restarted the server
+		bpelPackageManagementClient = new BpelPackageManagementClient(backEndUrl, sessionCookie);
+		humanTaskPackageManagementClient = new HumanTaskPackageManagementClient(backEndUrl, sessionCookie);
+		instanceManagementClient = new BpelInstanceManagementClient(backEndUrl, sessionCookie);
+		log.info(""Server setting up completed ...!!!"");
+		serverConfigurationManager = new ServerConfigurationManager(bpsServer);
+
+		//initialize HT Client API for Clerk1 and manager1 user
+		AutomationContext clerk1AutomationContext =
+				new AutomationContext(""BPS"", ""bpsServerInstance0001"", FrameworkConstants.SUPER_TENANT_KEY,
+				                      HumanTaskTestConstants.CLERK1_USER);
+		LoginLogoutClient clerk1LoginLogoutClient = new LoginLogoutClient(clerk1AutomationContext);
+		String clerk1SessionCookie = clerk1LoginLogoutClient.login();
+		clerk1HumanTaskClientApiClient = new HumanTaskClientApiClient(backEndUrl, clerk1SessionCookie);
+
+		AutomationContext manager1AutomationContext =
+				new AutomationContext(""BPS"", ""bpsServerInstance0001"", FrameworkConstants.SUPER_TENANT_KEY,
+				                      HumanTaskTestConstants.MANAGER1_USER);
+		LoginLogoutClient manager1LoginLogoutClient = new LoginLogoutClient(manager1AutomationContext);
+		String manager1SessionCookie = manager1LoginLogoutClient.login();
+		manager1HumanTaskClientApiClient = new HumanTaskClientApiClient(backEndUrl, manager1SessionCookie);
+
+	}",0
+FilterMediatorTest.java,"/** * With setting ""Specify As"" set to ""Xpath"" */","@Test(groups = {""wso2.esb""})
+    public void filterMediatorWithXpathTest() throws Exception {
+        loadESBConfigurationFromClasspath(File.separator + ""artifacts"" + File.separator + ""ESB"" + File.separator
+                                          + ""synapseconfig"" + File.separator + ""filters"" + File.separator + ""filter"" + File.separator + ""synapse2.xml"");
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getMainSequenceURL(), null, ""IBM"");
+        Assert.assertTrue(response.toString().contains(""GetQuoteResponse""));
+        Assert.assertTrue(response.toString().contains(""IBM Company""));
+    }",0
+FilterMediatorTest.java,/** * Using OR operation with Xpaths * /filters/filter/syanpse3.xml is used * * @throws Exception */,"@Test(groups = {""wso2.esb""})
+    public void filterMediatorXpathWithORTest() throws Exception {
+
+        loadESBConfigurationFromClasspath(File.separator + ""artifacts"" + File.separator + ""ESB"" + File.separator
+                                          + ""synapseconfig"" + File.separator + ""filters"" + File.separator + ""filter"" + File.separator + ""synapse3.xml"");
+        OMElement response11 = axis2Client.sendSimpleStockQuoteSoap11(getMainSequenceURL(), null, ""IBM"");
+        OMElement response12 = axis2Client.sendSimpleStockQuoteSoap12(getMainSequenceURL(), null, ""IBM"");
+
+        Assert.assertTrue(response11.toString().contains(""GetQuoteResponse""));
+        Assert.assertTrue(response11.toString().contains(""IBM Company""));
+
+        Assert.assertTrue(response12.toString().contains(""GetQuoteResponse""));
+        Assert.assertTrue(response12.toString().contains(""IBM Company""));
+
+    }",0
+OutSequenceFaultSequenceTestCase.java,/** * Symbol WSO2 dropped and MSFT is given in out sequence */,"@Test(groups = ""wso2.esb"", description = ""- Custom proxy -Out sequence inline"")
+    public void testCustomProxyOutSequenceInline() throws Exception {
+
+        OMElement response = axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""StockQuoteProxyOne""), null, ""WSO2"");
+
+        String symbol = response.getFirstElement().getFirstChildWithName(new QName(""http://services.samples/xsd"", ""symbol""))
+                .getText();
+        assertEquals(symbol, ""MSFT"", ""Fault: value 'symbol' mismatched"");
+    }",0
+OutSequenceFaultSequenceTestCase.java,/** * Invalid service referred */,"@Test(groups = ""wso2.esb"", description = ""- Custom proxy -Fault sequence inline"")
+    public void testCustomProxyFaultInline() throws Exception {
+
+        try {
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""StockQuoteProxyFour""), null, ""WSO2"");
+            fail(""AxisFault Expected"");
+        } catch (AxisFault axisFault) {
+            assertTrue(axisFault.getReason().contains(""Fault sequence invoked""), ""Fault: value 'reason' mismatched"");
+        }
+
+    }",0
+OutSequenceFaultSequenceTestCase.java,/** * Invalid service referred */,"@Test(groups = ""wso2.esb"", description = ""- Custom proxy -Fault sequence From registry"")
+    public void testCustomProxyFaultFromRegistry() throws Exception {
+
+        try {
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""StockQuoteProxyFour""), null, ""WSO2"");
+            fail();
+        } catch (AxisFault axisFault) {
+            assertTrue(axisFault.getReason().contains(""Fault sequence invoked""), ""Fault: value 'reason' mismatched"");
+        }
+    }",0
+OutSequenceFaultSequenceTestCase.java,/** * Invalid service referred */,"@Test(groups = ""wso2.esb"", description = ""- Custom proxy -Fault sequence existing fault sequence"")
+    public void testCustomProxyFaultExistingFaultSequence() throws Exception {
+
+        try {
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""StockQuoteProxyFour""), null, ""WSO2"");
+            fail();
+        } catch (AxisFault axisFault) {
+            assertTrue(axisFault.getReason().contains(""Fault sequence invoked""), ""Fault: value 'reason' mismatched"");
+        }
+    }",0
+SiteStructureGenerator.java,/** Takes Block Coordinates */,"public boolean shouldBeDoor(Site site, int x, int z, int scale)
+        {
+            getBounds(site, scale);
+
+            int midx = (bounds[0][0] + bounds[1][0]) / 2;
+            int midz = (bounds[0][1] + bounds[1][1]) / 2;
+
+            // middle of a wall
+            if ((x == midx && (z == bounds[0][1] || z == bounds[1][1]))
+                    || (z == midz && (x == bounds[0][0] || x == bounds[1][0])))
+            {
+                SiteStructures structs = WorldGenerator.instance.structureGen.getStructuresForSite(site);
+                EnumFacing dir = getDoorDirection(site, x, z, scale, structs).getOpposite();
+                StructureSpace other = structs.getStructure(x + dir.getFrontOffsetX(), z + dir.getFrontOffsetZ(),
+                        scale);
+                if (other != null && other.getFloor(site, scale) != getFloor(site, scale)) return false;
+                return true;
+            }
+            return false;
+        }",0
+SiteStructureGenerator.java,/** Takes Block Coordinates */,"public boolean isInWall(Site site, int x, int y, int scale)
+        {
+            int width = (scale / SITETOBLOCK);
+            int pixelX = (x - site.corners[0][0] * scale - scale / 2 - width / 2) / width;
+            int pixelY = (y - site.corners[0][1] * scale - scale / 2 - width / 2) / width;
+            boolean ret = pixels.contains(pixelX + 2048 * pixelY);
+            if (width <= 1)
+            {
+                pixelX = (x - 1 - site.corners[0][0] * scale - scale / 2 - width / 2) / width;
+                pixelY = (y - 1 - site.corners[0][1] * scale - scale / 2 - width / 2) / width;
+                ret = ret || pixels.contains(pixelX + 2048 * pixelY);
+                pixelX = (x + 1 - site.corners[0][0] * scale - scale / 2 - width / 2) / width;
+                pixelY = (y + 1 - site.corners[0][1] * scale - scale / 2 - width / 2) / width;
+                ret = ret || pixels.contains(pixelX + 2048 * pixelY);
+            }
+            return ret;
+        }",0
+WorldChunkManagerFinite.java,/** Takes Blocks Coordinates */,"private BiomeGenBase[] makeBiomes(BiomeGenBase[] biomes, int scale, int x, int z)
+    {
+        int index;
+        for (int i1 = 0; i1 < 16; i1++)
+        {
+            for (int k1 = 0; k1 < 16; k1++)
+            {
+                index = (i1) + (k1) * 16;
+                int biome = getBiomeFromMaps(x + i1 - WorldGenerator.shift.getX(),
+                        z + k1 - WorldGenerator.shift.getZ());
+                
+                biomes[index] = BiomeGenBase.getBiome(biome);
+            }
+        }
+        return biomes;
+    }",0
+RocketMod.java,/** Uses player interact here to also prevent opening of inventories. * * @param evt */,"@SubscribeEvent
+    public void interactRightClickBlock(PlayerInteractEvent.RightClickBlock evt)
+    {
+        if (evt.getHand() == EnumHand.OFF_HAND || evt.getWorld().isRemote || evt.getItemStack() == null
+                || !evt.getEntityPlayer().isSneaking() || evt.getItemStack().getItem() != Items.STICK)
+            return;
+
+        ItemStack stack = evt.getItemStack();
+        String[] arr = stack.getDisplayName().split("","");
+        BlockPos min = null;
+        BlockPos max = null;
+        if (arr.length == 6)
+        {
+            try
+            {
+                min = new BlockPos(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
+                max = new BlockPos(Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer.parseInt(arr[5]));
+            }
+            catch (NumberFormatException e)
+            {
+                evt.getEntityPlayer().addChatMessage(new TextComponentString(""no good name.""));
+            }
+        }
+        if (min != null && max != null)
+        {
+            IBlockEntity.BlockEntityFormer.makeBlockEntity(evt.getWorld(), min, max, evt.getPos(), EntityRocket.class);
+        }
+    }",0
+BlockLift.java,/** Called when a block is placed using its ItemBlock.*/,"public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+            int meta, EntityLivingBase placer)
+    {
+        return getStateFromMeta(meta);
+    }",0
+ItemLinker.java,"/** If this function returns true (or the item is damageable), the * ItemStack's NBT tag will be sent to the client. */","public boolean getShareTag()
+    {
+        return true;
+    }",0
+AccelerationFeatures.java,/* * Haar-like filter for acceleration */,"private float getHaarFilter(float[] values)
+	{
+		float haar = 0;
+
+		// Sizes in number of samples
+		int wFrame = values.length;
+		int wFilter = (int) (0.2 * wFrame);
+		int wShift = (int) (0.5 * wFilter);
+		int N = (wFrame - wFilter) / wShift + 1;
+
+		float filterValue;
+
+		for (int n = 0; n < N; n++)
+		{
+			filterValue = 0;
+
+			for (int k = 0; k < wFilter; k++)
+			{
+				if (n * wShift + k < wFrame)
+				{
+					if (k < wFilter / 2)
+					{
+						// Left side of haar filter
+						filterValue -= values[n * wShift + k];
+					}
+					else
+					{
+						// Right side of haar filter
+						filterValue += values[n * wShift + k];
+					}
+				}
+			}
+
+			haar += Math.abs(filterValue);
+		}",0
+ClockSync.java,/* * static helper */,"static void listenForStartSignal(int port)
+    {
+        try
+        {
+            DatagramSocket syncSocket = new DatagramSocket(port);
+            syncSocket.setReuseAddress(true);
+
+            Log.i(""waiting for master pipeline (port = "" + port + "")"");
+            while (true) {
+                byte[] data = new byte[32];
+                DatagramPacket packet = new DatagramPacket(data, 32);
+                syncSocket.receive(packet);
+                Log.d(""received packet from "" + packet.getAddress().toString());
+
+                //check data
+                String str = new String(packet.getData(), ""ASCII"");
+                if (str.startsWith(""SSI:STRT:RUN"")) //SSI format for compatibility
+                {
+                    Log.d(""packet identified as start ping"");
+                    break;
+                }
+                Log.d(""packet not recognized"");
+            }
+        }
+        catch(IOException e)
+        {
+            Log.e(""network sync failed"", e);
+        }
+    }",0
+VoterConfig.java,/** * Used for RPC IPC example  */,"@Bean
+    public DirectExchange directExchange() {
+        return new DirectExchange(""voter.rpc"");
+    }",0
+ResponseBody.java,/** * getResult */,"@JsonIgnore
+  public Result getResult () throws Exception {
+    
+    if (this.getType() == ResponseType.JSON) {
+    
+      return Results.ok((String)this.getContent() );
+    } else if (this.getType() == ResponseType.FILE) {
+    
+      return Results.ok(new FileInputStream((String)this.getContent() ) );
+    } else if (this.getType() == ResponseType.HTML) {
+      
+      return Results.ok((Content)this.getContent() );
+    }
+    
+    throw new CodeException(
+      151,
+      12,
+      ""Unhandled ResponseBody Type [""
+      + this.getType().toString()
+      + ""]"",
+      ExceptionClass.TYPE);
+  }",0
+ResponseBody.java,/** * getBadRequestResult * @return bad request response * @throws Exception */,"@JsonIgnore
+  public Result getBadRequestResult (
+    VangavException vangavException,
+    UUID requestId) throws Exception {
+    
+    try {
+      
+      ResponseBodyError responseBodyError =
+        new ResponseBodyError(vangavException, requestId);
+      
+      return Results.badRequest((String)responseBodyError.getContent() );
+    } catch (Exception e) {
+      
+      try {
+        
+        ResponseBodyError responseBodyError =
+          new ResponseBodyError(vangavException);
+        
+        return Results.badRequest((String)responseBodyError.getContent() );
+      } catch (Exception e2) {
+        
+        try {
+
+          ResponseBodyError responseBodyError =
+            new ResponseBodyError(requestId);
+          
+          return Results.badRequest((String)responseBodyError.getContent() );
+        } catch (Exception e3) {
+
+          ResponseBodyError responseBodyError =
+            new ResponseBodyError();
+          
+          return Results.badRequest((String)responseBodyError.getContent() );
+        }
+      }
+    }
+  }",0
+ResponseBody.java,/** * getBadRequestResult */,"@JsonIgnore
+  public Result getBadRequestResult (
+    VangavException vangavException,
+    UUID requestId) throws Exception {
+    
+    try {
+      
+      ResponseBodyError responseBodyError =
+        new ResponseBodyError(vangavException, requestId);
+      
+      return Results.badRequest((String)responseBodyError.getContent() );
+    } catch (Exception e) {
+      
+      try {
+        
+        ResponseBodyError responseBodyError =
+          new ResponseBodyError(vangavException);
+        
+        return Results.badRequest((String)responseBodyError.getContent() );
+      } catch (Exception e2) {
+        
+        try {
+
+          ResponseBodyError responseBodyError =
+            new ResponseBodyError(requestId);
+          
+          return Results.badRequest((String)responseBodyError.getContent() );
+        } catch (Exception e3) {
+
+          ResponseBodyError responseBodyError =
+            new ResponseBodyError();
+          
+          return Results.badRequest((String)responseBodyError.getContent() );
+        }
+      }
+    }
+  }",0
+BrowseServlet.java,/** * Creates a folder. */,"protected void doPost(HttpServletRequest request,
+			HttpServletResponse response, Session session)
+			throws ServletException, IOException, TheBlendException {
+
+		String parentId = getRequiredStringParameter(request, PARAM_PARENT);
+		String typeId = getRequiredStringParameter(request, PARAM_TYPE_ID);
+		String name = getStringParameter(request, PARAM_NAME);
+
+		if (name == null || name.length() == 0) {
+			redirect(HTMLHelper.encodeUrlWithId(request, ""browse"", parentId),
+					request, response);
+			return;
+		}
+
+		// fetch the parent folder
+		Folder parent = CMISHelper.getFolder(session, parentId,
+				CMISHelper.LIGHT_OPERATION_CONTEXT, ""parent folder"");
+
+		// set name and type of the new folder
+		Map<String, Object> properties = new HashMap<String, Object>();
+		properties.put(PropertyIds.NAME, name);
+		properties.put(PropertyIds.OBJECT_TYPE_ID, typeId);
+
+		// create the folder
+		try {
+			parent.createFolder(properties);
+		} catch (CmisBaseException cbe) {
+			throw new TheBlendException(""Could not create folder: ""
+					+ cbe.getMessage(), cbe);
+		}
+
+		redirect(HTMLHelper.encodeUrlWithId(request, ""browse"", parentId),
+				request, response);
+	}",0
+RayHandler.java,/** * Expert functionality */,"public Texture getLightMapTexture() {
+                return this.lightMap.frameBuffer.getColorBufferTexture();
+        }",0
+Category.java,/** * The implementation of deepEquals(Entity) for TreatmentCategorization and * Category is complicated by their circular dependency. */,"@Override
+	public boolean deepEquals(Entity obj) {
+		if(obj instanceof Category) {
+			Category other = (Category) obj;
+			return d_name.equals(other.d_name) && d_owner.deepEquals(other.d_owner);
+		}
+		return false;
+	}",0
+TreatmentCategorizationWizardPresentation.java,"/** *  TreatmentCategorization#splitRange(RangeEdge, double, boolean) */","public Pair<RangeEdge> splitRange(final RangeEdge range, final double value, final boolean lowerRangeOpen) {
+		ObservableList<DecisionTreeNode> options1 = getOptionsForEdge(range);
+		Pair<RangeEdge> ranges = getBean().splitRange(range, value, lowerRangeOpen);
+		
+		// Ensure options list is preserved for first range
+		d_optionsForEdge.remove(range);
+		d_optionsForEdge.put(ranges.getFirst(), options1);
+		
+		// Ensure exclude-node for second range is in the options list
+		DecisionTree tree = getBean().getDecisionTree();
+		ObservableList<DecisionTreeNode> options2 = createOptionsForChildrenOfNode((ChoiceNode) tree.getEdgeSource(ranges.getSecond()));
+		d_optionsForEdge.put(ranges.getSecond(), options2);
+		getModelForEdge(ranges.getSecond()).setValue(findLeafNode(options2, null));
+		
+		return ranges;
+	}",0
+EntityUtil.java,"/** * Assumes that the key in <key, value> pairs is an Object to which a regular equals() is applicable. */","public static boolean deepEqual(Map<?, ? extends Entity> o1, Map<?, ? extends Entity> o2) {
+		if (o1.keySet().size() != o2.keySet().size()) return false;
+		for (Entry<?,? extends Entity> entry : o1.entrySet()) {
+			Object actualKey = findMatchingKey(entry.getKey(), o2.keySet());
+			if (actualKey == null) return false;
+			if (!deepEqual(entry.getValue(), o2.get(actualKey)))
+				return false;
+		}
+		return true;
+	}",0
+TreatmentCategorizationWizardPresentationTest.java,/* * Regression test for bug #566 */,"@Test
+	public void testDoNotReuseDefaultDose() {
+		TreatmentCategorizationWizardPresentation pm1 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		TreatmentCategorizationWizardPresentation pm2 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		pm1.getDoseUnit().setScaleModifier(ScaleModifier.MEGA);
+		assertFalse(pm2.getDoseUnit().equals(pm1.getDoseUnit()));
+	}",0
+AAbout.java,/** * Final Strings variables. */,"private String ABOUT_APP = null;
+
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ABOUT_APP = "" AIO video downloader [ "" + ""Version - "" + versionName + "" ]\n"" +
+                "" Powered by SoftC Software LLC."";
+
+        context = AAbout.this;
+
+        setContentView(R.layout.about_activity);
+
+        initViews();
+        initOnClick();
+    }",0
+ABaseTransformer.java,"/** * If the position offset of a fragment is less than negative one or greater than one, returning true. */","protected boolean hideOffscreenPages() {
+		return true;
+	}",0
+AbsDanmakuSync.java,/** * synchronize pause resume state with outside playback */,"public boolean isSyncPlayingState() {
+        return false;
+    }",0
+AbsEntityCursor.java,/* * observers */,"@Override
+    public void registerContentObserver(ContentObserver observer) {
+        cursor.registerContentObserver(observer);
+    }",0
+AbstractAccess.java,/** * Fields */,"@Override
+    public List<Field> getFields() {
+        List<Field> fields = new ArrayList<>();
+
+        if (forceAccess) {
+            fields.addAll(getAllFields(this.clazz));
+        } else {
+            fields.addAll(getFields(this.clazz));
+        }
+
+        return fields;
+    }",0
+AbstractAccess.java,/** * Methods */,"@Override
+    public List<Method> getMethods() {
+        List<Method> methods = new ArrayList<>();
+
+        if (forceAccess) {
+            methods.addAll(getAllMethods(this.clazz));
+        } else {
+            methods.addAll(getMethods(this.clazz));
+        }
+
+        return methods;
+    }",0
+AbstractAccess.java,/** * Constructors */,"@Override
+    public List<Constructor> getConstructors() {
+        List<Constructor> constructors = new ArrayList<>();
+
+        if (forceAccess) {
+            constructors.addAll(getAllConstructors(this.clazz));
+        } else {
+            constructors.addAll(getConstructors(this.clazz));
+        }
+
+        return constructors;
+    }",0
+AbstractAccess.java,/** * Other things */,"@Override
+    public boolean isAssignableFrom(final Class<?> clazz) {
+        return this.getReflectedClass().isAssignableFrom(clazz);
+    }",0
+AbstractAccess.java,/** * Utility methods */,"protected static List<Class<?>> getAllSuperClasses(final Class<?> clazz) {
+        List<Class<?>> result = new ArrayList<>();
+        if (clazz != null && (INCLUDE_OBJECT || !clazz.equals(Object.class))) {
+            result.add(clazz);
+            result.addAll(getAllSuperClasses(clazz.getSuperclass()));
+            for (Class<?> iface : clazz.getInterfaces()) {
+                result.addAll(getAllSuperClasses(iface));
+            }
+        }",0
+AbstractAjcCompiler.java,/** * Not safe and assembleArguments() must be run */,"private boolean hasSourcesToCompile() {
+        return resolvedIncludes.size() > 0;
+    }",0
+AbstractApplicationsAggregate.java,/** *  Handler */,"private PlatformData createPlatformFromExistingPlatformHandler(final PlatformData platform,
+                                                                   final PlatformData originPlatform,
+                                                                   final Map<String, PropertiesData> originProperties){
+        final PlatformCreatedFromExistingCommand hc = new PlatformCreatedFromExistingCommand(getPlatformRegistry(),
+                getPropertiesRegistry(), platform, originPlatform, originProperties);
+
+        this.tryAtomic(platform.getKey().getEntityName(), hc);
+
+        //We return the platform from get method, this way we are sure to get the platform from the registry, ie the way it has been modified.
+        return getPlatform(platform.getKey()).orElseThrow(() -> new MissingResourceException(""Cannot get the created platform. This is not expected and should be reported""));
+    }",0
+AbstractApplicationsAggregate.java,/* * REPLAY LISTENERS */,"@Subscribe
+    @Override
+    public void replayPlatformCreatedEvent(final PlatformCreatedEvent event) {
+        try {
+            final PlatformData platform = event.getPlatform();
+            this.createPlatform(platform);
+        } catch (Exception e) {
+            LOGGER.error(""Error while replaying platform created event {}"", e.getMessage());
+        }
+    }",0
+AbstractArrayState.java,/** * May return null if array has been collected. */,"final public Object getArray() {
+		Object l = array.get();
+		if (l == null) {
+			Yikes.yikes(""Getting array of AbstractArrayState after array has been gc'd."");
+		}
+		return l;
+	}",0
+AbstractAxis3D.java,/** * Provides serialization support. */,"private void readObject(ObjectInputStream stream)
+        throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.lineStroke = SerialUtils.readStroke(stream);
+    }",0
+AbstractBackendHelper.java,/** * Call this in LocationBackendService. */,"public synchronized void onOpen() {
+        if (state == State.WAITING || state == State.SCANNING)
+            throw new IllegalStateException(""Do not call onOpen if not closed before"");
+        currentDataUsed = true;
+        state = State.WAITING;
+    }",0
+AbstractBasicVO.java,/** * Useful For Debugging */,"@Override
+    public String toString() {
+        return ""id: "" + this.id;
+    }",0
+AbstractBindTest.java,/** * Default constructor */,"public EchoProtocolHandler() {
+            super();
+        }
+
+        r\\et",0
+AbstractBlockPositionWrapper.java,/** * The constructor */,"public AbstractBlockPositionWrapper(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+
+		this.z = z;
+	}",0
+AbstractCalendarView.java,/** * Getter methods */,"public int getFirstDayOfWeek() {
+        return mFirstDayOfWeek;
+    }",0
+AbstractCalendarView.java,/* // Assertions */,"protected static String tokenTypeDesc(int tt)
+    {
+	String desc = mTokenTypes.get(Integer.valueOf(tt));
+	return (desc == null) ? (""[""+tt+""]"") : desc;
+    }",0
+AbstractCalendarView.java,/** * Creates a new instance */,"public BasicBinder(boolean includeBuiltInBindings) {
+
+    	initExtendedBinders();
+    	
+        if (includeBuiltInBindings) {
+
+            initJdkBindings();
+
+            // Before we load other configuration, load the binding
+            // configuration from
+            // jadira-bindings' jar to ensure no-one overrides our built-in
+            // mappings.
+            initBuiltInBindings();
+
+            // Init bindings registered from other jars
+            initRegisteredBindings();
+        }
+    }",0
+AbstractCalendarView.java,/****************** * String Binder  * ******************/,"public <T> T convertFromString(Class<T> output, String object) {
+		return convertTo(String.class, output, object);
+	}",0
+AbstractCalendarView.java,/* * Commands X */,"@Override
+	public Object visit(Rule_cmdXorInt rule) {
+		return generateCmdFromRules(rule.rules);
+	}",0
+AbstractCalendarView.java,/** * Default constructor */,"public BasicForm()
+   {
+      initializePanel();
+   }",0
+AbstractCalendarView.java,/** * Initializer */,"protected void initializePanel()
+   {
+      setLayout(new BorderLayout());
+      add(createPanel(), BorderLayout.CENTER);
+   }",0
+AbstractCalendarView.java,"/* This is not a feature, but a known limitation */","public void testSetInputFollowedByACancelInJOptionPaneReturnsTheInputValue() throws Exception {
+    WindowInterceptor
+      .init(new Trigger() {
+        public void run() throws Exception {
+          assertEquals(""Result"", JOptionPane.showInputDialog(""Message""));
+        }
+      })
+      .process(BasicHandler.init()
+        .setText(""Result"")
+        .triggerButtonClick(""Cancel""))
+      .run();
+  }",0
+AbstractCalendarView.java,/** * fluent setter */,"public BasicLink withHref(final String href) {
+        this.setHref(href);
+        return this;
+    }",0
+AbstractCalendarView.java,/** * fluent setter */,"public BasicLink withBasicLinkSimpleExtension(final List<Object> basicLinkSimpleExtension) {
+        this.setBasicLinkSimpleExtension(basicLinkSimpleExtension);
+        return this;
+    }",0
+AbstractCalendarView.java,/** * fluent setter */,"public BasicLink withBasicLinkObjectExtension(final List<AbstractObject> basicLinkObjectExtension) {
+        this.setBasicLinkObjectExtension(basicLinkObjectExtension);
+        return this;
+    }",0
+AbstractCalendarView.java,/* /* Test methods */,"final CsvMapper MAPPER = mapperForCsv();
+
+    public void testSimpleExplicit() throws Exception {
+        ObjectReader r = MAPPER.reader(SIMPLE_SCHEMA);
+        _testSimpleExplicit(r, false);
+        _testSimpleExplicit(r, true);
+    }",0
+AbstractCalendarView.java,"/** * If start is less than min, it will * be ignored, and the pool will start * with min. */","public synchronized void setStart( int start )
+	throws ResourcePoolException
+    { this.start = start; }",0
+AbstractCalendarView.java,/* * Formatable methods */,public BasicUUID() { super(); },0
+AbstractCalendarView.java,/* ** Methods of UUID */,"public boolean equals(Object otherObject)
+	{
+		if (!(otherObject instanceof BasicUUID))
+			return false;
+
+		BasicUUID other = (BasicUUID) otherObject;
+
+		return (this.sequence == other.sequence)
+			&& (this.timemillis == other.timemillis)
+			&& (this.majorId == other.majorId);
+	}",0
+AbstractCalendarView.java,/* * a bug was introduced where the RenderContext in BasicVisualizationServer was reassigned. */,"public void testRenderContextNotOverridden() {
+    SparseGraph<Object, Object> graph = new SparseGraph<Object, Object>();
+    CircleLayout<Object, Object> layout = new CircleLayout<Object, Object>(graph);
+
+    BasicVisualizationServer<Object, Object> server = new BasicVisualizationServer<Object, Object>(layout);
+
+    PickedState<Object> pickedVertexState = server.getRenderContext().getPickedVertexState();
+    assertNotNull(pickedVertexState);
+  }",0
+AbstractCalendarView.java,/** * Method replicates the simple logic from JmsTemplate#getRequiredDefaultDestinationName. */,"private String getRequiredDefaultDestinationName() throws IllegalStateException {
+        String name = getDefaultDestinationName();
+        if (name == null) {
+            throw new IllegalStateException(
+                    ""No 'defaultDestination' or 'defaultDestinationName' specified. Check configuration of JmsTemplate."");
+        }
+        return name;
+    }",0
+AbstractCalendarView.java,"/** * Method replicates the simple logic from JmsTemplate doReceive MessageConsumer, long. */","private Message doReceive(MessageConsumer consumer, long timeout) throws JMSException {
+
+        if (timeout == RECEIVE_TIMEOUT_NO_WAIT) {
+            return consumer.receiveNoWait();
+        } else if (timeout > 0) {
+            return consumer.receive(timeout);
+        } else {
+            return consumer.receive();
+        }
+    }",0
+AbstractCalendarView.java,/** * Defaults to ONE if not set. */,"public BatchExecutionBuilder withConsistency(String consistency) {
+            this.consistency = consistency;
+            return this;
+        }",0
+AbstractCalendarView.java,/** * Defaults to LOGGED if not set. */,"public BatchExecutionBuilder withBatchType(BatchType batchType) {
+            this.batchType = batchType;
+            return this;
+        }",0
+AbstractCalendarView.java,/** * Default implementation that simply executes all events. */,"public class BatchExecutorImpl implements BatchExecutor {
+    public void execute(EventReader toExecute) {
+        for (int i = 0; i < toExecute.size(); i++) {
+            toExecute.get(i).run();
+        }
+    }
+}",0
+AbstractCalendarView.java,/* paint */,"JButton but=new JButton(new AbstractAction(""Load Mutation File"")
+			{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadVCF();
+				}
+			});",0
+AbstractCalendarView.java,"/** * stepFailWithLongException will throw an exception with very long message, and the exception should be truncated and stored in job repository STEP_EXECUTION table . */","@Test
+    public void testStepFailWithLongException() throws Exception {
+        final Properties params = Batchlet1Test.createParams(Batchlet1.ACTION, Batchlet1.ACTION_LONG_EXCEPTION);
+        System.out.printf(""Start with params %s%n"", params);
+        final long jobExecutionId = jobOperator.start(jobName4, params);
+        final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
+        jobExecution.awaitTermination(waitTimeoutMinutes, TimeUnit.MINUTES);
+        Assert.assertEquals(BatchStatus.FAILED, jobExecution.getBatchStatus());
+        final StepExecutionImpl stepExecution = (StepExecutionImpl) jobExecution.getStepExecutions().get(0);
+        Assert.assertEquals(BatchStatus.FAILED, stepExecution.getBatchStatus());
+        Assert.assertEquals(Batchlet1.ACTION_LONG_EXCEPTION, stepExecution.getExitStatus());
+
+        final Exception exception = stepExecution.getException();
+        Assert.assertNotNull(exception);
+        final String message = exception.getMessage();
+        //System.out.printf(""Step exception message: %s%n"", message.substring(0, Math.min(message.length(), 1000)));
+        Assert.assertEquals(true, message.startsWith(Batchlet1.ACTION_LONG_EXCEPTION));
+    }",0
+AbstractCalendarView.java,/** * Performs a deep copy on other. */,"public BatchMutateResult(BatchMutateResult other) {
+    __isset_bit_vector.clear();
+    __isset_bit_vector.or(other.__isset_bit_vector);
+    if (other.isSetDeps()) {
+      Set<Dep> __this__deps = new HashSet<Dep>();
+      for (Dep other_element : other.deps) {
+        __this__deps.add(new Dep(other_element));
+      }
+      this.deps = __this__deps;
+    }
+    this.lts = other.lts;
+  }",0
+AbstractCalendarView.java,"/** * No matter how we transform the query, we still have to throw SUBQUERY_CARDINALITY_VIOLATION if the subquery returns more than one row. */","@Test
+    public void subqueryCardinalityViolation() throws Exception {
+        // insert duplicate value in table B;
+        methodWatcher.executeUpdate(""insert into B values(16,'xxx', 16, 'xxx')"");
+        try {
+            doUpdate(true, 0, ""update A set A.name = (select B.name from B where A.id = B.id) where A.name IS NULL"");
+            fail();
+        } catch (SQLException e) {
+            Throwable cause = Throwables.getRootCause(e);
+            String errMsg = cause.getMessage();
+            assertTrue(errMsg.contains(""Scalar subquery is only allowed to return a single row""));
+        }
+    }",0
+AbstractCalendarView.java,/* Same test as above but position of column refs in subquery where clause is reversed. */,"@Test
+    public void updateReverseSubqueryColumnReferences() throws Exception {
+        doUpdate(true, 6, ""update A set A.name = (select B.name from B where B.id = A.id) where A.name IS NULL"");
+
+        ResultSet rs = methodWatcher.executeQuery(""select A.id,A.name from A"");
+
+        assertEquals("""" +
+                ""ID |NAME |\n"" +
+                ""----------\n"" +
+                ""10 | 10_ |\n"" +
+                ""11 | 11_ |\n"" +
+                ""12 | 12_ |\n"" +
+                ""13 |NULL |\n"" +
+                ""14 |NULL |\n"" +
+                ""15 |NULL |\n"" +
+                ""16 | 16_ |\n"" +
+                ""17 | 17_ |\n"" +
+                ""18 | 18_ |\n"" +
+                ""19 |NULL |\n"" +
+                ""20 |NULL |\n"" +
+                ""21 |NULL |"", TestUtils.FormattedResult.ResultFactory.toString(rs));
+    }",0
+AbstractCalendarView.java,/** * only update/insert/delete sql can be wrapped in an execute batch. */,"@Test(expected = EqlExecuteException.class)
+    public void test3() {
+        EqlTran eqlTran = new Eql().newTran();
+        eqlTran.start();
+        EqlBatch eqlBatch = new EqlBatch(5);
+
+        for (int i = 0; i < 10; ++i) {
+            new Eql().useBatch(eqlBatch).useTran(eqlTran).id(""test"").limit(1).execute();
+            String orderNo = randLetters(10);
+            String userId = randLetters(10);
+            int prizeItem = randInt(10);
+            int ret = new Eql().useBatch(eqlBatch).useTran(eqlTran).insert(""insertPrizeBingoo"")
+                    .params(orderNo, ""Olympic"", """" + prizeItem, userId)
+                    .execute();
+
+            assertThat(ret, is(0));
+        }
+
+        eqlBatch.executeBatch();
+        Closes.closeQuietly(eqlTran);
+    }",0
+AbstractCalendarView.java,/** * Do NOT modify this inventory on the client side of a singleplayer game! */,"public IInventory getBaubles(EntityPlayer player) {
+    return hasBaubles() ? getBaublesInvUnsafe(player) : null;
+  }",0
+AbstractCalendarView.java,/* * called for implicitCA */,"public BCDSTU4145PublicKey(
+        String algorithm,
+        ECPublicKeyParameters params)
+    {
+        this.algorithm = algorithm;
+        this.ecPublicKey = params;
+        this.ecSpec = null;
+    }",0
+AbstractCalendarView.java,/* * called for implicitCA */,"public BCECGOST3410PublicKey(
+        String algorithm,
+        ECPublicKeyParameters params)
+    {
+        this.algorithm = algorithm;
+        this.ecPublicKey = params;
+        this.ecSpec = null;
+    }",0
+AbstractCalendarView.java,/* * called for implicitCA */,"public BCECPublicKey(
+        String algorithm,
+        ECPublicKeyParameters params,
+        ProviderConfiguration configuration)
+    {
+        this.algorithm = algorithm;
+        this.ecPublicKey = params;
+        this.ecSpec = null;
+        this.configuration = configuration;
+    }",0
+AbstractCalendarView.java,/* * *  INFRASTRUCTURE * */,"public BcSignedDataTest(String name)
+    {
+        super(name);
+    }",0
+AbstractCalendarView.java,/** * Singleton instance. */,"public static final X500NameStyle INSTANCE = new BCStyle();
+
+    protected final Hashtable defaultLookUp;
+    protected final Hashtable defaultSymbols;
+
+    protected BCStyle()
+    {
+        defaultSymbols = copyHashTable(DefaultSymbols);
+        defaultLookUp = copyHashTable(DefaultLookUp);
+    }",0
+AbstractArrayState.java,/* * A version to use in caches where getting null can be expected. */,"final Object getArrayNoCheck() {
+		return array.get();
+	}",0
+Util.java,/** * V must implement equals. */,"public static <V> void assertCollectionSameElements(Collection<V> expected, Collection<V> actual) {
+    Collection<V> expectedCopy = new ArrayList<V>(expected);
+    Collection<V> actualCopy = new ArrayList<V>(actual);
+
+    for (V item : actualCopy) {
+      assertTrue(expectedCopy.remove(item));
+    }
+    assertTrue(expectedCopy.isEmpty());
+  }",0
+AggregateUI.java,/* SINGLETON FETCHING */,"public static synchronized final AggregateUI getUI() {
+    if (singleton == null) {
+      // if you get here, you've put something in the AggregateUI()
+      // constructor that should have been put in the onModuleLoad()
+      // method.
+      GWT.log(""AggregateUI.getUI() called before singleton has been initialized"");
+    }
+    return singleton;
+  }",0
+AggregateUI.java,/* NAVIGATION */,"public void redirectToSubTab(SubTabs subTab) {
+    for (Tabs tab : tabPosition) {
+
+      AggregateTabBase tabObj = tabMap.get(tab);
+      if (tabObj == null) {
+        continue;
+      }
+
+      SubTabInterface subTabObj = tabObj.getSubTab(subTab);
+      if (subTabObj != null) {
+        // found the tab
+        int index = tabPosition.indexOf(tab);
+        mainNav.selectTab(index);
+        tabObj.selectTab(tabObj.findSubTabIndex(subTab));
+
+      }
+    }
+    resize();
+  }",0
+AggregateUI.java,/* *SECURITY */,"private boolean authorizedForTab(Tabs tab) {
+    switch (tab) {
+    case SUBMISSIONS:
+      return userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_DATA_VIEWER);
+    case MANAGEMENT:
+      return userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_DATA_OWNER);
+    case ADMIN:
+      return userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_SITE_ACCESS_ADMIN);
+    case ODKTABLES:
+    	return userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_SYNCHRONIZE_TABLES) ||
+    		   userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_SUPER_USER_TABLES) ||
+               userInfo.getGrantedAuthorities().contains(GrantedAuthorityName.ROLE_ADMINISTER_TABLES);
+    default:
+      return false;
+    }
+  }",0
+AggregateUI.java,/* * HELP STUFF */,"private void changeHelpPanel(SubTabs subMenu) {
+    // change root item
+    rootItem.setText(subMenu + "" Help"");
+    rootItem.removeItems();
+    SubTabInterface subTabObj = getSubTab(subMenu);
+    if (subTabObj != null) {
+      HelpSliderConsts[] helpVals = subTabObj.getHelpSliderContent();
+      if (helpVals != null) {
+        for (int i = 0; i < helpVals.length; i++) {
+          TreeItem helpItem = new TreeItem(SafeHtmlUtils.fromString(helpVals[i].getTitle()));
+          TreeItem content = new TreeItem(SafeHtmlUtils.fromString(helpVals[i].getContent()));
+          helpItem.setState(false);
+          helpItem.addItem(content);
+          rootItem.addItem(helpItem);
+        }
+      }
+    }
+    rootItem.setState(true);
+    resize();
+  }",0
+AbstractExternalService.java,/** * Helper function for constructors. * */,"protected static FormServiceCursor createFormServiceCursor(IForm form, CommonFieldsBase entity, ExternalServicePublicationOption externalServiceOption, ExternalServiceType type, CallingContext cc) throws ODKDatastoreException {
+    FormServiceCursor formServiceCursor = FormServiceCursor.createFormServiceCursor(form, type, entity, cc);
+    formServiceCursor.setExternalServiceOption(externalServiceOption);
+    formServiceCursor.setIsExternalServicePrepared(false);
+    formServiceCursor.setOperationalStatus(OperationalStatus.ESTABLISHED);
+    formServiceCursor.setEstablishmentDateTime(new Date());
+    formServiceCursor.setUploadCompleted(false);
+    return formServiceCursor;
+  }",0
+AbstractExternalService.java,/** * Helper function for constructors. */,"protected static final <T extends CommonFieldsBase> T newEntity(T parameterTableRelation, CallingContext cc) throws ODKDatastoreException {
+    Datastore ds = cc.getDatastore();
+    User user = cc.getCurrentUser();
+    return ds.createEntityUsingRelation(parameterTableRelation, user);
+  }",0
+AbstractExternalService.java,/** * Helper function for constructors. */,"protected static final <T extends CommonFieldsBase> T retrieveEntity(T parameterTableRelation, FormServiceCursor fsc, CallingContext cc) throws ODKDatastoreException {
+    Datastore ds = cc.getDatastore();
+    User user = cc.getCurrentUser();
+    return ds.getEntity(parameterTableRelation, fsc.getAuriService(), user);
+  }",0
+FusionTable.java,/** * Helper function to create a FusionTable parameter table (missing the * not-yet-created tableId). */,"private static final FusionTable2ParameterTable newFusionTableEntity(String ownerEmail,
+      CallingContext cc) throws ODKDatastoreException {
+    Datastore ds = cc.getDatastore();
+    User user = cc.getCurrentUser();
+
+    FusionTable2ParameterTable t = ds.createEntityUsingRelation(
+        FusionTable2ParameterTable.assertRelation(cc), user);
+    t.setOwnerEmail(ownerEmail);
+    return t;
+  }",0
+OhmageJsonServer2ParameterTable.java,/** * Construct an empty entity. */,"private OhmageJsonServer2ParameterTable(OhmageJsonServer2ParameterTable ref, User user) {
+    super(ref, user);
+  }",0
+PersistentResults.java,/** * Constructor helper for the common case.  */,"public PersistentResults(ExportType type, IForm form, SubmissionFilterGroup filterGroup, Map<String, String> parameters,
+      CallingContext cc) throws ODKDatastoreException {
+    Datastore ds = cc.getDatastore();
+    User user = cc.getCurrentUser();
+    PersistentResultsTable relation = PersistentResultsTable.assertRelation(cc);
+    row = ds.createEntityUsingRelation(relation, user);
+    setRequestingUser(user.getUriUser());
+    Date now = new Date();
+    setRequestDate(now);
+    setRequestParameters(parameters);
+    setLastRetryDate(now);
+    setAttemptCount(1L);
+    setStatus(ExportStatus.GENERATION_IN_PROGRESS);
+    setResultType(type);
+    setFormId(form.getFormId());
+    if(filterGroup != null) {
+      setFilterGroupUri(filterGroup.getUri());
+    }
+    this.bcm = PersistentResultsTable.assertManipulator(row.getUri(), cc);
+
+    // NOTE: the entity is not yet persisted!
+  }",0
+BulkRowObjWrapper.java,/** * Should only be called if the request didn't specify a rowFilterScope  */,"public void setRowFilterScope(RowFilterScope rowFilterScope) {
+    if ( !nullIncomingScope ) {
+      throw new IllegalStateException(""Should not be called"");
+    }
+    this.rowFilterScope = rowFilterScope;
+    row.setRowFilterScope(rowFilterScope);
+  }",0
+Row.java,/** * Expects a string as generated by org.opendatakit.common.utils.WebUtils#iso8601Date(Date). */,"public void setSavepointTimestamp(String savepointTimestamp) {
+    this.savepointTimestamp = savepointTimestamp;
+  }",0

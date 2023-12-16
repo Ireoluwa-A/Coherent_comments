@@ -1,0 +1,796 @@
+@relation comments_features
+
+@attribute ** {false,true}
+@attribute -1 {false,true}
+@attribute -lsb- {false,true}
+@attribute -rsb- {false,true}
+@attribute / {false,true}
+@attribute 0 {false,true}
+@attribute 1 {false,true}
+@attribute 10 {false,true}
+@attribute 2 {false,true}
+@attribute 3 {false,true}
+@attribute </code> {false,true}
+@attribute <AMPERSAND> {false,true}
+@attribute <ASTERISK> {false,true}
+@attribute <BACKSLASH> {false,true}
+@attribute <CLOSEPAREN> {false,true}
+@attribute <CLOSESQUARE> {false,true}
+@attribute <COLON> {false,true}
+@attribute <COMMA> {false,true}
+@attribute <DASH> {false,true}
+@attribute <DOUBLEQUOTE> {false,true}
+@attribute <ELLIPSE> {false,true}
+@attribute <EXCLAMATIONMARK> {false,true}
+@attribute <LEFTANGLE {false,true}
+@attribute <OPENPAREN> {false,true}
+@attribute <OPENSQUARE> {false,true}
+@attribute <PERCENTSIGN> {false,true}
+@attribute <PERIOD> {false,true}
+@attribute <PLUSSIGN> {false,true}
+@attribute <QUESTIONMARK> {false,true}
+@attribute <RIGHTANGLE> {false,true}
+@attribute <SEMICOLON> {false,true}
+@attribute <SINGLEQUOTE> {false,true}
+@attribute <code> {false,true}
+@attribute <p> {false,true}
+@attribute <string> {false,true}
+@attribute = {false,true}
+@attribute == {false,true}
+@attribute @link {false,true}
+@attribute @nonnull {false,true}
+@attribute @override {false,true}
+@attribute @param {false,true}
+@attribute @return {false,true}
+@attribute @see {false,true}
+@attribute @suppresswarnings {false,true}
+@attribute @test {false,true}
+@attribute @throws {false,true}
+@attribute _ {false,true}
+@attribute a {false,true}
+@attribute abstractcalendarview.java {false,true}
+@attribute action {false,true}
+@attribute add {false,true}
+@attribute after {false,true}
+@attribute all {false,true}
+@attribute allowed {false,true}
+@attribute an {false,true}
+@attribute and {false,true}
+@attribute any {false,true}
+@attribute api {false,true}
+@attribute are {false,true}
+@attribute array {false,true}
+@attribute arraylist {false,true}
+@attribute as {false,true}
+@attribute assertequals {false,true}
+@attribute assertnotnull {false,true}
+@attribute asserttrue {false,true}
+@attribute associated {false,true}
+@attribute at {false,true}
+@attribute axis {false,true}
+@attribute base {false,true}
+@attribute be {false,true}
+@attribute been {false,true}
+@attribute before {false,true}
+@attribute block {false,true}
+@attribute boolean {false,true}
+@attribute buffer {false,true}
+@attribute builder {false,true}
+@attribute but {false,true}
+@attribute by {false,true}
+@attribute byte {false,true}
+@attribute call {false,true}
+@attribute callback {false,true}
+@attribute called {false,true}
+@attribute can {false,true}
+@attribute case {false,true}
+@attribute catch {false,true}
+@attribute change {false,true}
+@attribute check {false,true}
+@attribute class {false,true}
+@attribute client {false,true}
+@attribute collection {false,true}
+@attribute color {false,true}
+@attribute compare {false,true}
+@attribute configuration {false,true}
+@attribute configured {false,true}
+@attribute constructor {false,true}
+@attribute contains {false,true}
+@attribute content {false,true}
+@attribute context {false,true}
+@attribute convert {false,true}
+@attribute coordinate {false,true}
+@attribute copy {false,true}
+@attribute corresponding {false,true}
+@attribute could {false,true}
+@attribute create {false,true}
+@attribute created {false,true}
+@attribute creates {false,true}
+@attribute current {false,true}
+@attribute currently {false,true}
+@attribute d {false,true}
+@attribute data {false,true}
+@attribute date {false,true}
+@attribute default {false,true}
+@attribute defined {false,true}
+@attribute delete {false,true}
+@attribute description {false,true}
+@attribute details {false,true}
+@attribute device {false,true}
+@attribute directory {false,true}
+@attribute do {false,true}
+@attribute document {false,true}
+@attribute does {false,true}
+@attribute double {false,true}
+@attribute e {false,true}
+@attribute e.printstacktrace {false,true}
+@attribute each {false,true}
+@attribute either {false,true}
+@attribute element {false,true}
+@attribute else {false,true}
+@attribute empty {false,true}
+@attribute enabled {false,true}
+@attribute entity {false,true}
+@attribute entry {false,true}
+@attribute enum {false,true}
+@attribute equals {false,true}
+@attribute error {false,true}
+@attribute errors {false,true}
+@attribute event {false,true}
+@attribute exception {false,true}
+@attribute expected {false,true}
+@attribute extends {false,true}
+@attribute f {false,true}
+@attribute failed {false,true}
+@attribute false {false,true}
+@attribute field {false,true}
+@attribute file {false,true}
+@attribute final {false,true}
+@attribute find {false,true}
+@attribute first {false,true}
+@attribute float {false,true}
+@attribute following {false,true}
+@attribute for {false,true}
+@attribute format {false,true}
+@attribute found {false,true}
+@attribute fragment {false,true}
+@attribute from {false,true}
+@attribute function {false,true}
+@attribute further {false,true}
+@attribute get {false,true}
+@attribute getid {false,true}
+@attribute getname {false,true}
+@attribute gets {false,true}
+@attribute gety {false,true}
+@attribute given {false,true}
+@attribute handle.getfloat {false,true}
+@attribute handle.getintegers {false,true}
+@attribute has {false,true}
+@attribute hashmap {false,true}
+@attribute have {false,true}
+@attribute here {false,true}
+@attribute host {false,true}
+@attribute http {false,true}
+@attribute i {false,true}
+@attribute id {false,true}
+@attribute if {false,true}
+@attribute illegalargumentexception {false,true}
+@attribute image {false,true}
+@attribute in {false,true}
+@attribute index {false,true}
+@attribute info {false,true}
+@attribute inputstream {false,true}
+@attribute instance {false,true}
+@attribute instanceof {false,true}
+@attribute int {false,true}
+@attribute integer {false,true}
+@attribute internal {false,true}
+@attribute into {false,true}
+@attribute ioexception {false,true}
+@attribute is {false,true}
+@attribute it {false,true}
+@attribute item {false,true}
+@attribute iterator {false,true}
+@attribute its {false,true}
+@attribute java {false,true}
+@attribute json {false,true}
+@attribute jsonobject {false,true}
+@attribute key {false,true}
+@attribute l {false,true}
+@attribute length {false,true}
+@attribute list {false,true}
+@attribute load {false,true}
+@attribute log {false,true}
+@attribute long {false,true}
+@attribute main {false,true}
+@attribute map {false,true}
+@attribute maximum {false,true}
+@attribute may {false,true}
+@attribute message {false,true}
+@attribute messages {false,true}
+@attribute method {false,true}
+@attribute more {false,true}
+@attribute must {false,true}
+@attribute n {false,true}
+@attribute name {false,true}
+@attribute new {false,true}
+@attribute next {false,true}
+@attribute no {false,true}
+@attribute node {false,true}
+@attribute not {false,true}
+@attribute note {false,true}
+@attribute null {false,true}
+@attribute number {false,true}
+@attribute 'n\\u2019t' {false,true}
+@attribute obj {false,true}
+@attribute object {false,true}
+@attribute occurred {false,true}
+@attribute of {false,true}
+@attribute offset {false,true}
+@attribute on {false,true}
+@attribute one {false,true}
+@attribute only {false,true}
+@attribute operation {false,true}
+@attribute option {false,true}
+@attribute optional {false,true}
+@attribute or {false,true}
+@attribute other {false,true}
+@attribute otherwise {false,true}
+@attribute output {false,true}
+@attribute override {false,true}
+@attribute packet {false,true}
+@attribute page {false,true}
+@attribute parameters {false,true}
+@attribute parent {false,true}
+@attribute part {false,true}
+@attribute path {false,true}
+@attribute per {false,true}
+@attribute player {false,true}
+@attribute point {false,true}
+@attribute pool {false,true}
+@attribute position {false,true}
+@attribute possible {false,true}
+@attribute private {false,true}
+@attribute properties {false,true}
+@attribute property {false,true}
+@attribute protected {false,true}
+@attribute provider {false,true}
+@attribute proxy {false,true}
+@attribute public {false,true}
+@attribute queue {false,true}
+@attribute read {false,true}
+@attribute remove {false,true}
+@attribute resource {false,true}
+@attribute resources {false,true}
+@attribute result {false,true}
+@attribute retrieve {false,true}
+@attribute return {false,true}
+@attribute returned {false,true}
+@attribute returns {false,true}
+@attribute run {false,true}
+@attribute running {false,true}
+@attribute runtimeexception {false,true}
+@attribute s {false,true}
+@attribute same {false,true}
+@attribute search {false,true}
+@attribute see {false,true}
+@attribute send {false,true}
+@attribute sent {false,true}
+@attribute server {false,true}
+@attribute service {false,true}
+@attribute session {false,true}
+@attribute set {false,true}
+@attribute sets {false,true}
+@attribute sheet {false,true}
+@attribute should {false,true}
+@attribute size {false,true}
+@attribute so {false,true}
+@attribute socket {false,true}
+@attribute source {false,true}
+@attribute specified {false,true}
+@attribute specifies {false,true}
+@attribute start {false,true}
+@attribute state {false,true}
+@attribute static {false,true}
+@attribute status {false,true}
+@attribute stop {false,true}
+@attribute string {false,true}
+@attribute such {false,true}
+@attribute super {false,true}
+@attribute support {false,true}
+@attribute system.out.println {false,true}
+@attribute t {false,true}
+@attribute tag {false,true}
+@attribute task {false,true}
+@attribute test {false,true}
+@attribute text {false,true}
+@attribute than {false,true}
+@attribute that {false,true}
+@attribute the {false,true}
+@attribute then {false,true}
+@attribute there {false,true}
+@attribute these {false,true}
+@attribute this {false,true}
+@attribute thread {false,true}
+@attribute throw {false,true}
+@attribute throwable {false,true}
+@attribute throws {false,true}
+@attribute time {false,true}
+@attribute to {false,true}
+@attribute tostring {false,true}
+@attribute true {false,true}
+@attribute try {false,true}
+@attribute type {false,true}
+@attribute unknown {false,true}
+@attribute unused {false,true}
+@attribute update {false,true}
+@attribute url {false,true}
+@attribute use {false,true}
+@attribute used {false,true}
+@attribute user {false,true}
+@attribute uses {false,true}
+@attribute using {false,true}
+@attribute uuid {false,true}
+@attribute valid {false,true}
+@attribute value {false,true}
+@attribute values {false,true}
+@attribute version {false,true}
+@attribute view {false,true}
+@attribute void {false,true}
+@attribute want {false,true}
+@attribute was {false,true}
+@attribute wbstype.java {false,true}
+@attribute we {false,true}
+@attribute web {false,true}
+@attribute when {false,true}
+@attribute where {false,true}
+@attribute whether {false,true}
+@attribute which {false,true}
+@attribute while {false,true}
+@attribute will {false,true}
+@attribute window {false,true}
+@attribute with {false,true}
+@attribute within {false,true}
+@attribute world {false,true}
+@attribute write {false,true}
+@attribute x {false,true}
+@attribute xml {false,true}
+@attribute y {false,true}
+@attribute you {false,true}
+@attribute your {false,true}
+@attribute zmq.java {false,true}
+@attribute zmq.zmq.zmq {false,true}
+@attribute zrtpconfigure.java {false,true}
+@attribute | {false,true}
+@attribute '\\u2019s' {false,true}
+@attribute CLASS {0,1}
+
+@data
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,40 true,41 true,52 true,55 true,88 true,183 true,213 true,225 true,256 true,264 true,280 true,291 true,305 true,306 true,316 true,332 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,28 true,29 true,30 true,35 true,39 true,46 true,109 true,172 true,182 true,195 true,201 true,213 true,241 true,248 true,250 true,256 true,300 true,317 true,320 true,335 true,336 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,46 true,73 true,182 true,225 true,247 true,256 true,264 true,279 true,283 true,306 true,311 true,316 true,358 true,359 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,47 true,75 true,98 true,162 true,225 true,256 true,264 true,306 true,310 true,315 true,316 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,130 true,164 true,172 true,182 true,213 true,256 true,279 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,39 true,40 true,50 true,58 true,69 true,81 true,145 true,154 true,162 true,173 true,184 true,187 true,198 true,202 true,205 true,213 true,217 true,234 true,256 true,267 true,279 true,290 true,304 true,306 true,311 true,316 true,321 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,40 true,46 true,114 true,256 true,336 true,363 1}
+{0 true,1 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,36 true,40 true,44 true,46 true,47 true,51 true,54 true,62 true,63 true,64 true,71 true,104 true,106 true,113 true,118 true,154 true,157 true,159 true,182 true,198 true,213 true,217 true,227 true,247 true,256 true,283 true,294 true,298 true,306 true,316 true,329 true,336 true,363 1}
+{0 true,4 true,5 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,47 true,55 true,61 true,106 true,148 true,163 true,176 true,213 true,225 true,256 true,258 true,263 true,264 true,306 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,42 true,182 true,256 true,264 true,283 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,6 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,22 true,23 true,24 true,27 true,28 true,30 true,35 true,36 true,100 true,150 true,154 true,171 true,182 true,213 true,250 true,264 true,291 true,294 true}
+{0 true,4 true,10 true,12 true,14 true,15 true,16 true,17 true,19 true,20 true,22 true,23 true,24 true,26 true,29 true,30 true,32 true,35 true,40 true,41 true,47 true,50 true,53 true,54 true,112 true,126 true,127 true,150 true,166 true,170 true,173 true,187 true,195 true,198 true,203 true,213 true,225 true,249 true,256 true,264 true,279 true,294 true,300 true,306 true,310 true,316 true,324 true,331 true,333 true,349 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,40 true,144 true,256 true,294 true,296 true,363 1}
+{0 true,1 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,36 true,41 true,45 true,111 true,150 true,171 true,173 true,176 true,182 true,213 true,215 true,256 true,264 true,266 true,306 true,312 true,314 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,37 true,256 true,264 true,294 true,363 1}
+{4 true,8 true,12 true,14 true,15 true,16 true,18 true,19 true,23 true,24 true,30 true,35 true,46 true,145 true,165 true,213 true,249 true,277 true,293 true,316 true,319 true,363 1}
+{4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,39 true,41 true,159 true,160 true,212 true,225 true,256 true,264 true,272 true,294 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,41 true,47 true,79 true,140 true,150 true,153 true,160 true,176 true,180 true,213 true,256 true,264 true,291 true,306 true,316 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,31 true,35 true,36 true,47 true,52 true,55 true,61 true,173 true,182 true,198 true,203 true,223 true,225 true,227 true,243 true,256 true,264 true,284 true,291 true,294 true,306 true,333 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,47 true,70 true,73 true,95 true,142 true,162 true,165 true,173 true,195 true,212 true,225 true,235 true,252 true,256 true,264 true,279 true,294 true,306 true,318 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,44 true,45 true,95 true,137 true,187 true,219 true,230 true,233 true,256 true,314 true,326 true,329 true,336 true,349 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,28 true,30 true,33 true,35 true,41 true,106 true,173 true,197 true,212 true,217 true,219 true,225 true,233 true,245 true,256 true,263 true,264 true,279 true,294 true,306 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,44 true,46 true,54 true,62 true,63 true,66 true,131 true,137 true,172 true,179 true,203 true,212 true,213 true,223 true,251 true,256 true,273 true,294 true,314 true,318 true,334 true,336 true,349 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,36 true,41 true,127 true,173 true,189 true,197 true,208 true,223 true,227 true,228 true,229 true,264 true,306 true,312 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,41 true,45 true,47 true,103 true,117 true,144 true,176 true,186 true,213 true,250 true,264 true,291 true,294 true,302 true,314 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,27 true,29 true,30 true,35 true,40 true,41 true,46 true,127 true,152 true,157 true,173 true,177 true,182 true,197 true,200 true,223 true,256 true,264 true,289 true,363 1}
+{0 true,4 true,7 true,11 true,12 true,14 true,15 true,17 true,18 true,19 true,21 true,23 true,24 true,26 true,29 true,30 true,35 true,39 true,40 true,55 true,67 true,73 true,109 true,127 true,131 true,148 true,150 true,173 true,176 true,204 true,223 true,225 true,227 true,246 true,256 true,306 true,310 true,333 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,148 true,157 true,176 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,45 true,46 true,68 true,88 true,111 true,135 true,137 true,150 true,180 true,213 true,243 true,251 true,256 true,294 true,306 true,310 true,314 true,316 true,318 true,362 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,29 true,30 true,35 true,154 true,173 true,182 true,250 true,264 true,286 true,306 true,335 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,47 true,106 true,130 true,164 true,172 true,182 true,225 true,245 true,256 true,258 true,263 true,264 true,306 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,130 true,164 true,172 true,182 true,213 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,40 true,69 true,84 true,122 true,123 true,140 true,176 true,205 true,217 true,256 true,291 true,313 true,319 true,326 true,336 true,343 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,37 true,46 true,96 true,142 true,153 true,159 true,185 true,219 true,256 true,306 true,310 true,336 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,46 true,54 true,100 true,140 true,150 true,171 true,173 true,182 true,187 true,189 true,219 true,225 true,256 true,262 true,264 true,266 true,305 true,306 true,310 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,29 true,30 true,40 true,47 true,55 true,150 true,154 true,195 true,203 true,223 true,225 true,251 true,256 true,294 true,306 true,332 true,333 true,336 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,106 true,130 true,140 true,148 true,225 true,256 true,258 true,263 true,264 true,306 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,17 true,18 true,19 true,21 true,23 true,24 true,30 true,35 true,40 true,41 true,47 true,109 true,127 true,157 true,173 true,198 true,208 true,219 true,256 true,264 true,294 true,315 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,158 true,172 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,41 true,74 true,213 true,225 true,247 true,253 true,264 true,290 true,294 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,110 true,187 true,223 true,225 true,252 true,256 true,280 true,294 true,306 true,332 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,73 true,77 true,127 true,150 true,173 true,234 true,256 true,318 true,325 true,336 true}
+{0 true,4 true,12 true,13 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,27 true,30 true,31 true,35 true,41 true,45 true,47 true,157 true,173 true,176 true,211 true,213 true,250 true,264 true,294 true,303 true,306 true,312 true,314 true,332 true,346 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,47 true,66 true,84 true,85 true,122 true,184 true,186 true,187 true,208 true,213 true,253 true,260 true,264 true,310 true,312 true,316 true,319 true,324 true,362 true}
+{0 true,4 true,8 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,27 true,30 true,41 true,46 true,121 true,160 true,196 true,225 true,244 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,40 true,41 true,46 true,47 true,89 true,93 true,111 true,137 true,141 true,152 true,170 true,173 true,176 true,193 true,213 true,215 true,219 true,233 true,256 true,264 true,272 true,286 true,294 true,306 true,312 true,329 true,338 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,46 true,83 true,94 true,110 true,130 true,150 true,173 true,176 true,187 true,203 true,213 true,217 true,218 true,219 true,240 true,256 true,294 true,306 true,314 true,320 true,327 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,67 true,69 true,73 true,81 true,142 true,173 true,204 true,229 true,256 true,264 true,266 true,282 true,306 true,310 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,43 true,47 true,73 true,86 true,95 true,173 true,256 true,264 true,306 true,318 true,322 true,360 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,176 true,239 true,256 true,278 true,291 true,306 true,335 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,28 true,30 true,35 true,39 true,42 true,46 true,47 true,52 true,69 true,73 true,83 true,84 true,120 true,122 true,150 true,173 true,176 true,179 true,186 true,188 true,193 true,201 true,213 true,221 true,237 true,256 true,264 true,273 true,306 true,312 true,316 true,319 true,332 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,16 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,42 true,47 true,60 true,66 true,87 true,102 true,139 true,146 true,150 true,172 true,173 true,198 true,205 true,213 true,217 true,234 true,237 true,253 true,256 true,264 true,287 true,294 true,296 true,303 true,305 true,306 true,316 true,349 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,67 true,148 true,163 true,213 true,227 true,256 true,279 true,306 true,332 true,336 true,352 true,353 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,6 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,22 true,23 true,24 true,27 true,30 true,34 true,35 true,40 true,41 true,103 true,150 true,154 true,171 true,173 true,182 true,198 true,208 true,213 true,250 true,264 true,294 true,298 true,316 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,44 true,46 true,47 true,48 true,53 true,64 true,84 true,122 true,137 true,154 true,167 true,173 true,176 true,185 true,187 true,209 true,215 true,219 true,228 true,229 true,256 true,264 true,266 true,279 true,294 true,304 true,306 true,312 true,313 true,314 true,316 true,318 true,319 true,323 true,332 true,333 true,336 true,340 true,343 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,184 true,256 true,291 true,292 true,336 true,363 1}
+{4 true,5 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,47 true,113 true,158 true,162 true,187 true,197 true,223 true,250 true,255 true,305 true,314 true,316 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,77 true,99 true,106 true,157 true,164 true,182 true,256 true,258 true,263 true,264 true,306 true,316 true,318 true,353 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,46 true,47 true,62 true,89 true,213 true,256 true,260 true,306 true,320 true,336 true}
+{0 true,2 true,3 true,4 true,7 true,11 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,21 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,46 true,47 true,145 true,151 true,154 true,169 true,173 true,174 true,177 true,180 true,182 true,187 true,193 true,212 true,213 true,217 true,219 true,233 true,250 true,258 true,264 true,279 true,294 true,312 true,315 true,320 true,332 true,333 true,352 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,40 true,47 true,154 true,256 true,277 true,310 true,316 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,6 true,8 true,9 true,12 true,13 true,14 true,15 true,16 true,17 true,18 true,19 true,22 true,23 true,24 true,25 true,26 true,27 true,29 true,30 true,35 true,36 true,40 true,45 true,51 true,91 true,127 true,144 true,150 true,154 true,173 true,177 true,178 true,182 true,183 true,186 true,198 true,208 true,211 true,213 true,219 true,222 true,223 true,256 true,258 true,264 true,289 true,294 true,306 true,310 true,314 true,336 true,346 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,30 true,35 true,36 true,47 true,148 true,150 true,173 true,182 true,197 true,198 true,213 true,219 true,225 true,256 true,264 true,266 true,287 true,306 true,316 true,325 true,353 true,355 true,361 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,77 true,99 true,106 true,157 true,164 true,182 true,256 true,258 true,263 true,264 true,306 true,316 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,306 true,320 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,40 true,41 true,47 true,55 true,60 true,101 true,143 true,150 true,152 true,157 true,171 true,173 true,181 true,182 true,190 true,198 true,206 true,207 true,213 true,222 true,223 true,225 true,229 true,230 true,250 true,264 true,266 true,294 true,306 true,316 true,334 true,345 true,346 true,349 true,354 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,28 true,30 true,35 true,36 true,40 true,41 true,47 true,52 true,58 true,59 true,69 true,73 true,78 true,95 true,109 true,128 true,142 true,150 true,162 true,171 true,173 true,176 true,182 true,187 true,188 true,197 true,221 true,229 true,233 true,235 true,256 true,264 true,273 true,282 true,291 true,302 true,306 true,316 true,318 true,331 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,39 true,69 true,82 true,83 true,134 true,135 true,137 true,143 true,173 true,176 true,219 true,250 true,256 true,310 true,316 true,336 true,345 true,363 1}
+{0 true,1 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,40 true,41 true,75 true,84 true,96 true,97 true,109 true,117 true,122 true,123 true,144 true,173 true,176 true,179 true,182 true,186 true,199 true,213 true,219 true,225 true,243 true,256 true,264 true,291 true,294 true,306 true,319 true,346 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,48 true,173 true,217 true,256 true,264 true,279 true,310 true,316 true}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,47 true,97 true,103 true,150 true,182 true,187 true,213 true,220 true,225 true,256 true,264 true,291 true,306 true,316 true,325 true,358 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,40 true,182 true,256 true,279 true,306 true,316 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,27 true,29 true,30 true,35 true,46 true,74 true,78 true,84 true,144 true,150 true,176 true,182 true,186 true,188 true,213 true,236 true,250 true,286 true,291 true,294 true,298 true,316 true,319 true,336 true,346 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,39 true,46 true,47 true,118 true,173 true,188 true,191 true,256 true,296 true,306 true,316 true,335 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,27 true,30 true,40 true,45 true,47 true,55 true,65 true,137 true,162 true,173 true,187 true,213 true,217 true,252 true,256 true,265 true,269 true,291 true,294 true,306 true,312 true,314 true,316 true,330 true,331 true,332 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,28 true,29 true,30 true,31 true,35 true,36 true,41 true,66 true,144 true,145 true,150 true,171 true,173 true,182 true,187 true,213 true,219 true,241 true,243 true,250 true,264 true,294 true,306 true,316 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,36 true,46 true,47 true,50 true,55 true,58 true,71 true,80 true,90 true,104 true,118 true,125 true,127 true,157 true,160 true,173 true,181 true,187 true,188 true,191 true,213 true,215 true,217 true,219 true,225 true,233 true,240 true,241 true,259 true,284 true,291 true,305 true,306 true,316 true,323 true,336 true,338 true,347 true,349 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,47 true,85 true,256 true,264 true,291 true,292 true,294 true,306 true,338 true,349 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,94 true,150 true,213 true,225 true,254 true,256 true,283 true,294 true,296 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,160 true,183 true,225 true,256 true,264 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,110 true,127 true,133 true,150 true,173 true,219 true,250 true,264 true,290 true,363 1}
+{4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,46 true,51 true,55 true,61 true,70 true,81 true,84 true,150 true,167 true,173 true,212 true,213 true,219 true,223 true,249 true,269 true,279 true,306 true,312 true,319 true,336 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,37 true,40 true,78 true,130 true,182 true,213 true,256 true,273 true,279 true,292 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,69 true,73 true,88 true,155 true,173 true,187 true,189 true,233 true,256 true,264 true,266 true,275 true,300 true,306 true,310 true,316 true,318 true,347 true,362 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,31 true,44 true,55 true,58 true,61 true,62 true,165 true,173 true,187 true,215 true,217 true,219 true,225 true,236 true,244 true,256 true,305 true,306 true,336 true,340 true,342 true,347 true,349 true,353 true,355 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,33 true,36 true,37 true,40 true,41 true,47 true,73 true,142 true,173 true,219 true,223 true,253 true,264 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,46 true,69 true,127 true,142 true,173 true,217 true,219 true,227 true,233 true,250 true,282 true,306 true,318 true,323 true,336 true,344 true,363 1}
+{0 true,4 true,6 true,8 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,27 true,30 true,31 true,35 true,36 true,37 true,40 true,41 true,45 true,47 true,61 true,86 true,145 true,154 true,173 true,174 true,213 true,216 true,217 true,219 true,221 true,225 true,230 true,240 true,259 true,264 true,289 true,294 true,301 true,306 true,312 true,314 true,317 true,330 true,347 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,39 true,40 true,46 true,47 true,54 true,58 true,80 true,101 true,114 true,134 true,135 true,141 true,150 true,169 true,182 true,187 true,199 true,202 true,213 true,225 true,228 true,256 true,260 true,294 true,305 true,306 true,309 true,316 true,324 true,332 true,335 true,336 true,363 1}
+{0 true,4 true,12 true,15 true,17 true,18 true,19 true,21 true,22 true,24 true,28 true,47 true,82 true,86 true,109 true,132 true,134 true,137 true,141 true,150 true,184 true,192 true,217 true,224 true,225 true,233 true,261 true,274 true,289 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,30 true,42 true,219 true,256 true,264 true,279 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,46 true,75 true,153 true,175 true,182 true,256 true,264 true,280 true,306 true,310 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,72 true,106 true,164 true,182 true,248 true,256 true,258 true,263 true,264 true,306 true,353 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,47 true,61 true,82 true,106 true,128 true,131 true,157 true,159 true,165 true,166 true,176 true,182 true,187 true,188 true,208 true,212 true,215 true,217 true,225 true,227 true,256 true,264 true,284 true,294 true,306 true,308 true,310 true,328 true,340 true,362 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,27 true,30 true,31 true,35 true,40 true,41 true,46 true,47 true,60 true,61 true,69 true,73 true,82 true,85 true,142 true,144 true,150 true,152 true,154 true,170 true,173 true,187 true,188 true,198 true,210 true,212 true,213 true,216 true,217 true,228 true,229 true,256 true,264 true,284 true,294 true,306 true,318 true,332 true,345 true,354 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,33 true,41 true,47 true,99 true,106 true,108 true,121 true,161 true,164 true,187 true,218 true,223 true,225 true,248 true,256 true,258 true,263 true,264 true,305 true,306 true,316 true,355 true,363 1}
+{4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,39 true,47 true,58 true,69 true,137 true,168 true,198 true,202 true,213 true,225 true,227 true,228 true,250 true,256 true,264 true,267 true,306 true,307 true,311 true,314 true,327 true,336 true,340 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,40 true,41 true,54 true,61 true,162 true,182 true,195 true,225 true,252 true,256 true,263 true,264 true,294 true,306 true,316 true,332 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,73 true,173 true,187 true,256 true,264 true,268 true,310 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,94 true,256 true,328 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,20 true,22 true,23 true,24 true,27 true,29 true,30 true,35 true,41 true,46 true,54 true,71 true,73 true,79 true,84 true,122 true,123 true,134 true,142 true,187 true,205 true,208 true,213 true,225 true,227 true,256 true,264 true,268 true,279 true,285 true,290 true,292 true,298 true,306 true,310 true,316 true,318 true,319 true,341 true,349 true,363 1}
+{0 true,2 true,3 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,124 true,150 true,182 true,256 true,258 true,263 true,264 true,306 true,353 true,363 1}
+{0 true,4 true,6 true,8 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,32 true,40 true,41 true,46 true,73 true,91 true,118 true,142 true,173 true,217 true,256 true,264 true,291 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,37 true,73 true,256 true,264 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,160 true,182 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,27 true,30 true,41 true,46 true,69 true,217 true,219 true,252 true,256 true,264 true,282 true,291 true,294 true,324 true,363 1}
+{4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,111 true,150 true,173 true,175 true,187 true,217 true,220 true,225 true,244 true,256 true,294 true,306 true,326 true,336 true,363 1}
+{0 true,1 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,29 true,30 true,35 true,40 true,70 true,165 true,173 true,176 true,196 true,201 true,256 true,279 true,306 true,316 true,336 true,358 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,134 true,137 true,145 true,225 true,256 true,279 true,296 true,306 true,310 true,313 true,316 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,51 true,77 true,148 true,163 true,213 true,226 true,248 true,256 true,279 true,306 true,310 true,316 true,332 true,336 true,352 true,353 true,363 1}
+{4 true,5 true,6 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,27 true,29 true,30 true,34 true,35 true,44 true,58 true,62 true,64 true,150 true,168 true,171 true,182 true,183 true,188 true,213 true,229 true,232 true,256 true,279 true,294 true,302 true,308 true,333 true,336 true,362 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,46 true,157 true,175 true,256 true,264 true,306 true,320 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,33 true,41 true,130 true,143 true,164 true,172 true,182 true,187 true,229 true,256 true,258 true,263 true,264 true,275 true,306 true,316 true,320 true,321 true,342 true,348 true,362 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,29 true,30 true,31 true,35 true,55 true,69 true,74 true,77 true,82 true,120 true,127 true,173 true,176 true,187 true,188 true,214 true,218 true,219 true,221 true,225 true,227 true,242 true,256 true,297 true,303 true,305 true,306 true,307 true,308 true,316 true,336 true,348 true,363 1}
+{4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,47 true,55 true,61 true,74 true,162 true,200 true,250 true,270 true,294 true,305 true,306 true,326 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,28 true,29 true,30 true,34 true,38 true,39 true,40 true,41 true,43 true,46 true,49 true,69 true,73 true,77 true,78 true,79 true,80 true,127 true,145 true,162 true,173 true,176 true,195 true,200 true,208 true,213 true,214 true,225 true,249 true,256 true,264 true,294 true,296 true,304 true,306 true,310 true,315 true,316 true,318 true,327 true,336 true,347 true,349 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,46 true,70 true,73 true,81 true,109 true,131 true,165 true,173 true,216 true,217 true,219 true,223 true,225 true,246 true,256 true,264 true,289 true,302 true,306 true,310 true}
+{0 true,4 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,69 true,106 true,150 true,256 true,258 true,263 true,264 true,294 true,303 true,306 true,316 true,332 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,78 true,109 true,213 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,103 true,111 true,172 true,197 true,213 true,225 true,250 true,264 true,294 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,28 true,30 true,41 true,49 true,73 true,106 true,217 true,233 true,256 true,258 true,263 true,264 true,306 true,338 true,344 true,363 1}
+{0 true,4 true,12 true,13 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,31 true,35 true,40 true,41 true,54 true,56 true,73 true,84 true,88 true,122 true,134 true,137 true,142 true,149 true,151 true,173 true,176 true,186 true,211 true,213 true,219 true,224 true,235 true,262 true,264 true,266 true,274 true,285 true,306 true,316 true,318 true,319 true,347 true,348 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,40 true,41 true,46 true,59 true,89 true,93 true,111 true,137 true,141 true,152 true,170 true,173 true,176 true,193 true,213 true,215 true,219 true,225 true,233 true,256 true,264 true,272 true,286 true,287 true,294 true,306 true,312 true,329 true,338 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,41 true,50 true,56 true,66 true,73 true,109 true,142 true,150 true,173 true,182 true,198 true,213 true,233 true,236 true,256 true,264 true,287 true,289 true,290 true,306 true,310 true,316 true,318 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,48 true,145 true,198 true,256 true,264 true,310 true}
+{4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,36 true,110 true,173 true,176 true,192 true,219 true,256 true,264 true,291 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,41 true,42 true,47 true,82 true,124 true,150 true,154 true,156 true,162 true,228 true,233 true,256 true,264 true,306 true,310 true,316 true,325 true,356 true,357 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,36 true,40 true,41 true,47 true,69 true,85 true,96 true,107 true,120 true,173 true,187 true,208 true,217 true,219 true,238 true,256 true,264 true,284 true,306 true,310 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,39 true,256 true,264 true,294 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,75 true,90 true,153 true,182 true,256 true,264 true,280 true,303 true,306 true,310 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,37 true,256 true,264 true,279 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,38 true,46 true,54 true,58 true,69 true,73 true,97 true,127 true,146 true,150 true,151 true,173 true,176 true,182 true,190 true,208 true,209 true,212 true,215 true,216 true,219 true,225 true,228 true,229 true,250 true,256 true,260 true,264 true,265 true,294 true,295 true,304 true,306 true,308 true,310 true,335 true,340 true,347 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,43 true,49 true,72 true,106 true,150 true,158 true,172 true,187 true,256 true,263 true,264 true,279 true,306 true,310 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,41 true,46 true,73 true,86 true,116 true,142 true,173 true,178 true,187 true,219 true,256 true,264 true,277 true,306 true,316 true,318 true,329 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,30 true,37 true,47 true,61 true,77 true,90 true,116 true,128 true,149 true,173 true,175 true,217 true,225 true,256 true,264 true,279 true,288 true,306 true,310 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,54 true,128 true,130 true,250 true,296 true,327 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,28 true,30 true,35 true,36 true,40 true,46 true,54 true,60 true,150 true,189 true,198 true,212 true,213 true,219 true,256 true,290 true,292 true,306 true,336 true,349 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,106 true,161 true,164 true,182 true,225 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,67 true,72 true,99 true,106 true,161 true,164 true,182 true,225 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,39 true,40 true,182 true,256 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,44 true,62 true,63 true,87 true,137 true,208 true,225 true,256 true,262 true,298 true,302 true,314 true,320 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,111 true,157 true,187 true,201 true,256 true,264 true,306 true,315 true,363 1}
+{0 true,1 true,4 true,12 true,14 true,15 true,19 true,21 true,23 true,24 true,30 true,41 true,46 true,157 true,173 true,182 true,220 true,225 true,256 true,264 true,294 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,58 true,73 true,109 true,150 true,219 true,233 true,256 true,264 true,299 true,306 true,354 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,78 true,106 true,163 true,225 true,248 true,256 true,258 true,263 true,264 true,306 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,32 true,42 true,143 true,176 true,256 true,306 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,37 true,256 true,264 true,279 true,363 1}
+{2 true,3 true,4 true,5 true,6 true,8 true,12 true,14 true,15 true,18 true,19 true,22 true,23 true,24 true,27 true,30 true,35 true,127 true,148 true,150 true,173 true,176 true,182 true,211 true,220 true,225 true,250 true,333 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,45 true,145 true,253 true,294 true,303 true,306 true,314 true,336 true,363 1}
+{1 true,4 true,5 true,7 true,11 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,22 true,23 true,24 true,25 true,26 true,27 true,30 true,35 true,36 true,47 true,66 true,121 true,127 true,141 true,171 true,173 true,182 true,256 true,298 true,336 true,346 true}
+{0 true,4 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,99 true,106 true,161 true,164 true,182 true,225 true,246 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,32 true,55 true,154 true,176 true,214 true,250 true,280 true,306 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,65 true,122 true,253 true,264 true,266 true,306 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,36 true,48 true,86 true,92 true,154 true,173 true,208 true,212 true,213 true,215 true,219 true,225 true,233 true,250 true,264 true,287 true,294 true,306 true,312 true,314 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,29 true,30 true,35 true,40 true,41 true,46 true,47 true,121 true,150 true,155 true,198 true,203 true,204 true,225 true,256 true,264 true,266 true,291 true,294 true,306 true,310 true,316 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,40 true,41 true,46 true,47 true,60 true,98 true,150 true,173 true,198 true,213 true,219 true,225 true,256 true,264 true,306 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,29 true,30 true,35 true,39 true,60 true,127 true,173 true,198 true,213 true,256 true,264 true}
+{0 true,1 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,25 true,26 true,27 true,30 true,35 true,47 true,55 true,76 true,83 true,84 true,86 true,88 true,106 true,108 true,109 true,120 true,122 true,127 true,137 true,138 true,141 true,142 true,151 true,156 true,167 true,168 true,173 true,176 true,182 true,187 true,188 true,205 true,213 true,215 true,217 true,219 true,221 true,225 true,228 true,235 true,243 true,256 true,264 true,267 true,270 true,291 true,294 true,306 true,308 true,310 true,316 true,318 true,319 true,323 true,332 true,334 true,338 true,340 true,342 true,347 true,349 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,213 true,225 true,256 true,279 true,306 true,332 true,336 true,351 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,176 true,256 true,264 true,266 true,306 true,335 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,43 true,73 true,115 true,129 true,150 true,156 true,173 true,187 true,225 true,233 true,256 true,279 true,307 true,316 true,318 true,322 true,336 true,360 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,46 true,47 true,50 true,52 true,55 true,58 true,83 true,101 true,111 true,121 true,135 true,148 true,150 true,151 true,162 true,173 true,193 true,220 true,250 true,264 true,291 true,294 true,306 true,316 true,320 true,321 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,42 true,46 true,47 true,55 true,69 true,73 true,120 true,142 true,150 true,173 true,176 true,184 true,187 true,188 true,191 true,206 true,207 true,217 true,225 true,228 true,229 true,231 true,235 true,242 true,256 true,257 true,264 true,275 true,279 true,285 true,297 true,306 true,310 true,316 true,318 true,338 true,358 true,359 true,363 1}
+{4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,47 true,69 true,82 true,138 true,145 true,176 true,219 true,223 true,264 true,316 true,325 true,334 true,343 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,41 true,49 true,75 true,225 true,256 true,264 true,280 true,306 true,310 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,106 true,130 true,225 true,256 true,258 true,263 true,264 true,306 true,351 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,56 true,154 true,157 true,173 true,198 true,202 true,215 true,225 true,229 true,256 true,264 true,284 true,306 true,311 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,48 true,52 true,87 true,111 true,150 true,171 true,182 true,256 true,267 true,305 true,336 true}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,99 true,121 true,213 true,225 true,256 true,279 true,306 true,332 true,336 true,352 true,355 true,363 1}
+{0 true,4 true,12 true,15 true,17 true,19 true,24 true,26 true,30 true,47 true,103 true,113 true,132 true,225 true,230 true,256 true,279 true,301 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,40 true,41 true,47 true,49 true,55 true,61 true,69 true,84 true,101 true,122 true,126 true,138 true,150 true,155 true,173 true,187 true,191 true,205 true,213 true,217 true,225 true,229 true,253 true,262 true,264 true,266 true,282 true,286 true,299 true,305 true,306 true,310 true,312 true,316 true,319 true,320 true,342 true,345 true,347 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,29 true,30 true,35 true,39 true,60 true,127 true,173 true,198 true,213 true,256 true,264 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,40 true,46 true,47 true,69 true,73 true,83 true,100 true,104 true,111 true,127 true,134 true,173 true,182 true,183 true,203 true,219 true,256 true,291 true,294 true,316 true,320 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,40 true,61 true,125 true,127 true,162 true,173 true,233 true,253 true,257 true,306 true,316 true,336 true,361 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,40 true,46 true,96 true,150 true,173 true,219 true,256 true,264 true,279 true,306 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,47 true,61 true,69 true,89 true,109 true,133 true,150 true,162 true,173 true,176 true,184 true,187 true,219 true,233 true,235 true,256 true,264 true,265 true,266 true,294 true,306 true,345 true,347 true,357 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,27 true,29 true,30 true,37 true,40 true,41 true,45 true,110 true,134 true,157 true,166 true,172 true,173 true,194 true,224 true,232 true,240 true,256 true,264 true,294 true,314 true,327 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,42 true,256 true,264 true,279 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,256 true,294 true,314 true,336 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,32 true,35 true,40 true,46 true,47 true,69 true,96 true,109 true,154 true,186 true,210 true,242 true,296 true,306 true,310 true,314 true,320 true,354 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,47 true,69 true,82 true,103 true,152 true,168 true,198 true,212 true,213 true,225 true,256 true,279 true,294 true,306 true,316 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,27 true,30 true,41 true,46 true,121 true,160 true,196 true,225 true,244 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,69 true,130 true,136 true,238 true,256 true,263 true,264 true,305 true,306 true,347 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,55 true,142 true,208 true,225 true,256 true,261 true,267 true,268 true,293 true,306 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,40 true,41 true,45 true,69 true,73 true,120 true,126 true,127 true,154 true,173 true,174 true,181 true,187 true,188 true,213 true,217 true,222 true,225 true,230 true,232 true,256 true,259 true,264 true,281 true,287 true,306 true,310 true,312 true,316 true,318 true,320 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,31 true,37 true,41 true,47 true,50 true,76 true,106 true,150 true,164 true,187 true,203 true,225 true,256 true,258 true,263 true,264 true,306 true,310 true,316 true,326 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,28 true,30 true,35 true,36 true,40 true,41 true,47 true,69 true,84 true,102 true,122 true,160 true,173 true,188 true,217 true,219 true,225 true,233 true,242 true,256 true,264 true,291 true,294 true,306 true,319 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,73 true,111 true,129 true,142 true,157 true,187 true,235 true,256 true,264 true,318 true,342 true,344 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,46 true,55 true,69 true,145 true,165 true,188 true,208 true,223 true,225 true,256 true,264 true,266 true,306 true,310 true,316 true,326 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,40 true,73 true,256 true,279 true,306 true,316 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,39 true,40 true,92 true,256 true,306 true,316 true,326 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,45 true,103 true,119 true,173 true,186 true,193 true,194 true,213 true,219 true,256 true,264 true,291 true,294 true,314 true,316 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,40 true,47 true,256 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,31 true,45 true,46 true,52 true,109 true,117 true,154 true,186 true,250 true,306 true,314 true,336 true,363 1}
+{0 true,4 true,5 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,33 true,41 true,47 true,66 true,69 true,78 true,106 true,150 true,164 true,172 true,187 true,220 true,256 true,258 true,263 true,264 true,276 true,306 true,316 true,348 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,37 true,39 true,47 true,52 true,55 true,96 true,150 true,173 true,191 true,225 true,256 true,306 true,316 true,325 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,106 true,130 true,225 true,256 true,258 true,263 true,264 true,306 true,351 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,40 true,41 true,46 true,47 true,54 true,69 true,82 true,108 true,119 true,150 true,176 true,210 true,229 true,256 true,264 true,291 true,294 true,303 true,305 true,306 true,316 true,326 true,329 true,332 true,345 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,36 true,40 true,41 true,47 true,116 true,127 true,141 true,173 true,182 true,256 true,264 true,292 true,294 true,316 true,321 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,40 true,41 true,46 true,47 true,61 true,69 true,77 true,98 true,109 true,111 true,127 true,150 true,166 true,173 true,181 true,184 true,188 true,195 true,203 true,208 true,213 true,219 true,223 true,225 true,256 true,264 true,294 true,305 true,306 true,310 true,316 true,347 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,69 true,73 true,173 true,204 true,256 true,264 true,282 true,306 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,157 true,178 true,256 true,264 true,363 1}
+{4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,48 true,87 true,223 true,236 true,256 true,264 true,294 true,299 true}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,36 true,37 true,40 true,41 true,46 true,47 true,54 true,55 true,69 true,73 true,78 true,86 true,88 true,96 true,127 true,128 true,142 true,150 true,170 true,173 true,176 true,187 true,188 true,197 true,221 true,256 true,264 true,282 true,283 true,291 true,306 true,318 true,342 true,344 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,52 true,190 true,225 true,228 true,244 true,256 true,257 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,30 true,35 true,40 true,45 true,55 true,84 true,97 true,122 true,127 true,146 true,173 true,176 true,181 true,186 true,188 true,189 true,213 true,219 true,256 true,264 true,293 true,306 true,312 true,314 true,316 true,319 true,327 true,336 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,40 true,41 true,46 true,47 true,54 true,56 true,77 true,84 true,98 true,122 true,173 true,174 true,185 true,188 true,189 true,212 true,213 true,219 true,256 true,264 true,291 true,294 true,306 true,312 true,316 true,319 true,346 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,47 true,150 true,182 true,213 true,256 true,264 true,289 true,294 true,306 true,316 true,358 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,34 true,35 true,36 true,38 true,40 true,41 true,45 true,47 true,54 true,56 true,57 true,69 true,79 true,82 true,106 true,120 true,134 true,135 true,160 true,173 true,176 true,182 true,187 true,208 true,213 true,217 true,219 true,220 true,224 true,225 true,227 true,228 true,254 true,256 true,279 true,282 true,297 true,305 true,306 true,310 true,312 true,314 true,316 true,345 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,46 true,150 true,219 true,250 true,306 true,310 true,336 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,73 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,40 true,41 true,42 true,46 true,47 true,52 true,66 true,95 true,103 true,127 true,136 true,148 true,150 true,173 true,176 true,177 true,182 true,194 true,225 true,250 true,263 true,264 true,315 true,316 true,326 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,40 true,46 true,106 true,143 true,150 true,172 true,176 true,201 true,256 true,279 true,287 true,291 true,301 true,306 true,311 true,316 true,336 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,99 true,106 true,161 true,164 true,182 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,39 true,73 true,140 true,173 true,182 true,196 true,256 true,306 true,310 true,316 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,31 true,35 true,40 true,41 true,46 true,47 true,55 true,56 true,69 true,100 true,109 true,124 true,147 true,150 true,154 true,171 true,182 true,198 true,208 true,219 true,223 true,225 true,256 true,264 true,279 true,281 true,286 true,306 true,310 true,316 true,323 true,349 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,182 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,67 true,148 true,163 true,213 true,227 true,256 true,279 true,306 true,332 true,336 true,352 true,355 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,13 true,14 true,15 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,31 true,33 true,35 true,36 true,41 true,45 true,47 true,56 true,127 true,145 true,173 true,211 true,212 true,213 true,214 true,217 true,253 true,264 true,270 true,294 true,312 true,314 true,346 true,361 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,46 true,47 true,69 true,73 true,142 true,150 true,173 true,219 true,231 true,233 true,235 true,256 true,264 true,273 true,279 true,280 true,294 true,306 true,310 true,316 true,318 true,326 true,332 true,338 true,356 true,358 true,359 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,39 true,41 true,42 true,73 true,77 true,111 true,187 true,256 true,264 true,265 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,37 true,40 true,45 true,55 true,116 true,145 true,150 true,162 true,213 true,216 true,250 true,276 true,279 true,306 true,314 true,316 true,330 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,29 true,30 true,33 true,40 true,67 true,78 true,82 true,108 true,121 true,125 true,173 true,174 true,176 true,213 true,217 true,218 true,256 true,279 true,305 true,306 true,310 true,312 true,332 true,336 true,352 true,353 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,41 true,160 true,173 true,180 true,213 true,219 true,225 true,256 true,264 true,291 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,41 true,77 true,127 true,173 true,182 true,187 true,213 true,219 true,264 true,306 true,335 true,344 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,40 true,63 true,127 true,131 true,150 true,158 true,173 true,181 true,203 true,223 true,250 true,294 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,28 true,29 true,30 true,35 true,36 true,39 true,40 true,55 true,58 true,59 true,69 true,91 true,145 true,147 true,150 true,166 true,171 true,173 true,176 true,182 true,183 true,187 true,198 true,203 true,210 true,213 true,219 true,225 true,251 true,252 true,253 true,256 true,264 true,271 true,279 true,291 true,294 true,306 true,307 true,310 true,316 true,336 true,343 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,110 true,130 true,142 true,150 true,155 true,213 true,253 true,264 true,291 true,314 true,320 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,35 true,56 true,150 true,154 true,213 true,256 true,294 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,69 true,84 true,122 true,137 true,173 true,203 true,217 true,256 true,306 true,310 true,319 true,336 true,347 true,356 true}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,69 true,71 true,81 true,124 true,150 true,171 true,173 true,182 true,187 true,188 true,209 true,215 true,219 true,225 true,256 true,282 true,284 true,299 true,310 true,316 true,326 true,336 true,342 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,37 true,42 true,46 true,136 true,182 true,250 true,264 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,47 true,52 true,55 true,56 true,61 true,76 true,79 true,82 true,84 true,122 true,123 true,133 true,137 true,150 true,159 true,165 true,171 true,173 true,176 true,182 true,187 true,188 true,192 true,198 true,208 true,217 true,219 true,249 true,250 true,259 true,286 true,300 true,306 true,310 true,316 true,319 true,326 true,328 true,336 true,340 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,35 true,47 true,52 true,55 true,58 true,66 true,107 true,114 true,118 true,131 true,132 true,150 true,165 true,185 true,217 true,225 true,233 true,256 true,282 true,305 true,306 true,310 true,316 true,327 true,340 true,363 1}
+{0 true,4 true,5 true,6 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,30 true,34 true,35 true,44 true,45 true,59 true,84 true,86 true,122 true,123 true,137 true,173 true,187 true,198 true,213 true,241 true,256 true,294 true,298 true,314 true,319 true,333 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,37 true,61 true,78 true,176 true,250 true,256 true,270 true,271 true,306 true,332 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,34 true,35 true,83 true,213 true,256 true,262 true,264 true,279 true,323 true,332 true,334 true,362 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,46 true,84 true,119 true,122 true,123 true,137 true,140 true,143 true,173 true,219 true,250 true,264 true,306 true,310 true,316 true,318 true,319 true,336 true,347 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,48 true,173 true,217 true,228 true,256 true,264 true,279 true,294 true,310 true,316 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,99 true,106 true,121 true,164 true,225 true,248 true,256 true,258 true,263 true,264 true,306 true,353 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,42 true,46 true,78 true,106 true,150 true,151 true,176 true,195 true,201 true,225 true,256 true,264 true,285 true,306 true,358 true,359 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,22 true,23 true,24 true,26 true,30 true,35 true,40 true,47 true,173 true,182 true,226 true,248 true,256 true,316 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,27 true,30 true,39 true,150 true,172 true,256 true,264 true,294 true,317 true}
+{0 true,4 true,5 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,32 true,35 true,40 true,42 true,47 true,69 true,73 true,77 true,106 true,125 true,142 true,143 true,156 true,172 true,173 true,176 true,182 true,187 true,188 true,220 true,225 true,233 true,256 true,294 true,306 true,314 true,316 true,318 true,336 true,345 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,42 true,46 true,74 true,115 true,150 true,182 true,231 true,256 true,263 true,264 true,274 true,283 true,284 true,285 true,287 true,306 true,316 true,357 true,358 true,359 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,67 true,106 true,148 true,163 true,176 true,227 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,40 true,41 true,52 true,70 true,73 true,86 true,100 true,104 true,165 true,173 true,176 true,187 true,198 true,217 true,233 true,250 true,264 true,279 true,281 true,291 true,305 true,306 true,316 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,44 true,64 true,84 true,95 true,114 true,137 true,219 true,255 true,256 true,277 true,314 true,319 true,332 true,336 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,299 true,363 1}
+{0 true,4 true,12 true,13 true,14 true,15 true,19 true,23 true,24 true,30 true,94 true,111 true,256 true,296 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,44 true,57 true,86 true,157 true,193 true,213 true,256 true,294 true,302 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,72 true,99 true,164 true,182 true,213 true,256 true,279 true,332 true,336 true,352 true,353 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,27 true,30 true,35 true,40 true,46 true,47 true,55 true,69 true,73 true,82 true,133 true,142 true,150 true,169 true,173 true,210 true,217 true,229 true,233 true,250 true,276 true,294 true,306 true,316 true,318 true,331 true,336 true,347 true,356 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,294 true,306 true,320 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,108 true,121 true,164 true,182 true,213 true,232 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{4 true,12 true,15 true,17 true,19 true,24 true,30 true,46 true,132 true,225 true,289 true,290 true,303 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,213 true,225 true,245 true,256 true,279 true,294 true,306 true,330 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,45 true,46 true,47 true,50 true,54 true,55 true,97 true,150 true,151 true,157 true,172 true,186 true,213 true,236 true,243 true,256 true,264 true,294 true,301 true,306 true,314 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,47 true,85 true,219 true,256 true,264 true,291 true,292 true,294 true,306 true,338 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,42 true,73 true,145 true,256 true,336 true,363 1}
+{0 true,4 true,6 true,10 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,27 true,30 true,32 true,35 true,36 true,40 true,41 true,46 true,51 true,71 true,76 true,125 true,126 true,147 true,150 true,152 true,173 true,182 true,225 true,226 true,233 true,248 true,250 true,264 true,272 true,280 true,306 true,316 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,36 true,40 true,41 true,45 true,46 true,60 true,77 true,150 true,157 true,173 true,198 true,213 true,219 true,256 true,264 true,294 true,300 true,303 true,314 true,317 true,335 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,121 true,176 true,182 true,192 true,197 true,250 true,264 true,291 true,306 true,316 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,213 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,47 true,54 true,55 true,57 true,61 true,69 true,82 true,87 true,96 true,131 true,144 true,150 true,173 true,176 true,187 true,188 true,197 true,210 true,219 true,221 true,226 true,233 true,254 true,256 true,264 true,294 true,295 true,305 true,306 true,310 true,316 true,326 true,337 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,33 true,35 true,68 true,87 true,96 true,132 true,138 true,149 true,150 true,153 true,192 true,212 true,227 true,256 true,264 true,288 true,291 true,294 true,306 true,310 true,332 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,44 true,64 true,84 true,95 true,114 true,137 true,154 true,219 true,255 true,256 true,277 true,314 true,319 true,332 true,336 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,27 true,28 true,30 true,35 true,40 true,41 true,69 true,102 true,118 true,127 true,133 true,150 true,152 true,168 true,173 true,177 true,181 true,182 true,187 true,208 true,213 true,217 true,219 true,225 true,241 true,256 true,264 true,269 true,282 true,291 true,306 true,310 true,312 true,345 true,346 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,36 true,38 true,40 true,41 true,45 true,47 true,54 true,57 true,69 true,79 true,112 true,120 true,134 true,150 true,167 true,172 true,173 true,176 true,213 true,217 true,219 true,223 true,224 true,225 true,227 true,254 true,256 true,282 true,287 true,294 true,297 true,306 true,310 true,312 true,314 true,345 true,346 true,349 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,34 true,35 true,36 true,40 true,41 true,66 true,157 true,162 true,173 true,182 true,183 true,203 true,219 true,225 true,253 true,257 true,264 true,306 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,40 true,41 true,47 true,58 true,66 true,73 true,127 true,142 true,145 true,150 true,171 true,173 true,182 true,220 true,225 true,235 true,256 true,264 true,276 true,291 true,306 true,308 true,314 true,318 true,346 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,106 true,164 true,177 true,256 true,258 true,263 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,41 true,47 true,84 true,122 true,144 true,154 true,187 true,197 true,202 true,208 true,213 true,225 true,251 true,256 true,260 true,264 true,269 true,294 true,306 true,310 true,312 true,316 true,319 true,324 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,45 true,47 true,106 true,145 true,201 true,206 true,233 true,256 true,294 true,306 true,314 true,316 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,10 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,28 true,30 true,32 true,33 true,36 true,37 true,41 true,42 true,47 true,54 true,55 true,59 true,61 true,69 true,78 true,82 true,86 true,89 true,100 true,115 true,124 true,125 true,131 true,147 true,150 true,173 true,176 true,182 true,183 true,187 true,188 true,198 true,205 true,209 true,210 true,212 true,215 true,217 true,218 true,219 true,225 true,227 true,228 true,233 true,243 true,256 true,264 true,265 true,266 true,271 true,273 true,287 true,294 true,305 true,306 true,308 true,316 true,320 true,326 true,332 true,347 true,349 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,40 true,41 true,54 true,68 true,106 true,112 true,117 true,126 true,127 true,144 true,146 true,150 true,157 true,173 true,213 true,215 true,219 true,225 true,233 true,253 true,264 true,294 true,306 true,309 true,316 true,326 true,343 true,354 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,27 true,30 true,35 true,41 true,47 true,84 true,109 true,122 true,127 true,141 true,154 true,157 true,160 true,172 true,173 true,213 true,219 true,256 true,264 true,277 true,294 true,306 true,312 true,316 true,319 true,341 true,363 1}
+{4 true,7 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,29 true,30 true,35 true,36 true,42 true,90 true,145 true,166 true,173 true,203 true,213 true,219 true,256 true,264 true,267 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,46 true,84 true,122 true,157 true,168 true,212 true,254 true,256 true,282 true,313 true,319 true,328 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,72 true,106 true,164 true,182 true,248 true,256 true,258 true,263 true,264 true,306 true,353 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,73 true,77 true,150 true,256 true,264 true,363 1}
+{0 true,4 true,9 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,49 true,78 true,106 true,164 true,225 true,256 true,258 true,263 true,264 true,306 true,316 true,320 true,323 true,363 1}
+{0 true,4 true,7 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,55 true,69 true,103 true,105 true,117 true,180 true,182 true,186 true,203 true,210 true,213 true,225 true,233 true,243 true,256 true,264 true,291 true,294 true,314 true,316 true,351 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,88 true,106 true,187 true,193 true,206 true,256 true,258 true,263 true,264 true,305 true,306 true,316 true,342 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,31 true,35 true,36 true,40 true,41 true,47 true,69 true,73 true,118 true,142 true,144 true,162 true,173 true,205 true,235 true,250 true,260 true,264 true,282 true,291 true,305 true,306 true,318 true,346 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,30 true,35 true,37 true,41 true,47 true,160 true,172 true,213 true,223 true,254 true,256 true,264 true,291 true,306 true,363 1}
+{4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,69 true,73 true,84 true,122 true,142 true,144 true,173 true,186 true,213 true,219 true,243 true,250 true,264 true,282 true,291 true,314 true,318 true,319 true,346 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,73 true,94 true,97 true,150 true,167 true,216 true,219 true,254 true,256 true,260 true,261 true,306 true,310 true,320 true,341 true,345 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,33 true,40 true,47 true,69 true,104 true,210 true,212 true,213 true,233 true,256 true,279 true,294 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,40 true,182 true,256 true,279 true,306 true,316 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,33 true,40 true,47 true,51 true,58 true,69 true,78 true,107 true,150 true,164 true,173 true,182 true,187 true,188 true,213 true,220 true,225 true,229 true,238 true,245 true,256 true,275 true,279 true,306 true,309 true,310 true,316 true,323 true,325 true,332 true,336 true,345 true,346 true,347 true,348 true,352 true,362 true,363 1}
+{0 true,1 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,30 true,41 true,46 true,134 true,150 true,157 true,173 true,182 true,225 true,256 true,264 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,32 true,41 true,43 true,61 true,150 true,176 true,256 true,264 true,266 true,295 true,306 true,310 true,322 true,325 true,360 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,47 true,72 true,81 true,148 true,182 true,187 true,191 true,256 true,264 true,329 true,342 true,351 true}
+{0 true,4 true,5 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,32 true,40 true,42 true,47 true,69 true,143 true,176 true,256 true,294 true,306 true,314 true,316 true,336 true,363 1}
+{4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,47 true,52 true,58 true,89 true,162 true,171 true,173 true,176 true,190 true,222 true,223 true,250 true,264 true,271 true,305 true,336 true,346 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,40 true,41 true,54 true,65 true,157 true,173 true,177 true,182 true,219 true,233 true,256 true,264 true,285 true,305 true,306 true,349 true,358 true,361 true,363 1}
+{0 true,4 true,5 true,11 true,12 true,14 true,15 true,16 true,17 true,19 true,20 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,46 true,47 true,51 true,66 true,69 true,71 true,83 true,111 true,137 true,173 true,176 true,195 true,200 true,207 true,223 true,225 true,237 true,253 true,294 true,303 true,306 true,310 true,316 true,336 true,342 true,361 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,33 true,35 true,37 true,40 true,41 true,53 true,68 true,87 true,96 true,138 true,139 true,149 true,150 true,153 true,160 true,187 true,192 true,212 true,223 true,225 true,249 true,252 true,253 true,256 true,264 true,280 true,288 true,294 true,306 true,310 true,320 true,332 true,336 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,25 true,30 true,31 true,35 true,40 true,77 true,84 true,122 true,211 true,213 true,220 true,225 true,256 true,270 true,294 true,303 true,306 true,312 true,314 true,319 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,77 true,97 true,126 true,146 true,150 true,152 true,176 true,231 true,234 true,256 true,263 true,264 true,271 true,305 true,306 true,310 true,316 true,338 true,350 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,72 true,78 true,106 true,161 true,164 true,248 true,256 true,258 true,263 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,46 true,96 true,144 true,150 true,170 true,213 true,250 true,280 true,306 true,316 true,320 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,106 true,109 true,212 true,225 true,256 true,258 true,263 true,264 true,274 true,294 true,306 true,316 true,326 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,16 true,18 true,19 true,21 true,23 true,24 true,30 true,35 true,84 true,122 true,134 true,150 true,157 true,173 true,208 true,219 true,250 true,285 true,293 true,298 true,316 true,319 true,324 true,336 true,341 true,346 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,172 true,173 true,187 true,201 true,245 true,256 true,264 true,271 true,278 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,30 true,35 true,198 true,213 true,223 true,256 true,294 true,296 true}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,30 true,35 true,44 true,45 true,62 true,69 true,78 true,116 true,137 true,145 true,150 true,171 true,182 true,201 true,213 true,227 true,256 true,262 true,282 true,302 true,306 true,309 true,314 true,336 true,349 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,294 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,150 true,219 true,256 true,264 true,281 true,310 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,32 true,41 true,43 true,61 true,150 true,176 true,256 true,264 true,266 true,295 true,306 true,310 true,322 true,325 true,360 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,9 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,36 true,39 true,40 true,41 true,173 true,182 true,183 true,219 true,256 true,264 true,361 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,6 true,8 true,9 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,40 true,41 true,105 true,134 true,203 true,208 true,212 true,213 true,219 true,223 true,250 true,264 true,294 true,306 true,363 1}
+{0 true,4 true,5 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,44 true,46 true,50 true,54 true,137 true,144 true,157 true,176 true,187 true,195 true,209 true,213 true,220 true,225 true,227 true,256 true,294 true,302 true,306 true,310 true,314 true,316 true,332 true,336 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,48 true,94 true,111 true,256 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,106 true,109 true,143 true,164 true,182 true,197 true,225 true,256 true,258 true,263 true,264 true,283 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,42 true,116 true,256 true,264 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,46 true,47 true,58 true,69 true,80 true,82 true,104 true,150 true,157 true,176 true,256 true,260 true,261 true,264 true,291 true,306 true,342 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,41 true,84 true,134 true,142 true,175 true,186 true,194 true,206 true,207 true,213 true,223 true,243 true,256 true,262 true,264 true,294 true,318 true,319 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,47 true,69 true,98 true,176 true,193 true,194 true,213 true,223 true,264 true,265 true,314 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,40 true,41 true,47 true,61 true,73 true,162 true,195 true,225 true,252 true,256 true,263 true,264 true,294 true,306 true,316 true,332 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,70 true,137 true,165 true,173 true,188 true,256 true,264 true,266 true,305 true,306 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,32 true,43 true,47 true,66 true,84 true,93 true,120 true,122 true,155 true,162 true,173 true,177 true,182 true,197 true,217 true,219 true,225 true,246 true,256 true,264 true,266 true,306 true,307 true,316 true,319 true,322 true,332 true,360 true,363 1}
+{4 true,5 true,6 true,7 true,12 true,14 true,15 true,17 true,18 true,19 true,22 true,23 true,24 true,25 true,26 true,27 true,29 true,30 true,31 true,35 true,36 true,118 true,121 true,150 true,171 true,173 true,182 true,201 true,213 true,256 true,264 true,282 true,291 true,294 true,309 true,346 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,36 true,46 true,47 true,55 true,84 true,97 true,102 true,103 true,105 true,166 true,172 true,173 true,186 true,203 true,212 true,213 true,217 true,219 true,223 true,225 true,230 true,241 true,251 true,253 true,264 true,278 true,279 true,294 true,306 true,312 true,314 true,319 true,320 true,336 true,361 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,40 true,47 true,73 true,127 true,129 true,173 true,227 true,233 true,256 true,291 true,305 true,306 true,311 true,316 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,54 true,84 true,87 true,110 true,122 true,139 true,145 true,150 true,151 true,184 true,187 true,201 true,213 true,250 true,256 true,264 true,291 true,294 true,296 true,299 true,310 true,317 true,319 true,334 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,157 true,182 true,256 true,264 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,46 true,142 true,173 true,199 true,209 true,256 true,293 true,335 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,54 true,73 true,97 true,128 true,142 true,154 true,237 true,256 true,264 true,316 true,318 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,40 true,45 true,47 true,137 true,223 true,238 true,256 true,310 true,314 true,363 1}
+{0 true,2 true,3 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,36 true,38 true,40 true,47 true,59 true,69 true,77 true,82 true,173 true,174 true,201 true,210 true,213 true,217 true,219 true,225 true,256 true,279 true,294 true,303 true,306 true,312 true,332 true,336 true,352 true,363 1}
+{4 true,5 true,11 true,12 true,14 true,15 true,17 true,18 true,19 true,22 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,46 true,47 true,66 true,108 true,121 true,154 true,171 true,173 true,182 true,256 true,284 true,299 true,336 true,346 true}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,48 true,50 true,213 true,253 true,336 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,46 true,73 true,84 true,94 true,122 true,123 true,127 true,173 true,182 true,186 true,213 true,219 true,256 true,296 true,310 true,319 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,37 true,40 true,41 true,47 true,52 true,73 true,95 true,112 true,127 true,136 true,142 true,150 true,173 true,176 true,187 true,198 true,203 true,223 true,225 true,235 true,249 true,250 true,264 true,294 true,310 true,315 true,318 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,41 true,46 true,73 true,86 true,116 true,142 true,173 true,178 true,187 true,217 true,219 true,233 true,256 true,264 true,277 true,306 true,316 true,318 true,329 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,28 true,30 true,35 true,40 true,45 true,47 true,57 true,73 true,83 true,84 true,97 true,122 true,162 true,173 true,176 true,187 true,189 true,208 true,213 true,219 true,256 true,264 true,304 true,306 true,310 true,312 true,314 true,316 true,319 true,329 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,47 true,69 true,84 true,94 true,122 true,137 true,138 true,157 true,169 true,176 true,213 true,239 true,253 true,306 true,310 true,312 true,316 true,318 true,319 true,321 true,324 true,336 true,362 true}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,19 true,20 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,38 true,45 true,78 true,84 true,122 true,137 true,186 true,213 true,256 true,264 true,269 true,291 true,294 true,312 true,314 true,319 true,324 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,43 true,73 true,115 true,129 true,150 true,156 true,173 true,187 true,225 true,233 true,256 true,279 true,307 true,316 true,318 true,322 true,336 true,360 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,58 true,69 true,73 true,109 true,119 true,150 true,173 true,185 true,187 true,205 true,213 true,217 true,219 true,227 true,233 true,256 true,264 true,297 true,305 true,306 true,309 true,347 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,47 true,61 true,69 true,84 true,92 true,103 true,137 true,141 true,144 true,154 true,188 true,200 true,213 true,243 true,253 true,264 true,306 true,312 true,313 true,316 true,319 true,356 true}
+{0 true,4 true,5 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,27 true,29 true,30 true,35 true,36 true,37 true,40 true,41 true,46 true,47 true,54 true,55 true,84 true,97 true,105 true,111 true,122 true,127 true,144 true,150 true,173 true,178 true,180 true,182 true,188 true,213 true,219 true,225 true,227 true,233 true,247 true,256 true,257 true,264 true,273 true,291 true,294 true,306 true,316 true,319 true,325 true,338 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,130 true,136 true,223 true,238 true,245 true,256 true,263 true,264 true,306 true,362 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,33 true,41 true,58 true,67 true,121 true,176 true,256 true,264 true,306 true,355 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,145 true,150 true,155 true,253 true,264 true,291 true,299 true,314 true,327 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,28 true,29 true,30 true,39 true,73 true,87 true,145 true,234 true,256 true,264 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,40 true,45 true,145 true,253 true,306 true,314 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,182 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,46 true,57 true,79 true,150 true,172 true,213 true,225 true,250 true,294 true,306 true,310 true,316 true,336 true,337 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,58 true,256 true,264 true,288 true,345 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,77 true,256 true,261 true,310 true,326 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,9 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,31 true,35 true,37 true,40 true,41 true,46 true,47 true,49 true,54 true,55 true,56 true,61 true,70 true,73 true,115 true,124 true,142 true,150 true,165 true,173 true,176 true,182 true,183 true,187 true,201 true,204 true,207 true,220 true,225 true,227 true,231 true,233 true,235 true,239 true,256 true,257 true,264 true,275 true,279 true,285 true,287 true,290 true,295 true,305 true,306 true,310 true,316 true,318 true,320 true,325 true,328 true,338 true,349 true,358 true,361 true,363 1}
+{0 true,4 true,5 true,6 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,47 true,66 true,69 true,78 true,150 true,164 true,172 true,182 true,187 true,213 true,220 true,256 true,276 true,279 true,306 true,316 true,332 true,336 true,348 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,48 true,55 true,69 true,173 true,182 true,187 true,188 true,247 true,256 true,289 true,304 true,306 true,314 true,336 true,347 true,349 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,256 true,264 true,294 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,27 true,30 true,35 true,40 true,94 true,144 true,154 true,162 true,212 true,213 true,225 true,243 true,256 true,258 true,294 true,316 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,121 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,19 true,23 true,24 true,27 true,30 true,36 true,41 true,127 true,144 true,157 true,173 true,176 true,182 true,197 true,225 true,256 true,264 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,157 true,256 true,264 true,294 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,27 true,30 true,35 true,36 true,46 true,102 true,103 true,109 true,117 true,127 true,145 true,154 true,173 true,182 true,213 true,217 true,219 true,225 true,256 true,264 true,291 true,294 true,306 true,319 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,41 true,42 true,46 true,47 true,55 true,73 true,92 true,129 true,142 true,150 true,154 true,187 true,225 true,227 true,229 true,231 true,233 true,256 true,263 true,264 true,285 true,306 true,316 true,318 true,325 true,332 true,342 true,346 true,347 true,358 true,359 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,41 true,47 true,58 true,105 true,111 true,180 true,188 true,199 true,213 true,225 true,256 true,264 true,291 true,305 true,306 true,316 true,328 true,329 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,256 true,292 true,336 true,363 1}
+{0 true,4 true,7 true,12 true,13 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,46 true,52 true,55 true,142 true,157 true,188 true,211 true,213 true,214 true,227 true,253 true,264 true,268 true,289 true,305 true,306 true,316 true,318 true,356 true,362 true}
+{0 true,1 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,27 true,29 true,30 true,35 true,36 true,109 true,127 true,142 true,150 true,171 true,173 true,176 true,182 true,188 true,213 true,216 true,217 true,219 true,223 true,241 true,248 true,256 true,264 true,306 true,310 true,318 true,362 true}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,78 true,106 true,130 true,140 true,148 true,213 true,225 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,30 true,35 true,40 true,41 true,45 true,46 true,82 true,84 true,112 true,122 true,127 true,137 true,173 true,176 true,182 true,187 true,197 true,213 true,217 true,219 true,225 true,256 true,264 true,266 true,291 true,294 true,306 true,312 true,314 true,319 true,363 1}
+{0 true,1 true,2 true,3 true,4 true,5 true,6 true,11 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,39 true,40 true,46 true,47 true,50 true,54 true,55 true,59 true,60 true,66 true,77 true,82 true,91 true,109 true,127 true,147 true,150 true,162 true,173 true,182 true,188 true,189 true,198 true,213 true,217 true,223 true,227 true,233 true,250 true,256 true,259 true,264 true,271 true,279 true,306 true,315 true,316 true,336 true,337 true,340 true,347 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,32 true,43 true,47 true,66 true,84 true,93 true,120 true,122 true,155 true,162 true,173 true,177 true,182 true,217 true,219 true,225 true,246 true,256 true,264 true,266 true,306 true,307 true,316 true,319 true,322 true,332 true,360 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,18 true,19 true,23 true,24 true,27 true,30 true,35 true,36 true,96 true,109 true,173 true,188 true,212 true,213 true,219 true,256 true,316 true,329 true,336 true,342 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,46 true,47 true,103 true,213 true,296 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,27 true,30 true,40 true,41 true,84 true,122 true,134 true,137 true,154 true,250 true,264 true,292 true,319 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,18 true,19 true,22 true,23 true,24 true,25 true,26 true,28 true,29 true,30 true,31 true,35 true,36 true,46 true,54 true,55 true,56 true,57 true,58 true,69 true,76 true,82 true,86 true,106 true,107 true,113 true,120 true,127 true,150 true,173 true,176 true,187 true,188 true,198 true,208 true,215 true,217 true,225 true,227 true,228 true,229 true,233 true,234 true,256 true,278 true,294 true,299 true,305 true,306 true,308 true,310 true,314 true,315 true,316 true,318 true,325 true,327 true,328 true,332 true,336 true,345 true,347 true,356 true,357 true,362 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,46 true,182 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,110 true,187 true,223 true,225 true,252 true,256 true,280 true,294 true,306 true,332 true,336 true,363 1}
+{0 true,4 true,10 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,32 true,41 true,55 true,65 true,77 true,101 true,111 true,187 true,208 true,219 true,225 true,237 true,242 true,264 true,266 true,281 true,282 true,297 true,305 true,306 true,310 true,345 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,36 true,51 true,59 true,70 true,145 true,165 true,173 true,196 true,205 true,219 true,223 true,225 true,256 true,264 true}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,40 true,43 true,78 true,94 true,109 true,145 true,150 true,154 true,206 true,256 true,296 true,306 true,322 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,69 true,182 true,220 true,225 true,256 true,264 true,275 true,306 true,316 true,363 1}
+{0 true,4 true,8 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,33 true,40 true,99 true,121 true,164 true,182 true,187 true,213 true,218 true,225 true,256 true,279 true,305 true,306 true,316 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,87 true,139 true,150 true,202 true,213 true,239 true,241 true,251 true,253 true,256 true,261 true,264 true,318 true,341 true,363 1}
+{0 true,4 true,8 true,9 true,12 true,14 true,15 true,16 true,17 true,19 true,22 true,23 true,24 true,26 true,27 true,28 true,29 true,30 true,35 true,44 true,45 true,46 true,54 true,55 true,62 true,63 true,80 true,131 true,137 true,142 true,150 true,157 true,165 true,179 true,203 true,213 true,223 true,256 true,283 true,294 true,314 true,336 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,33 true,35 true,37 true,40 true,41 true,47 true,53 true,68 true,87 true,91 true,92 true,96 true,138 true,139 true,143 true,149 true,150 true,153 true,160 true,187 true,192 true,212 true,223 true,225 true,249 true,252 true,253 true,256 true,264 true,280 true,288 true,294 true,306 true,310 true,316 true,320 true,332 true,336 true,350 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,80 true,150 true,219 true,256 true,264 true,301 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,104 true,173 true,187 true,190 true,213 true,215 true,306 true,312 true,331 true,336 true,338 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,27 true,30 true,39 true,40 true,46 true,47 true,52 true,55 true,58 true,69 true,81 true,109 true,147 true,150 true,154 true,173 true,182 true,187 true,198 true,208 true,225 true,256 true,306 true,307 true,310 true,316 true,334 true,336 true,337 true,342 true,345 true,347 true,356 true,357 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,40 true,55 true,65 true,109 true,183 true,203 true,225 true,245 true,256 true,274 true,279 true,306 true,316 true,332 true,336 true,352 true,363 1}
+{0 true,2 true,3 true,4 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,46 true,47 true,56 true,58 true,98 true,145 true,212 true,225 true,256 true,264 true,288 true,291 true,294 true,305 true,306 true,316 true,347 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,42 true,47 true,55 true,61 true,66 true,77 true,87 true,93 true,103 true,105 true,119 true,122 true,179 true,180 true,186 true,187 true,213 true,222 true,223 true,225 true,250 true,256 true,264 true,287 true,289 true,291 true,306 true,314 true,316 true,320 true,347 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,6 true,12 true,14 true,15 true,17 true,19 true,22 true,23 true,24 true,26 true,29 true,30 true,35 true,46 true,47 true,66 true,82 true,166 true,169 true,203 true,213 true,223 true,255 true,256 true,271 true,278 true,291 true,294 true,304 true,306 true,315 true,316 true,336 true}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,35 true,40 true,256 true,279 true,306 true,316 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,182 true,225 true,256 true,306 true,351 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,28 true,30 true,36 true,46 true,80 true,173 true,199 true,209 true,219 true,227 true,256 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,40 true,46 true,109 true,172 true,256 true,279 true,294 true,306 true,336 true,363 1}
+{0 true,2 true,3 true,4 true,8 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,27 true,30 true,35 true,41 true,78 true,182 true,213 true,226 true,248 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,37 true,40 true,53 true,121 true,187 true,223 true,225 true,252 true,256 true,280 true,306 true,332 true,336 true,339 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,41 true,55 true,67 true,69 true,81 true,142 true,148 true,150 true,160 true,173 true,204 true,229 true,256 true,264 true,266 true,282 true,306 true,310 true,332 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,30 true,41 true,182 true,256 true,264 true,306 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,21 true,23 true,24 true,26 true,30 true,35 true,40 true,41 true,45 true,60 true,61 true,76 true,120 true,144 true,150 true,154 true,173 true,198 true,213 true,217 true,219 true,240 true,250 true,264 true,294 true,306 true,314 true,317 true,327 true,354 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,158 true,160 true,172 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,306 true,332 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,30 true,35 true,40 true,41 true,46 true,73 true,86 true,97 true,111 true,145 true,154 true,173 true,195 true,212 true,227 true,229 true,256 true,264 true,291 true,306 true,316 true,318 true,327 true,337 true,342 true,363 1}
+{0 true,4 true,11 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,47 true,70 true,72 true,90 true,95 true,133 true,136 true,150 true,165 true,173 true,187 true,213 true,245 true,256 true,306 true,310 true,318 true,336 true,342 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,35 true,40 true,46 true,170 true,213 true,225 true,255 true,256 true,280 true,294 true,332 true,336 true,363 1}
+{0 true,4 true,5 true,12 true,14 true,15 true,17 true,18 true,19 true,23 true,24 true,26 true,30 true,40 true,109 true,213 true,256 true,279 true,306 true,332 true,336 true,352 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,20 true,23 true,24 true,27 true,30 true,35 true,46 true,55 true,57 true,58 true,88 true,137 true,150 true,167 true,195 true,213 true,250 true,268 true,276 true,277 true,294 true,306 true,314 true,316 true,327 true,336 true,340 true}
+{0 true,4 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,28 true,30 true,35 true,46 true,77 true,109 true,111 true,162 true,173 true,187 true,212 true,219 true,223 true,232 true,250 true,294 true,306 true,316 true,317 true,323 true,327 true,336 true,340 true,349 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,35 true,38 true,40 true,47 true,145 true,150 true,213 true,250 true,301 true,319 true,330 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,17 true,19 true,23 true,24 true,26 true,30 true,40 true,41 true,47 true,55 true,58 true,66 true,73 true,106 true,107 true,147 true,150 true,162 true,173 true,176 true,187 true,212 true,213 true,219 true,225 true,233 true,239 true,256 true,264 true,294 true,305 true,306 true,310 true,315 true,327 true,344 true,361 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,16 true,19 true,23 true,24 true,26 true,30 true,40 true,47 true,50 true,71 true,79 true,187 true,255 true,256 true,306 true,310 true,316 true,336 true,363 1}
+{0 true,4 true,12 true,14 true,15 true,19 true,23 true,24 true,26 true,30 true,37 true,41 true,110 true,160 true,187 true,223 true,225 true,249 true,252 true,256 true,264 true,294 true,306 true,332 true,339 true,363 1}
+{0 true,4 true,6 true,8 true,12 true,14 true,15 true,16 true,17 true,19 true,23 true,24 true,26 true,30 true,33 true,35 true,37 true,40 true,47 true,60 true,113 true,150 true,173 true,198 true,213 true,223 true,253 true,271 true,272 true,299 true,336 true,349 true,363 1}

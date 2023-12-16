@@ -1,0 +1,2459 @@
+File,Comment,Code,Coherent
+YangIndenter.java,"Scans tokens for the matching opening peer. The internal cursor (<code>fPosition<code>) is set to the offset of the opening peer if found.  @param openToken the opening peer token @param closeToken the closing peer token @return <code>true<code> if a matching token was found, <code>false<code> otherwise","private boolean skipScope(int openToken, int closeToken) {
+
+        int depth = 1;
+
+        while (true) {
+            nextToken();
+
+            if (fToken == closeToken) {
+                depth++;
+            } else if (fToken == openToken) {
+                depth--;
+                if (depth == 0) {
+                    return true;
+                }
+            } else if (fToken == Symbols.TokenEOF) {
+                return false;
+            }
+        }
+    }",1
+WXDomManager.java,Notify the creating of whole dom tree has finished. This message is sent by JS. @param instanceId {@link com.taobao.weex.WXSDKInstance#mInstanceId} for the instance to notify.,"void createFinish(String instanceId) {
+    if (!isDomThread()) {
+      throw new WXRuntimeException(""CreateFinish operation must be done in dom thread"");
+    }
+    WXDomStatement statement = mDomRegistries.get(instanceId);
+    if (statement == null) {
+      return;
+    }
+    statement.createFinish();
+  }",1
+ZAddParams.java,Modify the return value from the number of new elements added to the total number of elements changed @return ZAddParams,"public ZAddParams ch() {
+    addParam(CH);
+    return this;
+  }",0
+YSLDFileHandlerTest.java,Supply a folder name and retrieve all the ysld files in it  <p>Test method for {@link com.sldeditor.extension.filesystem.file.ysld.YSLDFileHandler#getSLDContents(com.sldeditor.common.NodeInterface)}.,"@Test
+    public void testGetSLDContentsFolder() {
+        assertNull(new YSLDFileHandler().getSLDContents(null));
+
+        URL url = SLDFileHandlerTest.class.getResource(""/point/ysld"");
+
+        String folderName = """";
+        File parent = null;
+        try {
+            parent = new File(url.toURI());
+            folderName = parent.getName();
+            parent = parent.getParentFile();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
+        try {
+            FileTreeNode fileTreeNode = new FileTreeNode(parent, folderName);
+
+            YSLDFileHandler handler = new YSLDFileHandler();
+
+            List<SLDDataInterface> sldDataList = handler.getSLDContents(fileTreeNode);
+
+            List<String> expectedLayerNameList = Arrays.asList(""point_simplepoint.ysld"");
+            assertEquals(expectedLayerNameList.size(), sldDataList.size());
+
+            for (SLDDataInterface sldData : sldDataList) {
+                assertTrue(expectedLayerNameList.contains(sldData.getLayerName()));
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }",1
+Wiper.java,Those guys sure have an obsession with shit...this is supposed to do some lame-ass transpose.  @param array @param width @param height,"protected final void
+        shittyColMajorXform
+        ( short[]    array,
+          int       width,
+          int       height )
+        {
+            int     x;
+            int     y;
+            short[]  dest;
+
+            dest = new short[width*height];
+
+            for(y=0;y<height;y++)
+            for(x=0;x<width;x++){
+                dest[x*height+y] = array[y*width+x];
+                //dest[(1+x)*height+y] = array[y*width+(1+x)];
+            }
+            System.arraycopy(dest, 0, array, 0, width*height);
+
+            //Z_Free(dest);
+
+        }",0
+WeightLogs.java,@param weight The weight,"public void setWeight(List<Weight> weight) {
+        this.weight = weight;
+    }",1
+WritableResourceHandler.java,"Maven 2 Index writable {@link ResourceHandler}, is capable of saving resources too. Needed only if incremental index updates are wanted, to store the index state locally, and be able to calculate incremental diffs on next {@link IndexReader} invocation. Is used by single thread only.  @see ResourceHandler @since 5.1.2","public interface WritableResourceHandler
+    extends ResourceHandler
+{
+  interface WritableResource
+      extends Resource, Closeable
+  {
+    /**
+     * Returns the {@link OutputStream} stream of the resource, if exists, it will replace the existing content, or if
+     * not exists, the resource will be created. The stream should be closed by caller, otherwise resource leaks might
+     * be introduced. How and when content is written is left to implementation, but it is guaranteed that this method
+     * is called only once, and will be followed by {@link #close()} on the resource itself. Implementation does not
+     * have to be ""read consistent"", in a way to worry what subsequent {@link #read()} method will return, as mixed
+     * calls will not happen on same instance of resource.
+     */
+    OutputStream write() throws IOException;
+  }
+
+  /**
+   * Returns the {@link WritableResource} with {@code name}. Returned locator should be handled as
+   * resource, is {@link Closeable}.
+   *
+   * @param name Resource name, guaranteed to be non-{@code null} and is FS and URL safe string.
+   */
+  WritableResource locate(String name) throws IOException;
+}",1
+Wizard.java,Introduction,"protected JPanel step1_setup()
+	{
+		JTextArea introText = new JTextArea();
+			introText.setLineWrap(true);
+			introText.setWrapStyleWord(true);
+			introText.setEditable(false);
+			introText.setMargin(new Insets(10, 10, 10, 10));
+			introText.setAutoscrolls(true);
+			introText.setText(
+				""Welcome to D-Mason.\n""
+				+ ""\n""
+				+ ""This wizard will help you launching D-Mason on a single ""
+				+ ""machine for testing purposes. D-Mason is made of four ""
+				+ ""\""components\"" that must be executed in order to run a ""
+				+ ""simulation.\n""
+				+ ""\n""
+				+ ""Please hit the \""Next\"" button below to continue.""
+			);
+			
+		JScrollPane sclIntroText = new JScrollPane(introText);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(sclIntroText);
+		
+		return panel;
+	}",0
+WurmAPI.java,Creates new WurmAPI instance. This method must be used on existing and valid world directory.  @param worldDirectory path to existing world directory. @return WurmAPI instance,"public static WurmAPI open(String worldDirectory) throws IOException {
+        return new WurmAPI(worldDirectory);
+    }",1
+WBSType.java,Sets the value of the summaryBaselineMaterialCost property.  @param value allowed object is {@link Double },"public void setSummaryBaselineMaterialCost(Double value)
+   {
+      this.summaryBaselineMaterialCost = value;
+   }",1
+XfsService.java,@return the srvcVersion,"public WFSVersion getSrvcVersion() {
+		return srvcVersion;
+	}",1
+WFMKeyIterator.java,@throws UnsupportedOperationException,"@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}",1
+WebViews.java,Adds the specified listener to the specified WebView. <p> If necessary this method switches to the FX application thread.  @param webView the {@link WebView} to which the listener will be added @param listener the {@link WebViewHyperlinkListener} to add to the web view @param eventTypeFilter the {@link EventType} of all events passed to the listener; {@link Optional#empty()} means all events are passed @return a handle on the created listener which allows to attach and detach it,"private static WebViewHyperlinkListenerHandle addHyperlinkListenerDetached(
+			WebView webView, WebViewHyperlinkListener listener, Optional<EventType> eventTypeFilter) {
+
+		Objects.requireNonNull(webView, ""The argument 'webView' must not be null."");
+		Objects.requireNonNull(listener, ""The argument 'listener' must not be null."");
+		Objects.requireNonNull(eventTypeFilter, ""The argument 'eventTypeFilter' must not be null."");
+
+		return new DefaultWebViewHyperlinkListenerHandle(
+				webView, listener, eventTypeFilter, new DomEventConverter());
+	}",1
+WineTastingDetailUITests.java,TEST LIFECYCLE,"@Before
+    public void beforeEachTest() {
+        //Nuke any old state
+        SharedPreferencesHelper
+                .getInstance(getContext())
+                .nukeAllSharedPreferences();
+
+        //Go from the initial launch page to the details page.
+        goToDetailsPage();
+    }",0
+XmppSaslException.java,@param saslError @param detail,"public XmppSaslException(SaslError saslError, String detail) {
+		super(detail);
+		this.saslError = saslError;
+	}",1
+XMLFieldLiteralInt.java,"Configuration to compare the integer value of a field   <p>Java class for XMLFieldLiteralInt complex type.  <p>The following schema fragment specifies the expected content contained within this class.  <pre> &lt;complexType name=""XMLFieldLiteralInt""&gt; &lt;complexContent&gt; &lt;extension base=""{}XMLFieldLiteralBase""&gt; &lt;attribute name=""value"" type=""{http:www.w3.org2001XMLSchema}int"" &gt; &lt;extension&gt; &lt;complexContent&gt; &lt;complexType&gt; <pre>","@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = ""XMLFieldLiteralInt"")
+public class XMLFieldLiteralInt
+    extends XMLFieldLiteralBase
+{
+
+    @XmlAttribute(name = ""value"")
+    protected Integer value;
+
+    /**
+     * Gets the value of the value property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getValue() {
+        return value;
+    }
+
+    /**
+     * Sets the value of the value property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+}",1
+WalkthroughPagerAdapter.java,Mandatory constructor.,"public WalkthroughPagerAdapter(FragmentManager fragmentManager) {
+        super(fragmentManager);
+    }",1
+YangFormattingPreferences.java,@return the maxLineLength,"public int getMaxLineLength() {
+        return maxLineLength;
+    }",1
+WFSPINCAPS.java,{@link #keyNum},"public int getKeyNum() {
+		return keyNum.intValue();
+	}",1
+Volley.java,"Creates a default instance of the worker pool and calls {@link RequestQueue#start()} on it. You may set a maximum size of the disk cache in bytes.  @param context A {@link Context} to use for creating the cache dir. @param stack An {@link HttpStack} to use for the network, or null for default. @param maxDiskCacheBytes the maximum size of the disk cache, in bytes. Use -1 for default size. @return A started {@link RequestQueue} instance.","public static RequestQueue newRequestQueue(Context context, HttpStack stack, int maxDiskCacheBytes) {
+        File cacheDir = new File(context.getCacheDir(), DEFAULT_CACHE_DIR);
+
+        String userAgent = ""volley/0"";
+        try {
+            String packageName = context.getPackageName();
+            PackageInfo info = context.getPackageManager().getPackageInfo(packageName, 0);
+            userAgent = packageName + ""/"" + info.versionCode;
+        } catch (NameNotFoundException e) {
+        }
+
+        if (stack == null) {
+            if (Build.VERSION.SDK_INT >= 9) {
+                stack = new HurlStack();
+            } else {
+                // Prior to Gingerbread, HttpUrlConnection was unreliable.
+                // See: http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                stack = new HttpClientStack(AndroidHttpClient.newInstance(userAgent));
+            }
+        }
+
+        Network network = new BasicNetwork(stack);
+        
+        RequestQueue queue;
+        if (maxDiskCacheBytes <= -1)
+        {
+        	// No maximum size specified
+        	queue = new RequestQueue(new DiskBasedCache(cacheDir), network);
+        }
+        else
+        {
+        	// Disk cache size specified
+        	queue = new RequestQueue(new DiskBasedCache(cacheDir, maxDiskCacheBytes), network);
+        }
+
+        queue.start();
+
+        return queue;
+    }",1
+WorldProviderCaves.java,creates a new world chunk manager for WorldProvider,"@Override
+	public void registerWorldChunkManager()
+	{
+		this.worldChunkMgr = new WorldChunkManagerCaves(EnviroMine.caves, 1.0F, 0.0F);
+		this.isHellWorld = false;
+		this.hasNoSky = true;
+		this.dimensionId = EM_Settings.caveDimID;
+	}",1
+YangGeneratorConfiguration.java,@param additionalConfiguration the additionalConfiguration to set,"public void setAdditionalConfiguration(Map<String, String> additionalConfiguration) {
+        this.additionalConfiguration = additionalConfiguration;
+    }",1
+TestBSTMapExtra.java,"Sanity test for keySet, only here because it's optional","@Test
+    public void sanityKeySetTest() {
+    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+        HashSet<String> values = new HashSet<String>();
+        for (int i = 0; i < 455; i++) {
+            b.put(""hi"" + i, 1);   
+            values.add(""hi"" + i);
+        }
+        assertEquals(455, b.size()); //keys are there
+        Set<String> keySet = b.keySet();
+        assertTrue(values.containsAll(keySet));
+        assertTrue(keySet.containsAll(values));
+    }",0
+WBSType.java,Gets the value of the summaryEstimateAtCompletionLowPercentByLaborUnits property.  @return possible object is {@link Double },"public Double getSummaryEstimateAtCompletionLowPercentByLaborUnits()
+   {
+      return summaryEstimateAtCompletionLowPercentByLaborUnits;
+   }",1
+XMLMediaParser.java,"Parse the input stream as one of {@link Result}, {@link Artist}, {@link Album} or {@link Track}, depending on the document element.  @return An {@link Object} which can then be cast. @throws XMLStreamException @throws XMLParserException","private Object parse() throws XMLStreamException, XMLParserException {
+        String name;
+
+        /* Check if reader is currently on a start element. */
+        if (this.reader.getEventType() == START_ELEMENT) {
+            name = this.reader.getLocalName();
+
+            /* Check current element name and start parsing it. */
+            if (name.equals(""result"")) {
+                return this.parseResult();
+            } else if (name.equals(""toplist"")) {
+                return this.parseResult();
+            } else if (name.equals(""artist"")) {
+                return this.parseArtist();
+            } else if (name.equals(""album"")) {
+                return this.parseAlbum();
+            } else if (name.equals(""track"")) {
+                return this.parseTrack();
+            } else {
+                System.out.println(""Unexpected element '<"" + name + "">' while parsing root xml."");
+            }
+        }
+
+        throw new IllegalStateException(""Reader is not on a start element!"");
+    }",1
+WidgetUpdater.java,Update all app tracker app widgets @param context @param dbHelper,"public static void updateWidget(Context context, AppHistoryDbHelper dbHelper) {
+		
+		ComponentName widget = new ComponentName(context, AppTrackerWidgetProvider.class);
+		AppWidgetManager manager = AppWidgetManager.getInstance(context);
+		int[] appWidgetIds = manager.getAppWidgetIds(widget);
+		log.d(""updating widget for all app widget ids: %s"", appWidgetIds);
+		for (int appWidgetId : appWidgetIds) {
+			
+			// perform this check because there is a bug in Android where, if you
+			// exit from the configuration screen, Android will never forget that
+			// appWidgetId and it will remain as a ""stale"" appWidgetId
+			boolean exists = PreferenceHelper.checkIfAppExists(context, appWidgetId);
+			
+			if (!exists) {
+				log.d(""skipping stale appWidgetId %d"", appWidgetId);
+				continue;
+			}
+			
+			RemoteViews updateViews = buildUpdate(context, dbHelper, appWidgetId);
+			if (updateViews == null) { // nothing to see yet
+				continue;
+			}
+			manager.updateAppWidget(appWidgetId, updateViews);
+		}
+	}",1
+WrapperPlayServerEntityEffect.java,Set the effect id. @param value - new value.,"@SuppressWarnings(""deprecation"")
+	public void setEffect(PotionEffectType value) {
+        setEffectId((byte) value.getId());
+    }",1
+WNafPreCompInfo.java,Class holding precomputation data for the WNAF (Window Non-Adjacent Form) algorithm.,"class WNafPreCompInfo implements PreCompInfo
+{
+    /**
+     * Array holding the precomputed <code>ECPoint</code>s used for the Window
+     * NAF multiplication in <code>
+     * {@link org.bouncycastle.math.ec.multiplier.WNafMultiplier.multiply()
+     * WNafMultiplier.multiply()}</code>.",1
+WeexUiTestCaseTCAHrefEvent.java,findMyCaseByText,"public View findMyCaseByText(String caseText){
+        if (mCaseListIndexView.size() == 0) return null;
+
+        WXTextView view = null;
+        for(int i=0; i<mCaseListIndexView.size();i++){
+
+            view = (WXTextView)mCaseListIndexView.get(i);
+
+            if (view.getText().toString().toLowerCase().contains(caseText.toLowerCase())){
+                return view;
+            }
+
+        }
+        return view;
+    }",1
+WindowManagerService.java,Resumes normal rotation changes after being paused.,"void resumeRotationLocked() {
+        if (mDeferredRotationPauseCount > 0) {
+            mDeferredRotationPauseCount -= 1;
+            if (mDeferredRotationPauseCount == 0) {
+                boolean changed = updateRotationUncheckedLocked(false);
+                if (changed) {
+                    mH.sendEmptyMessage(H.SEND_NEW_CONFIGURATION);
+                }
+            }
+        }
+    }",1
+WrapperPlayServerSpawnEntity.java,Retrieve the z position of the object. <p> Note that the coordinate is rounded off to the nearest 132 of a meter. @return The current z,"public double getZ() {
+        return handle.getIntegers().read(3) / 32.0D;
+    }",1
+WriteConcern.java,@return the timeout in millis,"@Nonnegative
+  public int getTimeout() {
+    return timeout;
+  }",1
+YamlPanelWriter.java,"Workaround to remove lines that only contain ""xxx: null"". @param string @return","private String removeLines(String string) {
+		String lines[] = string.split(""\\r?\\n"");
+		String result = """";
+		for (String line : lines) {
+			if (line.endsWith("": null"")) {
+				// omit
+			} else if (line.startsWith(""!!org.openpixi"")) {
+				// omit
+			} else {
+				result = result + line + ""\n"";
+			}
+		}
+		return result;
+	}",1
+XOrGateFigure.java,"@see org.eclipse.draw2d.Figure#getPreferredSize(int, int)","public Dimension getPreferredSize(int wHint, int hHint) {
+	return SIZE;
+}",1
+WrapperPlayClientSettings.java,"Retrieve the client-side ""show cape"" option. @return The current Show Cape","public boolean getShowCape() {
+        return handle.getSpecificModifier(boolean.class).read(1);
+    }",1
+VocabularyService.java,@summary Perform a lookup of an array of concept identifiers returning the matching concepts with their detailed properties. @param sourceKey path parameter specifying the source key identifying the source to use for access to the set of vocabulary tables @param identifiers an array of concept identifiers @return collection of concepts,"@Path(""{sourceKey}/lookup/identifiers"")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Collection<Concept> executeIdentifierLookup(@PathParam(""sourceKey"") String sourceKey, long[] identifiers) {
+    if (identifiers.length == 0) {
+      return new ArrayList<>();
+    }",1
+XMLList.java,@param name,"void setName(QName qname)
+    {
+        if (length() == 1)
+        {
+            getXmlFromAnnotation(0).setName(qname);
+        }
+        else
+        {
+            throw ScriptRuntime.typeError(""The setName method works only on lists containing one item"");
+        }
+    }",1
+WrapperPlayServerAbilities.java,Set whether or not the current player is flying. @param value - new value.,"public void setFlying(boolean value) {
+        handle.getSpecificModifier(boolean.class).write(1, value);
+    }",1
+ModelHelper.java,"If the element is not found in diagram ""editor"", the method searches for its diagram element without an editor attached to it.","public static DiagramElement getDiagramElementByEditor (Element element, DiagramEditor editor){
+		
+		if (!initialized) initializeHelper();
+		
+		if(mappings.get(element)==null) return null;
+		
+		ArrayList<DiagramElement> found = new ArrayList<DiagramElement>();		
+		if(mappings.get(element)!=null && mappings.get(element).size()>0)
+		{			
+			if(editor!=null){
+				for(DiagramElement de: mappings.get(element))
+				{					
+					if (editor.getDiagram().getChildren().contains(de)) { found.add(de); }				
+				}
+			}
+		}	
+
+		if(found.size()>1)
+		{
+			Main.printErrLine(""The model instance {""+new OntoUMLElement(element,"""")+""} has 2 diagram elements for the same diagram editor."");
+			return null;
+		}
+		if(found.size()==0)
+		{		
+			for(DiagramElement de: mappings.get(element))
+			{
+				boolean attachedToDiagram=false;
+				for(DiagramEditor d: ProjectBrowser.frame.getDiagramManager().getDiagramEditors()){
+					if(d.getDiagram().getChildren().contains(de)) attachedToDiagram =true;
+				}	
+				if (!attachedToDiagram) return de;
+			}						
+			return null;
+			
+		}else{			
+			return found.get(0);
+		}	
+	}",0
+YamlStorage.java,Private method to purge data. Don't use it anywhere else,"private boolean removeWirelessScreen(String channelName, Location loc, String world) {
+        WirelessChannel channel = getWirelessChannel(channelName, true);
+        if (channel != null) {
+            channel.removeScreenAt(loc, world);
+            updateChannel(channelName, channel);
+            return true;
+        } else
+            return false;
+    }",0
+XYBarRenderer.java,Returns <code>true<code> if the specified anchor point is inside a bar.  @param anchor  the anchor point.  @return A boolean.,"private boolean isInternalAnchor(ItemLabelAnchor anchor) {
+        return anchor == ItemLabelAnchor.CENTER
+               || anchor == ItemLabelAnchor.INSIDE1
+               || anchor == ItemLabelAnchor.INSIDE2
+               || anchor == ItemLabelAnchor.INSIDE3
+               || anchor == ItemLabelAnchor.INSIDE4
+               || anchor == ItemLabelAnchor.INSIDE5
+               || anchor == ItemLabelAnchor.INSIDE6
+               || anchor == ItemLabelAnchor.INSIDE7
+               || anchor == ItemLabelAnchor.INSIDE8
+               || anchor == ItemLabelAnchor.INSIDE9
+               || anchor == ItemLabelAnchor.INSIDE10
+               || anchor == ItemLabelAnchor.INSIDE11
+               || anchor == ItemLabelAnchor.INSIDE12;
+    }",1
+WrapperPlayServerEntityEffect.java,Set the duration in ticks. @param value - new value.,"public void setDuration(short value) {
+        handle.getShorts().write(0, value);
+    }",1
+EntityTypesTest.java,"TODO, the unmarshalling fails.","public void _testJAXBListRepresentationFastInfoset() {
+        initiateWebApplication(JAXBListResourceFastInfoset.class);
+        WebResource r = resource(""/"");
+
+        Collection<JAXBBean> a = r.get(
+                new GenericType<Collection<JAXBBean>>(){});
+        Collection<JAXBBean> b = r.post(new GenericType<Collection<JAXBBean>>(){}, 
+                new GenericEntity<Collection<JAXBBean>>(a){});
+        
+        assertEquals(a, b);
+        
+        b = r.path(""type"").post(new GenericType<Collection<JAXBBean>>(){},
+                new GenericEntity<Collection<JAXBBean>>(a){});
+        assertEquals(a, b);
+    }",0
+WordApiTest.java,"Test of definitions method, of class WordApi.","@Test
+    public void testDefinitions_String_EnumSet() throws Exception {
+        System.out.println(""definitions"");
+        String word = ""cat"";
+//		EnumSet<SourceDictionary> sourceDictionaries = EnumSet.of(SourceDictionary.ahd, SourceDictionary.cmu); // not working? 7/25/12 --jb
+		EnumSet<SourceDictionary> sourceDictionaries = EnumSet.of(SourceDictionary.all);
+        List<Definition> result = WordApi.definitions(word, sourceDictionaries);
+        assertNotNull(result);
+        assertTrue(result.size() > 0);
+        for (Definition d : result) {
+            assertNotNull(d.getAttributionText());
+            System.out.println(d.toString());
+        }
+    }",1
+WriterPool.java,@return Number of {@link WriterPoolMember} instances still in the pool. @throws java.lang.UnsupportedOperationException,"public int getNumIdle()
+    throws UnsupportedOperationException {
+        return availableWriters.size();
+    }",1
+OutSequenceFaultSequenceTestCase.java,Invalid service referred,"@Test(groups = ""wso2.esb"", description = ""- Custom proxy -Fault sequence inline"")
+    public void testCustomProxyFaultInline() throws Exception {
+
+        try {
+            axis2Client.sendSimpleStockQuoteRequest(getProxyServiceURLHttp(""StockQuoteProxyFour""), null, ""WSO2"");
+            fail(""AxisFault Expected"");
+        } catch (AxisFault axisFault) {
+            assertTrue(axisFault.getReason().contains(""Fault sequence invoked""), ""Fault: value 'reason' mismatched"");
+        }
+
+    }",0
+WearableServiceImpl.java,DataItems,"@Override
+    public void putData(IWearableCallbacks callbacks, final PutDataRequest request) throws RemoteException {
+        Log.d(TAG, ""putData: "" + request.toString(true));
+        handler.post(new CallbackRunnable(callbacks) {
+            @Override
+            public void run(IWearableCallbacks callbacks) throws RemoteException {
+                DataItemRecord record = wearable.putData(request, packageName);
+                callbacks.onPutDataResponse(new PutDataResponse(0, record.toParcelable()));
+            }
+        });
+    }",0
+XyzOrder.java,@param approvalCode The approvalCode,"@JsonProperty(""origin"")
+    public void setApprovalCode(String approvalCode) {
+        this.approvalCode = approvalCode;
+    }",1
+Wine$Type.java,Generated by Gfx v3.0.0 (Granite Data Services).  WARNING: DO NOT CHANGE THIS FILE. IT MAY BE OVERWRITTEN EACH TIME YOU USE THE GENERATOR.,"package com.wineshop.client.entities;
+
+import org.granite.client.messaging.RemoteAlias;
+
+@RemoteAlias(""com.wineshop.entities.Wine$Type"")
+public enum Wine$Type {
+
+    RED, 
+    WHITE, 
+    ROSE
+}",1
+XMLNoteTransferHandler.java,Calls the previous handler of the JXMLNotePane. Drag is not supported yet,"public void exportAsDrag(JComponent comp,InputEvent e,int action) {
+		_defaultHandler.exportAsDrag(comp,e,action);
+	}",1
+ZeroConfClient.java,Debug function  @param message,"private final void debugClient(String message) {
+		Log.d(TAG, message);
+	}",0
+VmManagerConfig.java,@return,"@Nonnull
+    public Set<String> getReservedElasticIps() {
+        return reservedElasticIps;
+    }",1
+WXRecyclerView.java,@param context @param type @param orientation should be {@link OrientationHelper#HORIZONTAL} or {@link OrientationHelper#VERTICAL},"public void initView(Context context, int type,int orientation) {
+    if (type == TYPE_GRID_LAYOUT) {
+      setLayoutManager(new GridLayoutManager(context, 2,orientation,false));
+    } else if (type == TYPE_STAGGERED_GRID_LAYOUT) {
+      setLayoutManager(new StaggeredGridLayoutManager(2, orientation));
+    } else if (type == TYPE_LINEAR_LAYOUT) {
+      setLayoutManager(new LinearLayoutManager(context,orientation,false));
+    }
+  }",1
+WeakDelegateListObserverListener.java,"Called to attempt to retrieve the delegate. If it can't be reached, we will attempt to remove ourselves from the given observer. @param observer An observer to attempt to remove this listener from if we can't reach the delegate. @return The delegate, or null if it could not be reached.","protected Delegate getDelegate(ListObserver<Data> observer) {
+        Delegate proxy = weakRef.get();
+        if (proxy != null) {
+            return proxy;
+        } else {
+            if (observer != null) {
+                observer.removeListener(this);
+            }
+            return null;
+        }
+    }",1
+VolumeCreateOptions.java,Provisions a volume in the specified cloud based on the options defined in this object. @param provider the cloud provider in which the volume should be provisioned @return the unique ID of the newly provisioned volume @throws CloudException an error occurred with the cloud provider while provisioning the volume @throws InternalException an error occurred within Dasein Cloud while preparing the API call @throws OperationNotSupportedException the cloud does not support volumes,"public @Nonnull String build(@Nonnull CloudProvider provider) throws CloudException, InternalException {
+        ComputeServices services = provider.getComputeServices();
+
+        if( services == null ) {
+            throw new OperationNotSupportedException(provider.getCloudName() + "" does not have support for compute services"");
+        }",1
+WorkerAdapter.java,Should the worker be active only when the Space is in primary mode. Defaults to <code>false<code>. Setting this to <code>true<code> means that the worker will start regardless of the space state.,"public void setActiveWhenBackup(boolean activeWhenBackup) {
+        this.activeWhenBackup = activeWhenBackup;
+    }",1
+PullToRefreshBase.java,Helper method which just calls scrollTo() in the correct scrolling direction.,"protected final void setHeaderScroll(int value) {
+		if (DEBUG) {
+			Log.d(LOG_TAG, ""setHeaderScroll: "" + value);
+		}
+
+		// Clamp value to with pull scroll range
+		final int maximumPullScroll = getMaximumPullScroll();
+		value = Math.min(maximumPullScroll, Math.max(-maximumPullScroll, value));
+
+		if (mLayoutVisibilityChangesEnabled) {
+			if (value < 0) {
+				mHeaderLayout.setVisibility(View.VISIBLE);
+			} else if (value > 0) {
+				mFooterLayout.setVisibility(View.VISIBLE);
+			} else {
+				mHeaderLayout.setVisibility(View.INVISIBLE);
+				mFooterLayout.setVisibility(View.INVISIBLE);
+			}
+		}
+
+		if (USE_HW_LAYERS) {
+			/**
+			 * Use a Hardware Layer on the Refreshable View if we've scrolled at
+			 * all. We don't use them on the Header/Footer Views as they change
+			 * often, which would negate any HW layer performance boost.
+			 */
+			ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
+					: View.LAYER_TYPE_NONE);
+		}
+
+		switch (getPullToRefreshScrollDirection()) {
+			case VERTICAL:
+				scrollTo(0, value);
+				break;
+			case HORIZONTAL:
+				scrollTo(value, 0);
+				break;
+		}
+	}",0
+XOMFolderType.java,Instantiation of child variants of this type.,"public boolean canGetChildMassVariant(XNContext ctx, XOMVariant parent) {
+		return (ctx.allow(XNSecurityKey.FILE_SYSTEM_READ, ""Operation"", ""GetFolders"", ""Parent"", parent.toTextString(ctx)) && XOMFolderType.instance.canMakeInstanceFrom(ctx, parent));
+	}",0
+ZRegion1.java,"This example, due to Stephen Heumann, motivated a bug fix in the handling of z regions.","class ZRegion1<region R> {
+    ZRegion1<R> y;
+    void m() {
+        ZRegion1<this> z = new ZRegion1<this>();
+	// z was erroneously substituted for 'this' here
+        z.y = new ZRegion1<this>();
+    }
+}",1
+WBSType.java,Sets the value of the summaryScheduleVarianceByCost property.  @param value allowed object is {@link Double },"public void setSummaryScheduleVarianceByCost(Double value)
+   {
+      this.summaryScheduleVarianceByCost = value;
+   }",1
+WaveformAnalysis.java,This function returns the maximum noise among a map of ion to list of spectra @param spectra A map of ion to spectrum @return The maximum noise of the map,"public static Double maxNoiseOfSpectra(Map<String, List<XZ>> spectra) {
+    Double maxNoise = Double.MIN_VALUE;
+    for (Map.Entry<String, List<XZ>> ionToSpectrum : spectra.entrySet()) {
+      maxNoise = Math.max(maxNoise, noiseOfSpectrum(ionToSpectrum.getValue()));
+    }
+    return maxNoise;
+  }",1
+WiffConnection.java,@param packet a packet object describing this TCP packet @throws Exception,"public WiffConnection(WiffPacket packet) throws Exception {
+    sourceIp = packet.getSourceIP();
+    sourcePort = packet.getSourcePort();
+    destinationIp = packet.getDestinationIP();
+    destinationPort = packet.getDestinationPort();
+  }",1
+TexI.java,these may not be  entirely correct They should be corrected if oddities are detected.,"public static int detectfmt(BufferedImage img) {
+	ColorModel cm = img.getColorModel();
+	if(!(img.getSampleModel() instanceof PixelInterleavedSampleModel))
+	    return(-1);
+	PixelInterleavedSampleModel sm = (PixelInterleavedSampleModel)img.getSampleModel();
+	int[] cs = cm.getComponentSize();
+	int[] off = sm.getBandOffsets();
+	/*
+	System.err.print(this + "": "" + cm.getNumComponents() + "", ("");
+	for(int i = 0; i < off.length; i++)
+	    System.err.print(((i > 0)?"" "":"""") + off[i]);
+	System.err.print(""), ("");
+	for(int i = 0; i < off.length; i++)
+	    System.err.print(((i > 0)?"" "":"""") + cs[i]);
+	System.err.print("")"");
+	System.err.println();
+	*/
+	if((cm.getNumComponents() == 4) && (off.length == 4)) {
+	    if(((cs[0] == 8) && (cs[1] == 8) && (cs[2] == 8) && (cs[3] == 8)) &&
+	       (cm.getTransferType() == DataBuffer.TYPE_BYTE) &&
+	       (cm.getTransparency() == java.awt.Transparency.TRANSLUCENT)) {
+		if((off[0] == 0) && (off[1] == 1) && (off[2] == 2) && (off[3] == 3))
+		    return(GL.GL_RGBA);
+		if((off[0] == 2) && (off[1] == 1) && (off[2] == 0) && (off[3] == 3))
+		    return(GL.GL_BGRA);
+	    }
+	} else if((cm.getNumComponents() == 3) && (off.length == 3)) {
+	    if(((cs[0] == 8) && (cs[1] == 8) && (cs[2] == 8)) &&
+	       (cm.getTransferType() == DataBuffer.TYPE_BYTE) &&
+	       (cm.getTransparency() == java.awt.Transparency.OPAQUE)) {
+		if((off[0] == 0) && (off[1] == 1) && (off[2] == 2))
+		    return(GL.GL_RGB);
+		if((off[0] == 2) && (off[1] == 1) && (off[2] == 0))
+		    return(GL2.GL_BGR);
+	    }
+	}
+	return(-1);
+    }",0
+WebScarabWrapper.java,Disables logging to the console normally done by WebScarab.,"private void disableConsoleLogging() {
+		Logger l = Logger.getLogger(""org.owasp.webscarab.plugin.Framework"");
+		l.setLevel(Level.OFF);
+		l = Logger.getLogger(""org.owasp.webscarab.httpclient.URLFetcher"");
+		l.setLevel(Level.OFF);
+		l = Logger.getLogger(""org.owasp.webscarab.plugin.proxy.Listener"");
+		l.setLevel(Level.OFF);
+
+		/* disable all logging */
+		l = Logger.getLogger("""");
+		l.setLevel(Level.OFF);
+	}",1
+WebScenarioObject.java,Sets new name.  @param name New value of name.,"public void setName(String name) {
+        this.name = name;
+    }",1
+VPNPayload.java,An MDM payload for VPN.  @author Sylvain Pedneault,"class VPNPayload extends MobileConfigPayload {
+  public static final String VPNTYPE_L2TP = ""L2TP"";
+  public static final String VPNTYPE_PPTP = ""PPTP"";
+  public static final String VPNTYPE_IP_SEC = ""IPSec"";
+
+  public VPNPayload(final int payloadVersion, final String payloadOrganization, final String payloadIdentifier, final String payloadDisplayName, final String userDefinedName, final boolean overridePrimary, final String vpnType) throws JSONException {
+    super(payloadVersion, ""com.apple.vpn.managed"", payloadOrganization, payloadIdentifier, payloadDisplayName);
+    final JSONObject payload = getPayload();
+    payload.put(""UserDefinedName"", userDefinedName);
+    payload.put(""OverridePrimary"", overridePrimary);
+    payload.put(""VPNType"", vpnType);
+  }
+
+  public JSONObject addPPP() throws JSONException {
+    final JSONObject object = new JSONObject();
+    getPayload().put(""PPP"", object);
+    return object;
+  }
+
+  public JSONObject addIPSec() throws JSONException {
+    final JSONObject object = new JSONObject();
+    getPayload().put(""IPSec"", object);
+    return object;
+  }
+}",1
+WaitForChargeParameterDiscoveryRes.java,"If the signature of one ore more sales tariffs cannot be verified, then the sales tariffs should be ignored rather than terminating the charge process. The charge process can then proceed based solely on the PMaxSchedule  @param saSchedules The schedule(s) from the secondary actor including PMaxSchedule and potential SalesTariff elements.","private void deleteUnverifiedSalesTariffs(SAScheduleListType saSchedules) {
+		List<SAScheduleTupleType> saScheduleTuples = saSchedules.getSAScheduleTuple();
+		
+		for (SAScheduleTupleType saScheduleTuple : saScheduleTuples) {
+			saScheduleTuple.setSalesTariff(null);
+		}
+	}",0
+WBSCategoryType.java,Sets the value of the name property.  @param value allowed object is {@link String },"public void setName(String value)
+   {
+      this.name = value;
+   }",1
+WrapperPlayServerBlockBreakAnimation.java,Retrieve the y axis of the block coordinate. @return The current Y,"public int getY() {
+        return handle.getIntegers().read(2);
+    }",1
+WifiStatus.java,Method to Get type of connection used by mobile now,"public  boolean isDataByWifi() {
+     		ConnectivityManager cm = (ConnectivityManager) mContext
+     				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+     		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+     		if (null != activeNetwork) {
+     			if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+     				return true;
+      		} 
+     		return false;
+     	}",1
+XtnData.java,remove reWritten entry indication if exists  @param uid -uid of entry,"public void removeRewrittenEntryIndication(String uid) {
+        if (_reWrittenEntries != null)
+            _reWrittenEntries.remove(uid);
+    }",1
+YAMLGenerator.java,"Not sure what to do here; will always indent, but uses YAML-specific settings etc.","@Override
+    public YAMLGenerator setPrettyPrinter(PrettyPrinter pp) {
+        return this;
+    }",0
+XMLReferencesInfoHoverProcessor.java,Retrieves documentation to display in the hover help popup.  @return String any documentation information to display <code>null<code> if there is nothing to display.,"protected String computeHoverHelp(ITextViewer textViewer,
+			int documentPosition) {
+		String result = null;
+
+		IndexedRegion treeNode = ContentAssistUtils.getNodeAt(textViewer,
+				documentPosition);
+		if (treeNode == null) {
+			return null;
+		}
+		Node node = (Node) treeNode;
+
+		while ((node != null) && (node.getNodeType() == Node.TEXT_NODE)
+				&& (node.getParentNode() != null)) {
+			node = node.getParentNode();
+		}
+		IDOMNode parentNode = (IDOMNode) node;
+
+		IStructuredDocumentRegion flatNode = ((IStructuredDocument) textViewer
+				.getDocument()).getRegionAtCharacterOffset(documentPosition);
+		if (flatNode != null) {
+			ITextRegion region = flatNode
+					.getRegionAtCharacterOffset(documentPosition);
+			if (region != null) {
+				result = computeRegionHelp(treeNode, parentNode, flatNode,
+						region, documentPosition);
+			}
+		}
+
+		return result;
+	}",1
+WebRequestContext.java,@see javax.servlet.http.HttpServletRequestWrapper#getContextPath(),"public String getContextPath() 
+	{
+		String contextPath = super.getContextPath();
+		String proxiedContextPath = SystemGlobals.getValue(ConfigKeys.PROXIED_CONTEXT_PATH);
+		
+		if (!StringUtils.isEmpty(proxiedContextPath)) {
+			contextPath = proxiedContextPath;
+		}
+		
+		return contextPath;
+	}",1
+UndefPhaseThirdPage.java,Create the wizard.,"public UndefPhaseThirdPage(UndefPhaseOccurrence up) 
+	{
+		super(up);
+		setDescription((new ParsingElement(up.getPartition(),true,"""")).toString());
+	}",0
+YangGeneratorConfiguration.java,@param resourceBaseDir the resourceBaseDir to set,"public void setResourceBaseDir(File resourceBaseDir) {
+        this.resourceBaseDir = resourceBaseDir;
+    }",1
+X509CertSelector.java,"Returns the certificateEquals criterion. The specified <code>X509Certificate<code> must be equal to the <code>X509Certificate<code> passed to the <code>match<code> method. If <code>null<code>, this check is not applied.  @return the <code>X509Certificate<code> to match (or <code>null<code>) @see #setCertificate","public X509Certificate getCertificate() {
+        return x509Cert;
+    }",1
+WindowManagerService.java,Returns whether screen capture is disabled for all windows of a specific user.,"boolean isScreenCaptureDisabledLocked(int userId) {
+        Boolean disabled = mScreenCaptureDisabled.get(userId);
+        if (disabled == null) {
+            return false;
+        }
+        return disabled;
+    }",1
+WXDomManager.java,Invoke the {@link WXDomStatement} for scrolling the given view to the specified position. @param instanceId {@link com.taobao.weex.WXSDKInstance#mInstanceId} for the instance to scroll. @param ref {@link WXDomObject#ref} of the dom. @param options the specified position,"void scrollToDom(String instanceId, String ref, JSONObject options) {
+    if (!isDomThread()) {
+      throw new WXRuntimeException(""ScrollToDom operation must be done in dom thread"");
+    }
+    WXDomStatement statement = mDomRegistries.get(instanceId);
+    if (statement == null) {
+      return;
+    }
+    statement.scrollToDom(ref, options);
+  }",1
+WrapperPlayClientBlockPlace.java,Retrieve the x block position. @return The current X,"public int getX() {
+        return handle.getIntegers().read(0);
+    }",1
+ZkPathUtils.java,"<pre>  group(""O81982719823781212213"", 1); ""O81982719823781212213"" group(""O81982719823781212213"", 2); ""O81982719823781212213"" group(""O81982719823781212213"", 3); ""O81982719823781212213"" group(""O81982719823781212213"", 4); ""O81982719823781212213"" group(""O81982719823781212213"", 5); ""O81982719823781212213""  <pre> @param primary @return","public static String group(String primary, int groupLen) {
+        if (StringUtils.isBlank(primary))
+            return null;
+        
+        char[] chars = primary.toCharArray();
+        
+        StringBuilder sb = new StringBuilder();
+        int len = chars.length;
+        
+        for (int i = 0; i < len; i++) {
+            if (i % groupLen == 0) {
+                sb.append(""/"");
+            }
+            sb.append(chars[i]);
+        }
+        return sb.toString();
+    }",0
+WeakWorldReference.java,Creates a new weak world reference.  @param world the world,"public WeakWorldReference(World world) {
+        this.world = new WeakReference<>(checkNotNull(world, ""world""));
+        this.uniqueId = world.getUniqueId();
+    }",1
+ZipArchiveEntry.java,Sets the name using the raw bytes and the string created from it by guessing or using the configured encoding. @param name the name to use created from the raw bytes using the guessed or configured encoding @param rawName the bytes originally read as name from the archive @since Apache Commons Compress 1.2,"protected void setName(String name, byte[] rawName) {
+        setName(name);
+        this.rawName = rawName;
+    }",1
+XyzOrder.java,@return The approvalCode,"@JsonProperty(""approvalCode"")
+    public String getApprovalCode() {
+        return approvalCode;
+    }",1
+Waterfall.java,Execute the waterfall.  @param seed              Value to provide first task @param callback          Callback for the task @return                  Future for managing tasks,"public Future execute (Object seed, CompletionCallback callback)
+  {
+    if (callback == null)
+      throw new IllegalArgumentException (""Callback cannot be null"");
+
+    TaskManagerImpl taskManager = new TaskManagerImpl (this.executor_, this.tasks_, seed, callback);
+    this.executor_.execute (taskManager);
+
+    return new Future (taskManager);
+  }",1
+WifiStatus.java,Method to Check if wifi is enabled  @return true if wifi enabled or false if wifi Disabled,"public boolean istWifiEnabled() {
+			if (!mWifiManager.isWifiEnabled() ) {
+				  return false;
+			 }else{
+			      return true;  	   
+			  }
+	  }",1
+WBSType.java,Gets the value of the summaryAtCompletionMaterialCost property.  @return possible object is {@link Double },"public Double getSummaryAtCompletionMaterialCost()
+   {
+      return summaryAtCompletionMaterialCost;
+   }",1
+XmlExportTransformer.java,Closes the XML document.,"public void endDocument() throws SAXException {
+		xmlRowWriter.close();
+	}",1
+ZabbixReporter.java,for timer.  @param key @param snapshot @param dataObjectList,"private void addSnapshotDataObjectWithConvertDuration(String key, Snapshot snapshot, long clock,
+			List<DataObject> dataObjectList) {
+		dataObjectList.add(toDataObject(key, "".min"", convertDuration(snapshot.getMin()), clock));
+		dataObjectList.add(toDataObject(key, "".max"", convertDuration(snapshot.getMax()), clock));
+		dataObjectList.add(toDataObject(key, "".mean"", convertDuration(snapshot.getMean()), clock));
+		dataObjectList.add(toDataObject(key, "".stddev"", convertDuration(snapshot.getStdDev()), clock));
+		dataObjectList.add(toDataObject(key, "".median"", convertDuration(snapshot.getMedian()), clock));
+		dataObjectList.add(toDataObject(key, "".75th"", convertDuration(snapshot.get75thPercentile()), clock));
+		dataObjectList.add(toDataObject(key, "".95th"", convertDuration(snapshot.get95thPercentile()), clock));
+		dataObjectList.add(toDataObject(key, "".98th"", convertDuration(snapshot.get98thPercentile()), clock));
+		dataObjectList.add(toDataObject(key, "".99th"", convertDuration(snapshot.get99thPercentile()), clock));
+		dataObjectList.add(toDataObject(key, "".99.9th"", convertDuration(snapshot.get999thPercentile()), clock));
+	}",0
+WrapperPlayServerEntityEffect.java,Set entity ID of a player. @param value - new value.,"public void setEntityId(int value) {
+        handle.getIntegers().write(0, value);
+    }",1
+YearPicker.java,@return The selected year value.,"public int getYear(){
+        return mAdapter.getYear();
+    }",1
+WFSPINCAPS.java,{@link #rsaKeyCheckModes},"public void setRSAKeyCheckModes(final Set<PINRSAKeyCheckMode> rsaKeyCheckModes) {
+		this.rsaKeyCheckModes.set((int) Bitmask.of(rsaKeyCheckModes));
+	}",1
+WellKnownFolder.java,Beware1: this method does not take into account the outputDirectorybaseDir Beware2: must be called after initialization (so override are taken into account),"public boolean sameAsGeneratedFolder() {
+        return folder.equalsIgnoreCase(generatedFolder);
+    }",0
+XmlInterrogativeType.java,"<p>Java class for interrogativeType.  <p>The following schema fragment specifies the expected content contained within this class. <p> <pre> &lt;simpleType name=""interrogativeType""> &lt;restriction base=""{http:www.w3.org2001XMLSchema}string""> &lt;enumeration value=""HOW""> &lt;enumeration value=""WHAT_OBJECT""> &lt;enumeration value=""WHAT_SUBJECT""> &lt;enumeration value=""WHERE""> &lt;enumeration value=""WHO_INDIRECT_OBJECT""> &lt;enumeration value=""WHO_OBJECT""> &lt;enumeration value=""WHO_SUBJECT""> &lt;enumeration value=""WHY""> &lt;enumeration value=""YES_NO""> &lt;restriction> &lt;simpleType> <pre>","@XmlType(name = ""interrogativeType"")
+@XmlEnum
+public enum XmlInterrogativeType {
+
+    HOW,
+    WHAT_OBJECT,
+    WHAT_SUBJECT,
+    WHERE,
+    WHO_INDIRECT_OBJECT,
+    WHO_OBJECT,
+    WHO_SUBJECT,
+    WHY,
+    YES_NO;
+
+    public String value() {
+        return name();
+    }
+
+    public static XmlInterrogativeType fromValue(String v) {
+        return valueOf(v);
+    }
+
+}",1
+TextView.java,Not private so it can be called from an inner class without going through a thunk.,"void sendOnTextChanged(CharSequence text, int start, int before,
+                                   int after) {
+        if (mListeners != null) {
+            final ArrayList<TextWatcher> list = mListeners;
+            final int count = list.size();
+            for (int i = 0; i < count; i++) {
+                list.get(i).onTextChanged(text, start, before, after);
+            }
+        }
+    }",0
+WindowFeatures.java,"<p>Used to annotate an {@link IckleActivity} with <i>Window Feature<i> metadata using the constants declared in {@link Window}.<p>  @version 1.0.0 <br><br> @author <a href=""mailto:lahiru@lonepulse.com"">Lahiru Sahan Jayasinghe<a>","@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface WindowFeatures {
+
+	/**
+	 * <p>The array of {@code int}s containing the IDs of the 
+	 * <i>window features</i> to be applied. These constants 
+	 * can be found in {@link Window}.</p>
+	 * 
+	 * <p>Empty by default.</p>
+	 * 
+	 * @return the constant {@code int} IDs representing the  
+	 * 		   {@link Window} features to be used.
+	 * <br><br>
+	 * @since 1.0.0
+	 */
+	int[] value() default {};
+}",1
+WrapperPlayServerTileEntityData.java,Retrieve the z coordinate of the block associated with this tile entity. @return The current Z,"public int getZ() {
+        return handle.getIntegers().read(2);
+    }",1
+XMLResourceParseException.java,for other cases,"public XMLResourceParseException(String msg) {
+        super(msg);
+    }",0
+YeloBoardFragment.java,This loads the profile of the user  @param userId user id of the user u want to open profile of @param name   name of the user,"private void loadProfile(String userId, String name) {
+        final Intent userProfileIntent = new Intent(getActivity(),
+                UserProfileActivity.class);
+
+        userProfileIntent.putExtra(AppConstants.Keys.USER_ID, userId);
+        userProfileIntent.putExtra(AppConstants.Keys.USER_NAME, name);
+        userProfileIntent.putExtra(AppConstants.Keys.SERVICE_SCREEN_TYPE, AppConstants.ServiceScreenType.PROFILE);
+        startActivity(userProfileIntent);
+    }",1
+WBSType.java,Sets the value of the summaryActualNonLaborUnits property.  @param value allowed object is {@link Double },"public void setSummaryActualNonLaborUnits(Double value)
+   {
+      this.summaryActualNonLaborUnits = value;
+   }",1
+VPTreeGeospatialIndex.java,"Calculates the minimum westward angle traveled from a meridian to a point. If the point is coincident with the meridian, this method returns 360 degrees.  @param longitude the line of longitude at which to begin travel @param point the point to which to travel  @return the westward-traveling distance between the line and the point in degrees","private double getDegreesWestFromMeridian(final double longitude, final E point) {
+        return point.getLongitude() < longitude ?
+                longitude - point.getLongitude() : Math.abs(360 - (longitude - point.getLongitude()));
+    }",1
+AbstractApplicationsAggregate.java,REPLAY LISTENERS,"@Subscribe
+    @Override
+    public void replayPlatformCreatedEvent(final PlatformCreatedEvent event) {
+        try {
+            final PlatformData platform = event.getPlatform();
+            this.createPlatform(platform);
+        } catch (Exception e) {
+            LOGGER.error(""Error while replaying platform created event {}"", e.getMessage());
+        }
+    }",0
+VertexBuf.java,It would be terribly nice if GLArray could be a multiply inhereted class and these could be put in it instead,"private GLBuffer bufobj;
+	private int bufmode = GL.GL_STATIC_DRAW;
+	private boolean update = false;
+
+	public void bindvbo(GOut g) {
+	    BGL gl = g.gl;
+	    synchronized(this) {
+		if((bufobj != null) && (bufobj.cur != g.curgl))
+		    dispose();
+		if(bufobj == null) {
+		    bufobj = new GLBuffer(g);
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		    Buffer data = data();
+		    data.rewind();
+		    gl.glBufferData(GL.GL_ARRAY_BUFFER, data.remaining() * elsize(), data, bufmode);
+		    GOut.checkerr(gl);
+		    update = false;
+		} else if(update) {
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		    Buffer data = data();
+		    data.rewind();
+		    gl.glBufferData(GL.GL_ARRAY_BUFFER, data.remaining() * elsize(), data, bufmode);
+		    update = false;
+		} else {
+		    gl.glBindBuffer(GL.GL_ARRAY_BUFFER, bufobj);
+		}
+	    }
+	}",0
+WookiModule.java,Wooki Symbols default,"public static void contributeFactoryDefaults(MappedConfiguration<String, String> configuration)
+    {
+        configuration.add(
+                WookiSymbolsConstants.ERROR_UNHANDLED_BROWSER_PAGE,
+                ""error/unhandledbrowser"");
+    }",0
+WAL.java,"Write an entry to the WAL in HBase. If doCasCheck is true, this does a compare-and-swap so that the database will only change if the existing entry's entry.n is equal to casCheckEntry.n .  @param casCheckEntry The write won't occur unless the entry.n in the database is equal to casCheckEntry.n . Pass ""null"" to require that the database value not exist.","synchronized protected void putWAL(HTableInterface hTable, byte[] entityGroup, 
+	long walIndex, WALEntry entry, boolean doCasCheck, WALEntry casCheckEntry) 
+	throws IOException {
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		BinaryEncoder e = EncoderFactory.get().binaryEncoder(bao, null);
+		
+		writer.write(entry.toAvro(), e);
+		e.flush();
+		byte[] serializedWALEntry = bao.toByteArray();
+
+		byte[] row = ArrayUtils.addAll(entityGroup, Util.longToBytes(walIndex)); 
+		Put put = new Put(row);
+		put.add(cf, ENTRY_BYTES, serializedWALEntry);
+		put.add(cf, N_BYTES, Util.longToBytes(entry.n));
+		if (doCasCheck) {
+			// Atomic compare and swap: write the new value if and only if the
+			// n value hasn't changed since we read it.
+			byte[] casNBytes;
+			if (casCheckEntry == null) {
+				casNBytes = null;
+			} else {
+				casNBytes = Util.longToBytes(casCheckEntry.n);
+			}
+			if (!hTable.checkAndPut(row, cf, N_BYTES, casNBytes, put)) {
+				throw new CasChanged();
+			}
+		} else {
+			hTable.put(put);
+		}
+	}",1
+QuestionSet.java,constructor,"public QuestionSet() {
+		this.qs = new ArrayList<Question>();
+	}",0
+WFSPTRSTATUS.java,Specifies the state of the paper supplies. A number of paper supplies are defined below. Vendor specific paper supplies are defined starting from the end of the array. The maximum paper index is WFS_PTR_SUPPLYMAX.,"public PTRPaper[] getPaper() {
+		final PTRPaper[] paperSupplies = new PTRPaper[WFS_PTR_SUPPLYSIZE];
+		for (int i = 0; i < paperSupplies.length; i++) {
+			if (i < paper.length) {
+				paperSupplies[i] = XfsConstants.valueOf(paper.get(i), PTRPaper.class);
+			} else {
+				paperSupplies[i] = PTRPaper.NOTSUPP;
+			}
+		}
+		return paperSupplies;
+	}",1
+WebsockifySslContext.java,Constructor for singleton,"private WebsockifySslContext(String keystore, String password) {
+        this ( keystore, password, password );
+    }",0
+UserServlet.java,The doGet method of the servlet. This method is called when a form has its tag value method equals to get.,"public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doPost(request,response);
+	}",0
+WebdavServlet.java,Sets the <code>DavLocatorFactory<code>.  @param locatorFactory @see AbstractWebdavServlet#setLocatorFactory(DavLocatorFactory),"@Override
+    public void setLocatorFactory(DavLocatorFactory locatorFactory) {
+        this.locatorFactory = locatorFactory;
+    }",1
+WebDriverElement.java,"Expected way for sub element types to interact with their corresponding WebElement. This attempts the desired action, and will throw appropriate exceptions should the element not be able to be interacted with, for whatever reason. If the WebElement is stale when the action is attempted, the cached WebElement will be cleared and looked up again, which may lookup a fresh reference to the equivalent element.  @param action A function that wraps the action to be performed. Accepts the source WebElement as its only parameter and returns nothing.","protected void attempt(Consumer<WebElement> action) {
+        try {
+            action.accept(webElement());
+        } catch (StaleElementReferenceException e) {
+            invalidateCache();
+
+            try {
+                action.accept(webElement());
+            } catch (ElementNotVisibleException e1) {
+                throw new ElementNotDisplayedException(this, e1);
+            }
+        } catch (ElementNotVisibleException e) {
+            throw new ElementNotDisplayedException(this, e);
+        }
+    }",1
+WifiDirectHandler.java,Indicates this device's configuration details have changed Sticky Intent @param intent,"private void handleThisDeviceChanged(Intent intent) {
+        Log.i(TAG, ""This device changed"");
+
+        // Extra information from EXTRA_WIFI_P2P_DEVICE
+        thisDevice = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
+
+        // Logs extra information from EXTRA_WIFI_P2P_DEVICE
+        Log.i(TAG, p2pDeviceToString(thisDevice));
+
+        localBroadcastManager.sendBroadcast(new Intent(Action.DEVICE_CHANGED));
+    }",1
+WFSIDCCAPS.java,@see #chipPower,"public void setChipPower(final Set<IDCChipPower> chipPower) {
+		this.chipPower.set((int) Bitmask.of(chipPower));
+	}",1
+X509Signature.java,Gets the encryption algorithm for the content.,"public String getAlgorithm()
+  {
+    return _algorithm;
+  }",1
+WindowingOperatorDefinition.java,The windowing operator family does NOT support extendedType calculation,"@Override
+	public ExtendedType computeExtendedTypeRaw(ExtendedType[] types) {
+		ArrayList<IDomain> imageDomains = new ArrayList<IDomain>();
+		for (ExtendedType type : types) {
+			imageDomains.add(type.getDomain());
+		}
+		IDomain domain = computeImageDomain(imageDomains);
+		return new ExtendedType(domain,Types.OTHER,0,0);
+	}",0
+WordCram.java,"Use the given WordAngler to pick angles for each word. You can make your own, or use a pre-fab one from {@link Anglers}.  @see WordAngler @see Anglers @param angler the WordAngler to use. @return The WordCram, for further setup or drawing.","public WordCram withAngler(WordAngler angler) {
+		this.angler = angler;
+		return this;
+	}",1
+YangDiagramBehavior.java,@param createPosition the createPosition to set,"public void setCreatePosition(Point createPosition) {
+        this.createPosition = createPosition;
+    }",1
+ApplicationConfig.java,It is automatically generated by NetBeans REST support.,"private Set<Class<?>> getRestResourceClasses() {
+        Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
+        resources.add(org.javaee7.websocket.websocket.vs.rest.MyRestEndpoint.class);
+        return resources;
+    }",0
+_MainActivity.java,"Dev tools and the play store (and others?) launch with a different intent, and so lead to a redundant instance of this activity being spawned. <a href=""http:stackoverflow.comquestions17702202find-out-whether-the-current-activity-will-be-task-root-eventually-after-pendin"" >Details<a>.","private boolean isWrongInstance() {
+    if (!isTaskRoot()) {
+      Intent intent = getIntent();
+      boolean isMainAction = intent.getAction() != null && intent.getAction().equals(ACTION_MAIN);
+      return intent.hasCategory(CATEGORY_LAUNCHER) && isMainAction;
+    }
+    return false;
+  }",0
+WBSMilestoneType.java,Sets the value of the wbsName property.  @param value allowed object is {@link String },"public void setWBSName(String value)
+   {
+      this.wbsName = value;
+   }",1
+WBSCategoryType.java,Gets the value of the lastUpdateDate property.  @return possible object is {@link String },"public Date getLastUpdateDate()
+   {
+      return lastUpdateDate;
+   }",1
+Yiqi_Ou.java,"I use dynamic programming to solve the problem. let f(x) represents whether the person can win or not if there are x stones. So the recursion function is like:  f(x) = false, if f(x-1) && f(x-2) && f(x-3) == true f(x) = true, if f(x-1) && f(x-2) && f(x-3) == false  f(x) is false if f(x-1), f(x-2), f(x-3) are all true, meaning that no mater you pick 1, 2 or 3, your opponent will always get a true. f(x) is true if one of f(x-1), f(x-2), f(x-3) is false, meaning that you can always pick stones and leave a false state to your opponent.","public boolean canWinNim(int n) {
+		//the program can not pass the large test cases, so do some trick here.
+		if(n >= 134882061) return n%4 != 0;
+		boolean state1 = true, state2 = true, state3 = true, res = true;
+		if(n <= 0)
+			return false;
+		if(n <= 3)
+			return true;
+		for(int i = 4; i <= n; i++) {
+			res = (state1 && state2 && state3) ? false : true;
+			state1 = state2;
+			state2 = state3;
+			state3 = res;
+		}
+		return state3;
+	}",1
+WallPostFragment.java,Loads the user profile  @param userId id of the user whose profile we want to see @param name   name of the user,"private void loadProfile(String userId, String name) {
+        final Intent userProfileIntent = new Intent(getActivity(), UserProfileActivity.class);
+
+        userProfileIntent.putExtra(AppConstants.Keys.USER_ID, userId);
+        userProfileIntent.putExtra(AppConstants.Keys.USER_NAME, name);
+        userProfileIntent.putExtra(AppConstants.Keys.SERVICE_SCREEN_TYPE, AppConstants.ServiceScreenType.PROFILE);
+        startActivity(userProfileIntent);
+    }",1
+WeekView.java,Returns the first visible day in the week view. @return The first visible day in the week view.,"public Calendar getFirstVisibleDay() {
+        return mFirstVisibleDay;
+    }",1
+XMLFieldLiteralString.java,"Configuration to compare the string value of a field   <p>Java class for XMLFieldLiteralString complex type.  <p>The following schema fragment specifies the expected content contained within this class.  <pre> &lt;complexType name=""XMLFieldLiteralString""&gt; &lt;complexContent&gt; &lt;extension base=""{}XMLFieldLiteralBase""&gt; &lt;attribute name=""value"" type=""{http:www.w3.org2001XMLSchema}string"" &gt; &lt;extension&gt; &lt;complexContent&gt; &lt;complexType&gt; <pre>","@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = ""XMLFieldLiteralString"")
+public class XMLFieldLiteralString
+    extends XMLFieldLiteralBase
+{
+
+    @XmlAttribute(name = ""value"")
+    protected String value;
+
+    /**
+     * Gets the value of the value property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * Sets the value of the value property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+}",1
+XYBarRenderer.java,Provides serialization support.  @param stream  the input stream.  @throws IOException  if there is an IO error. @throws ClassNotFoundException  if there is a classpath problem.,"private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.legendBar = SerialUtilities.readShape(stream);
+    }",0
+ZMQ.java,"The 'ZMQ_HWM' option shall set the high water mark for the specified 'socket'. The high water mark is a hard limit on the maximum number of outstanding messages 0MQ shall queue in memory for any single peer that the specified 'socket' is communicating with.  If this limit has been reached the socket shall enter an exceptional state and depending on the socket type, 0MQ shall take appropriate action such as blocking or dropping sent messages. Refer to the individual socket descriptions in the man page of zmq_socket[3] for details on the exact action taken for each socket type.  @param hwm the number of messages to queue. @return true if the option was set, otherwise false. @deprecated this option uses integer range, use {@link #setHWM(int)} instead","@Deprecated
+        public boolean setHWM(long hwm)
+        {
+            boolean set = true;
+            set |= setSndHWM(hwm);
+            set |= setRcvHWM(hwm);
+            return set;
+        }",1
+WFSPINCAPS.java,{@link #algorithms},"public Set<PINAlgorithm> getAlgorithms() {
+		return XfsConstants.of(algorithms, PINAlgorithm.class);
+	}",1
+WorldChunkManagerTofu.java,"Finds a valid position within a range, that is in one of the listed biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y positions.","@Override
+    public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random)
+    {
+        IntCache.resetIntCache();
+        int l = par1 - par3 >> 2;
+        int i1 = par2 - par3 >> 2;
+        int j1 = par1 + par3 >> 2;
+        int k1 = par2 + par3 >> 2;
+        int l1 = j1 - l + 1;
+        int i2 = k1 - i1 + 1;
+        int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
+        ChunkPosition chunkposition = null;
+        int j2 = 0;
+
+        for (int k2 = 0; k2 < l1 * i2; ++k2)
+        {
+            int l2 = l + k2 % l1 << 2;
+            int i3 = i1 + k2 / l1 << 2;
+            BiomeGenBase biomeGenTofuBase = BiomeGenTofuBase.getBiomeGenArray()[aint[k2]];
+
+            if (par4List.contains(biomeGenTofuBase) && (chunkposition == null || par5Random.nextInt(j2 + 1) == 0))
+            {
+                chunkposition = new ChunkPosition(l2, 0, i3);
+                ++j2;
+            }
+        }
+
+        return chunkposition;
+    }",1
+WKBReader.java,Parse a binary encoded geometry.,"public void parse(byte[] value) {
+		parseGeometry(valueGetterForEndian(value), 0);
+	}",1
+XC_MethodReplacement.java,@see #returnConstant(Object),"public static XC_MethodReplacement returnConstant(int priority, final Object result) {
+        return new XC_MethodReplacement(priority) {
+            @Override
+            public MethodHookParam replaceHookedMethod(MethodHookParam param) throws Throwable {
+                return param;
+            }
+        };
+    }",1
+WorkQueueFrontier.java,Recalculate the value of thehighest-precedence queue waiting among inactive queues.  @param startFrom start looking at this precedence value,"protected void updateHighestWaiting(int startFrom) {
+        // probe for new highestWaiting
+        for(int precedenceKey : getInactiveQueuesByPrecedence().tailMap(startFrom).keySet()) {
+            if(!getInactiveQueuesByPrecedence().get(precedenceKey).isEmpty()) {
+                highestPrecedenceWaiting = precedenceKey;
+                return;
+            }
+        }
+        // nothing waiting
+        highestPrecedenceWaiting = Integer.MAX_VALUE;
+    }",1
+WriteAttributesSetStatement.java,"<p class=""changed_added_4_0""> <p>  @return the attributes","public Collection<PassThrough> getAttributes() {
+        return this.attributes;
+    }",0
+XSLFSheet.java,"Removes the specified shape from this sheet, if it is present (optional operation).  If this sheet does not contain the element, it is unchanged.  @param xShape shape to be removed from this sheet, if present @return <tt>true<tt> if this sheet contained the specified element @throws IllegalArgumentException if the type of the specified shape is incompatible with this sheet (optional)","public boolean removeShape(XSLFShape xShape) {
+        XmlObject obj = xShape.getXmlObject();
+        CTGroupShape spTree = getSpTree();
+        if(obj instanceof CTShape){
+            spTree.getSpList().remove(obj);
+        } else if (obj instanceof CTGroupShape){
+            spTree.getGrpSpList().remove(obj);
+        } else if (obj instanceof CTConnector){
+            spTree.getCxnSpList().remove(obj);
+        } else {
+            throw new IllegalArgumentException(""Unsupported shape: "" + xShape);
+        }
+        return getShapeList().remove(xShape);
+    }",1
+WrapperPlayServerWorldEvent.java,Set the ID of the effect. @see {@link SoundEffects} and {@link ParticleEffects}. @param value - new value.,"public void setEffectId(int value) {
+        handle.getIntegers().write(0, value);
+    }",1
+YUVImage.java,"Note, for performance reasons, this will ONLY work on BufferedImage's that use the TYPE_INT_ARGB or TYPE_INT_RGB data types. @param img","public void fillFromBuffered(BufferedImage img) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+
+		int blockW = (w + 15) & ~0x0f;
+		int blockH = (h + 15) & ~0x0f;
+
+		assert(blockW <= width);
+		assert(blockH <= height);
+
+		// Going to do two passes on this image, one for Y, one for UV as they use different
+		// resolutions
+		DataBufferInt ints = (DataBufferInt)img.getData().getDataBuffer();
+		int[] rgbs = ints.getData();
+
+
+		for (int y = 0; y < h; ++y) {
+
+			for (int x = 0; x < w; ++x) {
+				int luma = Util.rgbToY(rgbs[y*w+x]);
+				yPlane[y*width+x] = (byte)luma;
+
+				if ((y&1) == 0 && (x&1) == 0) {
+					// Add color
+					int u = Util.rgbToU(rgbs[y*w+x]);
+					int v = Util.rgbToV(rgbs[y*w+x]);
+					uPlane[y*width/4+x/2] = (byte)u;
+					vPlane[y*width/4+x/2] = (byte)v;
+
+				}
+			}
+		}
+	}",0
+WishListResource.java,GET  wish-lists : get all the wishLists.  @return the ResponseEntity with status 200 (OK) and the list of wishLists in body,"@GetMapping(""/wish-lists"")
+    @Timed
+    public List<WishList> getAllWishLists() {
+        log.debug(""REST request to get all WishLists"");
+        List<WishList> wishLists = wishListRepository.findAll();
+        return wishLists;
+    }",1
+WoTNewMessageListFetcher.java,Stops all running requests.,"public synchronized void stop() {
+		if(logDEBUG) Logger.debug(this, ""Trying to stop all requests"");
+		
+		mTicker.shutdown();
+		
+		USKRetriever[] retrievers = mRequests.values().toArray(new USKRetriever[mRequests.size()]);		
+		int counter = 0;		 
+		for(USKRetriever r : retrievers) {
+			r.cancel(null, mClientContext);
+			mUSKManager.unsubscribeContent(r.getOriginalUSK(), r, true);
+			 ++counter;
+		}
+		mRequests.clear();
+		
+		if(logDEBUG) Logger.debug(this, ""Stopped "" + counter + "" current requests"");
+	}",1
+WrapperPlayServerTileEntityData.java,Set the type of update to perform. @param value - new value.,"public void setAction(byte value) {
+        handle.getIntegers().write(3, (int) value);
+    }",1
+ZTauElement.java,"Class representing an element of <code><b>Z<b>[&tau;]<code>. Let <code>&lambda;<code> be an element of <code><b>Z<b>[&tau;]<code>. Then <code>&lambda;<code> is given as <code>&lambda; = u + v&tau;<code>. The components <code>u<code> and <code>v<code> may be used directly, there are no accessor methods. Immutable class.","class ZTauElement
+{
+    /**
+     * The &quot;real&quot; part of <code>&lambda;</code>.
+     */
+    public final BigInteger u;
+
+    /**
+     * The &quot;<code>&tau;</code>-adic&quot; part of <code>&lambda;</code>.
+     */
+    public final BigInteger v;
+
+    /**
+     * Constructor for an element <code>&lambda;</code> of
+     * <code><b>Z</b>[&tau;]</code>.
+     * @param u The &quot;real&quot; part of <code>&lambda;</code>.
+     * @param v The &quot;<code>&tau;</code>-adic&quot; part of
+     * <code>&lambda;</code>.
+     */
+    public ZTauElement(BigInteger u, BigInteger v)
+    {
+        this.u = u;
+        this.v = v;
+    }
+}",1
+WBSType.java,Gets the value of the summaryRemainingDuration property.  @return possible object is {@link Double },"public Double getSummaryRemainingDuration()
+   {
+      return summaryRemainingDuration;
+   }",1
+ZMQ.java,DO NOT USE if you're trying to build a special proxy,"public SocketBase base()
+        {
+            return base;
+        }",0
+YAMLGenerator.java,"Overridden methods, configuration","/**
+     * Not sure what to do here; could reset indentation to some value maybe?
+     */
+    @Override
+    public YAMLGenerator useDefaultPrettyPrinter()
+    {
+        return this;
+    }",0
+WrapperPlayServerPlayerInfo.java,Retrieve whether or not to remove the given player from the list of online players. @return The current Online,"public boolean getOnline() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }",1
+WatsAgentStartRequest.java,@param scriptUrl the scriptUrl to set,"public void setScriptUrl(String scriptUrl) {
+        this.scriptUrl = scriptUrl;
+    }",1
+TextView.java,Convenience for  Selection#getSelectionStart.,"@ViewDebug.ExportedProperty
+    public int getSelectionStart() {
+        return Selection.getSelectionStart(getText());
+    }",0
+TreatmentCategorizationWizardPresentationTest.java,Regression test for bug #566,"@Test
+	public void testDoNotReuseDefaultDose() {
+		TreatmentCategorizationWizardPresentation pm1 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		TreatmentCategorizationWizardPresentation pm2 = new TreatmentCategorizationWizardPresentation(TreatmentCategorization.createDefault(), d_domain);
+		pm1.getDoseUnit().setScaleModifier(ScaleModifier.MEGA);
+		assertFalse(pm2.getDoseUnit().equals(pm1.getDoseUnit()));
+	}",0
+WrapperPlayServerMapChunkBulk.java,"Retrieve whether or not the chunk data contains a light nibble array. <p> This is true in the main world, false in the end + nether. @return The current Sky light sent","public boolean getSkyLightSent() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }",1
+WidgetFrequencyDomainType.java,"@return    ""Live View"" or ""Waveform View"" or ""Waterfall View""","public String getType() {
+		
+		return typeCombobox.getSelectedItem().toString();
+		
+	}",1
+ZeroOrOneFactory.java,converts a zero ore one of zero or ones to a zero ore one of zero or ones <p>,"public static <Z> ZeroOrOne<ZeroOrOne<Z>> zeroOrOnes(
+  final ZeroOrOne<ZeroOrOne<Z>> nmz
+ ) {
+  return nmz.traverseZeroOrOnes(
+   () -> ZeroOrOneFactory.<Z>zero(),
+   (ZeroOrOne<Z> mz) -> mz
+  ).apply(lift1(ZeroOrOneFactory::one));
+ }",1
+WhitelistRulesEvaluator.java,true if rule matches a violation and should be whitelisted.  @return true if rule matches a violation,"@Override
+    public Boolean apply(final RuleEntity ruleEntity, final ViolationEntity violationEntity) {
+        final List<Predicate<ViolationEntity>> predicates = newArrayList();
+
+
+        trimOptional(ruleEntity.getAccountId())
+                .map(WhitelistRulesEvaluator::accountIsEqual)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getRegion())
+                .map(WhitelistRulesEvaluator::regionIsEqual)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getViolationTypeEntityId())
+                .map(WhitelistRulesEvaluator::violationTypeIdIsEqual)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getImageName())
+                .map(WhitelistRulesEvaluator::imageNameMatches)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getImageOwner())
+                .map(WhitelistRulesEvaluator::imageOwnerIsEqual)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getApplicationId())
+                .map(WhitelistRulesEvaluator::applicationIdIsEqual)
+                .ifPresent(predicates::add);
+
+        trimOptional(ruleEntity.getApplicationVersion())
+                .map(WhitelistRulesEvaluator::applicationVersionIsEqual)
+                .ifPresent(predicates::add);
+
+        final Optional<Predicate<ViolationEntity>> whiteListTest = predicates.stream().reduce(Predicate::and);
+
+        return whiteListTest.isPresent() && whiteListTest.get().test(violationEntity);
+    }",1
+WifiDirectHandler.java,Unregisters the WifiDirectBroadcastReceiver and IntentFilter,"public void unregisterP2pReceiver() {
+        if (p2pBroadcastReceiver != null) {
+            unregisterReceiver(p2pBroadcastReceiver);
+            p2pBroadcastReceiver = null;
+            Log.i(TAG, ""P2P BroadcastReceiver unregistered"");
+        }
+    }",1
+ZkSyncPrimitive.java,"Add a listener task to be executed when the object enters the synchronized state, and every time it updates its state thereafter (as marked by derived classes calling <code>onStateUpdated()<code>).  @param handler 					The listener task to execute when the state has changed. A weak reference is taken. @param doStartupRun 				If the state of the primitive is already synchronized then run the handler immediately","public void addUpdateListener(Runnable handler, boolean doStartupRun) {
+    	synchronized (mutex) {
+    		if (stateUpdateListeners == null) {
+    			stateUpdateListeners = new ArrayList<Runnable>(8);
+    		}
+    		// Add to listener set first to avoid reentrancy race
+    		stateUpdateListeners.add(handler);
+    		// If we are already synchronized then trigger
+    		if (doStartupRun && killedByException == null && isSynchronized.isSignalled()) {
+    			handler.run();
+    		}
+    	}
+    }",1
+Xpp3DomUtils.java,"Merge two DOMs, with one having dominance in the case of collision. Merge mechanisms (vs. override for nodes, or vs. append for children) is determined by attributes of the dominant root node.  @see #CHILDREN_COMBINATION_MODE_ATTRIBUTE @see #SELF_COMBINATION_MODE_ATTRIBUTE  @param dominant The dominant DOM into which the recessive valueattributeschildren will be merged @param recessive The recessive DOM, which will be merged into the dominant DOM","public static Xpp3Dom mergeXpp3Dom( Xpp3Dom dominant, Xpp3Dom recessive )
+    {
+        if ( dominant != null )
+        {
+            mergeIntoXpp3Dom( dominant, recessive, null );
+            return dominant;
+        }
+        return recessive;
+    }",1
+WeakRemoteEventListener.java,Used in order to weakly hold listeners by the Notify delegator.  @author Guy Korland @version 1.0 @since 5.01,"@com.gigaspaces.api.InternalApi
+public class WeakRemoteEventListener extends WeakReference<RemoteEventListener>
+        implements RemoteEventListener {
+    public WeakRemoteEventListener(RemoteEventListener listener) {
+        super(listener);
+    }
+
+    /**
+     * Delegate the notification to the listener.
+     */
+    public void notify(RemoteEvent event) throws UnknownEventException, RemoteException {
+        RemoteEventListener l = get();
+        if (l != null) {
+            l.notify(event);
+        }
+    }
+}",1
+WidgetRemoteViewsListAdapter.java,"AsyncQueryHandler helper class to do async queries instead of blocking the UI thread (yeah, don't know why but the runnable was not avoiding the UI lock @author adw","private class MyQueryHandler extends AsyncQueryHandler
+    {
+        public MyQueryHandler(ContentResolver cr) {
+            super(cr);
+        }
+
+        @Override
+		protected void onQueryComplete(int token, Object cookie,
+                Cursor cursor) {
+            super.onQueryComplete(token, cookie, cursor);
+            android.util.Log.d(""LAUNCHER"",""API v2 QUERY COMPLETE"");
+            mRemoteViews.setBindingCursor(cursor, mContext);
+            cursor.close();
+            notifyDataSetInvalidated();
+        }
+    }",1
+YearPicker.java,Constructor called from {@link #CREATOR},"private SavedState(Parcel in) {
+            super(in);
+            yearMin = in.readInt();
+            yearMax = in.readInt();
+            year = in.readInt();
+        }",0
+XMLResourceParseException.java,JDOMException or IOException,"public XMLResourceParseException(String resourceName, Throwable e) {
+        super(resourceName, e);
+    }",0
+XOMListType.java,Instantiation of root variants of this type.,"public final boolean canGetSingletonInstance(XNContext ctx) {
+		return elementInstanceType.canGetSingletonInstance(ctx);
+	}",0
+WrapperPlayServerUpdateSign.java,Set block X Coordinate. @param value - new value.,"public void setX(int value) {
+        handle.getIntegers().write(0, value);
+    }",1
+YearClass.java,"Calculates the year class by the amount of RAM the phone has. Evaluations are based off the table below: <table border=""1""> <thead> <tr><th width=""50%"">Amount<th><th>Year<th><tr> <thead> <tbody> <tr><td>>2GB<td><td>2014<td><tr> <tr><td><=2GB<td><td>2013<td><tr> <tr><td><=1.5GB<td><td>2012<td><tr> <tr><td><=1GB<td><td>2011<td><tr> <tr><td><=512MB<td><td>2010<td><tr> <tr><td><=256MB<td><td>2009<td><tr> <tr><td><=128MB<td><td>2008<td><tr> <tbody> <table>  @return the year in which top-of-the-line phones had the same amount of RAM as this phone.","private static int getRamYear(Context c) {
+    long totalRam = DeviceInfo.getTotalMemory(c);
+    if (totalRam <= 0) return CLASS_UNKNOWN;
+    if (totalRam <= 192 * MB) return CLASS_2008;
+    if (totalRam <= 290 * MB) return CLASS_2009;
+    if (totalRam <= 512 * MB) return CLASS_2010;
+    if (totalRam <= 1024 * MB) return CLASS_2011;
+    if (totalRam <= 1536 * MB) return CLASS_2012;
+    if (totalRam <= 2048 * MB) return CLASS_2013;
+    return CLASS_2014;
+  }",1
+WidgetDirectiveBuilderTest.java,Read directive content found at widgetIdwidgetId.js  @param widgetId id of the widget @return the directive as a string @throws IOException,"private String readDirective(String widgetId) throws IOException {
+        return new String(readAllBytes(resolve(widgetId + ""/"" + widgetId + "".js"")));
+    }",1
+YangIndenter.java,"Reads the next token in backward direction of <code>start<code> from the heuristic scanner and sets the fields <code>fToken, fPreviousPosition<code> and <code>fPosition<code> accordingly.  @param start the start offset from which to scan backwards","private void nextToken(int start) {
+        fToken = fScanner.previousToken(start - 1, YangHeuristicScanner.UNBOUND);
+        fPreviousPos = start;
+        fPosition = fScanner.getPosition() + 1;
+        try {
+            fLine = fDocument.getLineOfOffset(fPosition);
+        } catch (BadLocationException e) {
+            fLine = -1;
+        }
+    }",1
+WSPage.java,@param sets,"protected void setInput(Object[] elements) {
+        tv.setInput(elements);
+        for (int i = 0; i < elements.length; i++) {
+            IWorkingSet workingSet = (IWorkingSet) elements[i];
+            tv.setChecked(workingSet, workingSet.isVisible() && !workingSet.isEmpty());
+        }
+    }",1
+WrapperPlayClientUpdateSign.java,Set the location of the particle to send. @param loc - the location.,"public void setLocation(Location loc) {
+    	if (loc == null)
+    		throw new IllegalArgumentException(""Location cannot be NULL."");
+    	setX(loc.getBlockX());
+    	setY((short) loc.getBlockY());
+    	setZ(loc.getBlockZ());
+    }",1
+WoTIdentityManager.java,Get a set of introduction puzzle IDs which the given own identity might solve.  The puzzle's data is not returned because when generating HTML for displaying the puzzles we must reference them with a IMG-tag and we cannot embed the data of the puzzles in the IMG-tag because embedding image-data has only recently been added to browsers and many do not support it yet.  @param ownIdentity The identity which wants to solve the puzzles. @param amount The amount of puzzles to request. @return A list of the IDs of the puzzles. The amount might be less than the requested amount and even zero if WoT has not downloaded puzzles yet. @throws Exception,"public List<String> getIntroductionPuzzles(WoTOwnIdentity ownIdentity, int amount) throws Exception {
+		ArrayList<String> puzzleIDs = new ArrayList<String>(amount + 1);
+		
+		SimpleFieldSet params = new SimpleFieldSet(true);
+		params.putOverwrite(""Message"", ""GetIntroductionPuzzles"");
+		params.putOverwrite(""Identity"", ownIdentity.getID());
+		params.putOverwrite(""Type"", ""Captcha""); // TODO: Don't hardcode the String
+		params.put(""Amount"", amount);
+		
+		try {
+			SimpleFieldSet result = sendFCPMessageBlocking(params, null, ""IntroductionPuzzles"").params;
+			
+			for(int idx = 0; ; idx++) {
+				String id = result.get(""Puzzle"" + idx);
+				
+				if(id == null || id.equals("""")) /* TODO: Figure out whether the second condition is necessary */
+					break;
+				
+				puzzleIDs.add(id);
+			}
+		}
+		catch(PluginNotFoundException e) {
+			Logger.error(this, ""Getting puzzles failed"", e);
+		}
+		
+		return puzzleIDs;
+	}",1
+WrapperPlayServerUpdateTime.java,"Set the world (or region) time, in ticks. @param value - new value.","public void setTimeOfDay(long value) {
+        handle.getLongs().write(1, value);
+    }",1
+YammerData.java,Get the highest message ID in the messages table @param networkId @returns the highest message ID in the messages table,"public long getLastMessageId(long networkId) {
+    return Message.getLastMessageId(getReadableDatabase(), networkId);
+  }",1
+XPathMatcher.java,Returns the number of wilcard used in the XPath expression and -1 if there is no wildcard.  @return,"public int getNbWildCard() {
+		return nbWildCard;
+	}",1
+WebResourceName.java,Gets the value of the value property.  @return possible object is {@link String },"public String getvalue() {
+        return value;
+    }",1
+WifiStatus.java,Method to Run wifi Settings Activity Using Intent,"public void runWifiSettings(){
+		 mContext.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+	       }",1
+YangFormattingPreferences.java,@param maxLineLength the maxLineLength to set,"public void setMaxLineLength(int maxLineLength) {
+        this.maxLineLength = maxLineLength;
+    }",1
+WrapperPlayServerExperience.java,Set the total amount of experience gained. @param value - new value.,"public void setTotalExperience(short value) {
+        handle.getIntegers().write(0, (int) value);
+    }",1
+WebScenarioObject.java,Gets name.  @return Value of name.,"public String getName() {
+        return name;
+    }",1
+WrapperPlayServerEntityStatus.java,Set the entity ID. @param value - new value.,"public void setEntityId(int value) {
+        handle.getIntegers().write(0, value);
+    }",1
+WeekView.java,"Get whether ""now"" line should be displayed. ""Now"" line is defined by the attributes `nowLineColor` and `nowLineThickness`. @return True if ""now"" line should be displayed.","public boolean isShowNowLine() {
+        return mShowNowLine;
+    }",1
+XOMFileType.java,Instantiation of root variants of this type.,"public boolean canGetMassInstance(XNContext ctx) {
+		return ctx.allow(XNSecurityKey.FILE_SYSTEM_READ, ""Operation"", ""GetFiles"");
+	}",0
+TextView.java,Called when the activity is first created.,"@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.about);
+
+        // Get text to display by replacing ""[TABLE_RULES]"" with the contents of string resource
+        // with ID table[level]_rules.
+        String baseText = getString(R.string.about_text);
+        String tableRulesText = null;
+        try {
+            String fieldName = ""table"" + getIntent().getIntExtra(""level"", 1) + ""_rules"";
+            int tableRulesID = (Integer)R.string.class.getField(fieldName).get(null);
+            tableRulesText = getString(tableRulesID);
+        }
+        catch(Exception ex) {
+            tableRulesText = null;
+        }
+        if (tableRulesText==null) tableRulesText = """";
+        String displayText = baseText.replace(""[TABLE_RULES]"", tableRulesText);
+
+        TextView tv = (TextView)findViewById(R.id.aboutTextView);
+        tv.setText(displayText);
+    }",0
+PullToRefreshBase.java,Called when the UI has been to be updated to be in the State#RESET state.,"protected void onReset() {
+		mIsBeingDragged = false;
+		mLayoutVisibilityChangesEnabled = true;
+
+		// Always reset both layouts, just in case...
+		mHeaderLayout.reset();
+		mFooterLayout.reset();
+
+		smoothScrollTo(0);
+	}",0
+ZooKeeperConfiguration.java,Return a managed Curator connection.  This created connection will be wrapped in a {@link ManagedCuratorFramework} and offered to the provided {@link LifecycleEnvironment} parameter.,"public CuratorFramework newManagedCurator(LifecycleEnvironment env) {
+        CuratorFramework curator = newCurator();
+        env.manage(new ManagedCuratorFramework(curator));
+        return curator;
+    }",1
+WFSIDCCAPS.java,@see #cards,"public void setCards(final int cards) {
+		this.cards.set(cards);
+	}",1
+WFSPTRCAPS.java,"Specifies the logical service class, value is: {@link XfsServiceClass#PTR}","public XfsServiceClass getServiceClass() {
+		return XfsConstants.valueOf(clazz, XfsServiceClass.class);
+	}",1
+Win32PrintServiceLookup.java,return empty array as don't support multi docs,"public MultiDocPrintService[]
+        getMultiDocPrintServices(DocFlavor[] flavors,
+                                 AttributeSet attributes) {
+        SecurityManager security = System.getSecurityManager();
+        if (security != null) {
+          security.checkPrintJobAccess();
+        }
+        return new MultiDocPrintService[0];
+    }",1
+WoTIdentityManager.java,"Called by this WoTIdentityManager after a new WoTIdentity has been stored to the database and before committing the transaction.  You have to lock this WoTIdentityManager, the PersistentTaskManager and the database before calling this function.  @param newIdentity @throws Exception If adding the Freetalk context to the identity in WoT failed.","private void onNewOwnIdentityAdded(OwnIdentity identity) {
+		Logger.normal(this, ""onNewOwnIdentityAdded "" + identity);
+		
+		WoTOwnIdentity newIdentity = (WoTOwnIdentity)identity;
+		
+		// TODO: Do after an own message is posted. I have not decided at which place to do this :|
+		try {
+			addFreetalkContext(newIdentity);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+			
+		PersistentTask introductionTask = new IntroduceIdentityTask((WoTOwnIdentity)newIdentity);
+		mFreetalk.getTaskManager().storeTaskWithoutCommit(introductionTask);
+		
+		doNewOwnIdentityCallbacks(newIdentity);
+		onShouldFetchStateChanged(newIdentity, false, true);
+	}",1
+AAbout.java,Final Strings variables.,"private String ABOUT_APP = null;
+
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        ABOUT_APP = "" AIO video downloader [ "" + ""Version - "" + versionName + "" ]\n"" +
+                "" Powered by SoftC Software LLC."";
+
+        context = AAbout.this;
+
+        setContentView(R.layout.about_activity);
+
+        initViews();
+        initOnClick();
+    }",0
+Wsdl2Html.java,@param wsdlUrl @return @throws WsdlImportException,"public static String generateHtml(String wsdlUrl) throws WsdlImportException {
+		FreemarkerWebServiceDisplayEngine displayEngine = ClasspathFreemarkerWebServiceDisplayEngine.createEngine();
+		String byteCodesDirParent = System.getProperty(""java.io.tmpdir"") + ""/wsdl2html"";
+		return generateHtml(byteCodesDirParent, wsdlUrl, displayEngine);
+	}",1
+AbstractCalendarView.java,fluent setter,"public BasicLink withBasicLinkObjectExtension(final List<AbstractObject> basicLinkObjectExtension) {
+        this.setBasicLinkObjectExtension(basicLinkObjectExtension);
+        return this;
+    }",0
+ZipArchiveOutputStream.java,"The encoding to use for filenames and the file comment.  <p>For a list of possible values see <a href=""http:java.sun.comj2se1.5.0docsguideintlencoding.doc.html"">http:java.sun.comj2se1.5.0docsguideintlencoding.doc.html<a>. Defaults to UTF-8.<p> @param encoding the encoding to use for file names, use null for the platform's default encoding","public void setEncoding(final String encoding) {
+        this.encoding = encoding;
+        this.zipEncoding = ZipEncodingHelper.getZipEncoding(encoding);
+        useUTF8Flag &= ZipEncodingHelper.isUTF8(encoding);
+    }",1
+WXBaseCircleIndicator.java,@return the mCircleViewPager,"public WXCircleViewPager getCircleViewPager() {
+    return mCircleViewPager;
+  }",1
+AEThread2.java,"entry 0 is debug object, 1 is Long mono-time it was set","public static Object[] getDebug(
+            Thread t) {
+        if (t instanceof threadWrapper) {
+
+            return (((threadWrapper) t).getDebug());
+        }
+
+        return (null);
+    }",0
+WriteSmsNfcAsync.java,Instantiates a new WriteSmsNfcAsync.  @param asyncUiCallback the async ui callback @param asyncOperationCallback the async operation callback @param nfcWriteUtility the nfc write utility,"public WriteSmsNfcAsync(@Nullable AsyncUiCallback asyncUiCallback, @NotNull AsyncOperationCallback asyncOperationCallback, @NotNull NfcWriteUtility nfcWriteUtility) {
+        super(asyncUiCallback, asyncOperationCallback, nfcWriteUtility);
+    }
+
+    @Override
+    public void executeWriteOperation(final Intent intent, final Object... args) {
+        if (checkStringArguments(args.getClass()) || args.length != 2 || intent == null) {
+            throw new UnsupportedOperationException(""Invalid arguments"");
+        }
+
+        setAsyncOperationCallback(new AsyncOperationCallback() {
+            @Override
+            public boolean performWrite(NfcWriteUtility writeUtility) throws ReadOnlyTagException, InsufficientCapacityException, TagNotPresentException, FormatException {
+                return writeUtility.writeSmsToTagFromIntent((String) args[0], (String) args[1], intent);
+            }
+        });
+        super.executeWriteOperation();
+    }",1
+ZMQ.java,"Get the Affinity. The 'ZMQ_AFFINITY' option shall set the IO thread affinity for newly created connections on the specified 'socket'.  Affinity determines which threads from the 0MQ IO thread pool associated with the socket's _context_ shall handle newly created connections. A value of zero specifies no affinity, meaning that work shall be distributed fairly among all 0MQ IO threads in the thread pool. For non-zero values, the lowest bit corresponds to thread 1, second lowest bit to thread 2 and so on. For example, a value of 3 specifies that subsequent connections on 'socket' shall be handled exclusively by IO threads 1 and 2.  See also  in the man page of init[3] for details on allocating the number of IO threads for a specific _context_.  @param value the io_thread affinity. @return true if the option was set, otherwise false","public boolean setAffinity(long value)
+        {
+            return setSocketOpt(zmq.ZMQ.ZMQ_AFFINITY, value);
+        }",1
+WordMedian.java,"Maps words from line of text into a key-value pair; the length of the word as the key, and 1 as the value.","public static class WordMedianMapper extends
+      Mapper<Object, Text, IntWritable, IntWritable> {
+
+    private IntWritable length = new IntWritable();
+
+    /**
+     * Emits a key-value pair for counting the word. Outputs are (IntWritable,
+     * IntWritable).
+     * 
+     * @param value
+     *          This will be a line of text coming in from our input file.
+     */
+    public void map(Object key, Text value, Context context)
+        throws IOException, InterruptedException {
+      StringTokenizer itr = new StringTokenizer(value.toString());
+      while (itr.hasMoreTokens()) {
+        String string = itr.nextToken();
+        length.set(string.length());
+        context.write(length, ONE);
+      }
+    }
+  }",1
+VoiceAdd.java,"Creates a {@link Voice} in a {@link Measure}.  For each voice x in a measure, there is also a voice x-1 (for x>0). So maybe more than one voice is created. If already existing, a {@link UselessException} is thrown.  @author Andreas Wenger","public class VoiceAdd
+	implements Command {
+
+	//data
+	private Measure measure;
+	private int voiceIndex;
+	//backup
+	private int lastExistingVoiceIndex;
+	
+	
+	public VoiceAdd(Measure measure, int voiceIndex) {
+		this.measure = measure;
+		this.voiceIndex = voiceIndex;
+	}
+	
+	
+	@Override public void execute() {
+		if (measure.getVoices().size() > voiceIndex)
+			throw new UselessException();
+		lastExistingVoiceIndex = measure.getVoices().size() - 1;
+		for (int i = lastExistingVoiceIndex + 1; i <= voiceIndex; i++) {
+			Voice voice = voice();
+			voice.setParent(measure);
+			measure.getVoices().add(voice);
+		}
+	}",1
+WsMessageHandler.java,We implement this to catch the websocket handshake completing successfully. At that point we'll setup this client connection.,"@Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt)
+            throws Exception
+    {
+        if (evt == WebSocketServerProtocolHandler.ServerHandshakeStateEvent.HANDSHAKE_COMPLETE) {
+            configureClient(ctx);
+        }
+    }",1
+YAxisRendererHorizontalBarChart.java,Computes the axis values.  @param yMin - the minimum y-value in the data object for this axis @param yMax - the maximum y-value in the data object for this axis,"@Override
+    public void computeAxis(float yMin, float yMax, boolean inverted) {
+
+        // calculate the starting and entry point of the y-labels (depending on
+        // zoom / contentrect bounds)
+        if (mViewPortHandler.contentHeight() > 10 && !mViewPortHandler.isFullyZoomedOutX()) {
+
+            MPPointD p1 = mTrans.getValuesByTouchPoint(mViewPortHandler.contentLeft(),
+                    mViewPortHandler.contentTop());
+            MPPointD p2 = mTrans.getValuesByTouchPoint(mViewPortHandler.contentRight(),
+                    mViewPortHandler.contentTop());
+
+            if (!inverted) {
+                yMin = (float) p1.x;
+                yMax = (float) p2.x;
+            } else {
+                yMin = (float) p2.x;
+                yMax = (float) p1.x;
+            }
+
+            MPPointD.recycleInstance(p1);
+            MPPointD.recycleInstance(p2);
+        }
+
+        computeAxisValues(yMin, yMax);
+    }",1
+VOGeoServerContrastEnhancementNormalizeBlueTest.java,Creates the channel selection error object.  @param styleFactory the style factory @param contrastMethod the contrast method @return the channel selection,"private ChannelSelection createChannelSelectionError(StyleFactoryImpl styleFactory,
+            ContrastMethod contrastMethod) {
+        ContrastEnhancement contrastEnhancement = 
+                (ContrastEnhancement) styleFactory.contrastEnhancement(null, 
+                contrastMethod.name());
+
+        FilterFactory ff = CommonFactoryFinder.getFilterFactory();
+
+        Map<String, Expression> options = contrastEnhancement.getOptions();
+        options.put(""algorithm"", ff.literal(""TestStretchToMinimumMaximum""));
+        options.put(""minValue"", ff.literal(""1.0""));
+        options.put(""maxValue"", ff.literal(""5.0""));
+
+        SelectedChannelType channelType = styleFactory.createSelectedChannelType(""channel name"",
+                contrastEnhancement);
+        SelectedChannelType[] channels = new SelectedChannelType[3];
+        channels[0] = channelType;
+        channels[1] = channelType;
+        channels[2] = channelType;
+        ChannelSelection channelSelection = styleFactory.createChannelSelection(channels);
+        return channelSelection;
+    }",1
+ZMQ.java,"The 'ZMQ_RATE' option shall set the maximum send or receive data rate for multicast transports such as in the man page of zmq_pgm[7] using the specified 'socket'.  @param value maximum send or receive data rate for multicast, default 100 @return true if the option was set, otherwise false","public boolean setRate(long value)
+        {
+            throw new UnsupportedOperationException();
+        }",1
+WizPurchase.java,Convert a Purchase object in Java-land to a JSON Purchase object to be returned to JS-land  @param purchase Purchase to transform to a JSON object,"JSONObject convertToJSONObject(Purchase purchase) throws JSONException {
+		JSONObject purchaseObject = new JSONObject();
+		purchaseObject.put(""platform"", ""android"");
+		purchaseObject.put(""orderId"", purchase.getOrderId());
+		purchaseObject.put(""packageName"", cordova.getActivity().getPackageName());
+		purchaseObject.put(""productId"", purchase.getSku());
+		purchaseObject.put(""purchaseTime"", purchase.getPurchaseTime());
+		purchaseObject.put(""purchaseState"", purchase.getPurchaseState());
+		purchaseObject.put(""developerPayload"", purchase.getDeveloperPayload());
+		purchaseObject.put(""receipt"", purchase.getToken());
+		purchaseObject.put(""json"", purchase.getOriginalJson());
+		purchaseObject.put(""signature"", purchase.getSignature());
+		return purchaseObject;
+	}",1
+WrapperPlayClientBlockPlace.java,Retrieve the y position of the cursor. @return The current Cursor position Y,"public float getCursorPositionY() {
+        return handle.getFloat().read(1);
+    }",1
+XSLFSheet.java,"@return whether shapes on the master sheet should be shown. By default master graphics is turned off. Sheets that support the notion of master (slide, slideLayout) should override it and check this setting in the sheet XML","public boolean getFollowMasterGraphics(){
+        return false;
+    }",1
+WrapperPlayServerNamedEntitySpawn.java,Retrieve the y axis of the position. <p> Note that the coordinate is rounded off to the nearest 132 of a meter. @return The current y,"public double getY() {
+        return handle.getIntegers().read(2) / 32.0D;
+    }",1
+Wizard.java,Wrapper,"protected JPanel step2_setup()
+	{
+		JTextArea introText = new JTextArea();
+			introText.setLineWrap(true);
+			introText.setWrapStyleWord(true);
+			introText.setEditable(false);
+			introText.setMargin(new Insets(10, 10, 10, 10));
+			introText.setAutoscrolls(true);
+			introText.setText(
+				""The first component to launch is the communication server.\n""
+				+ ""\n""
+				+ ""D-Mason uses Apache ActiveMQ as messaging service server. ""
+				+ ""ActiveMQ is embodied in a special D-Mason's component, ""
+				+ ""called \""Wrapper\"" that allows starting, stopping and ""
+				+ ""resetting the server using the master console (another ""
+				+ ""D-Mason component that we will launch later).\n""
+				+ ""\n""
+				+ ""Click the button below to start the Wrapper and go to ""
+				+ ""the next step.""
+			);
+			
+		JScrollPane sclIntroText = new JScrollPane(introText);
+			
+		btnWrapper = new JButton(""Launch the Wrapper"");
+			btnWrapper.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {	launchWrapper(); }});
+		
+		JPanel pnlButtons = new JPanel();
+			pnlButtons.setLayout(new FlowLayout(FlowLayout.LEFT));
+			pnlButtons.add(btnWrapper);
+		
+		JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout(10, 10));
+			panel.add(sclIntroText, BorderLayout.CENTER);
+			panel.add(pnlButtons, BorderLayout.SOUTH);
+	
+		return panel;
+	}",0
+WfsIDCStatus.java,@see #magReadModule,"public IDCMagModule getMagReadModule() {
+		return magReadModule.get();
+	}",1
+WXCustomStyleSpan.java,Returns {@link Typeface#NORMAL} or {@link Typeface#ITALIC}.,"public int getStyle() {
+    return (mStyle == WXStyle.UNSET ? 0 : mStyle);
+  }",0
+XTraceBaggageInterface.java,Set the parent event IDs in the thread's current baggage to the specified event IDs  @param parentEventIds The event IDs to set for the current execution,"public static void setParentEventIds(long... parentEventIds) {
+        Set<ByteString> parentEventIdSet = Sets.newHashSetWithExpectedSize(parentEventIds.length);
+        for (int i = 0; i < parentEventIds.length; i++) {
+            parentEventIdSet.add(ByteStrings.copyFrom(parentEventIds[i]));
+        }
+        BaggageContents.replace(XTRACE_BAGGAGE_NAMESPACE, PARENT_EVENT_ID_BAGGAGE_FIELD, parentEventIdSet);
+    }",1
+WBSType.java,Gets the value of the summaryCostVarianceIndex property.  @return possible object is {@link Double },"public Double getSummaryCostVarianceIndex()
+   {
+      return summaryCostVarianceIndex;
+   }",1
+WritableBerkeleyDBWiktionaryEdition.java,Returns the setting if {@link IWiktionaryEntry}s should be ordered alphabetically.,"public boolean getEntryIndexByTitle() {
+		return entryIndexByTitle;
+	}",1
+WeexPerTestCaseListPerfWithAppendTree.java,get tc list by text @param byText @return @throws InterruptedException,"public ArrayList<View> getTestCaseListViewByText(String byText) throws InterruptedException {
+        Log.e(""TestScript_Guide"", ""byText =="" + byText);
+
+        if(TextUtils.isEmpty(byText)){
+            return null;
+        }
+        ArrayList<View> outViews = new ArrayList<View>();
+
+        mViewGroup.findViewsWithText(outViews, byText, View.FIND_VIEWS_WITH_TEXT);
+        sleep(2000);
+
+        for (View view :  outViews){
+            String viewText = ((TextView)view).getText().toString();
+            Log.e(TAG, ""viewText =="" + viewText);
+
+
+        }
+        return outViews;
+    }",1
+WrapperPlayClientHeldItemSlot.java,Set the slot which the player has selected (0-8). @param value - new value.,"public void setSlot(short value) {
+        handle.getIntegers().write(0, (int) value);
+    }",1
+ZkLock.java,This condition will be signaled if a zookeeper event was processed and the event contains a datachild change.  @return the condition.,"public Condition getDataChangedCondition() {
+        return _dataChangedCondition;
+    }",1
+WrapperPlayServerEntityStatus.java,Retrieve the entity. @param world - the current world of the entity. @return The entity.,"public Entity getEntity(World world) {
+    	return handle.getEntityModifier(world).read(0);
+    }",1
+Wiper.java,Those guys sure have an obsession with shit...this is supposed to do some lame-ass transpose.  @param array @param width @param height,"protected final void
+        shittyColMajorXform
+        ( byte[]    array,
+          int       width,
+          int       height )
+        {
+            int     x;
+            int     y;
+            byte[]  dest;
+
+            dest = new byte[width*height];
+
+            for(y=0;y<height;y++)
+            for(x=0;x<width;x++){
+                dest[x*height+y] = array[y*width+x];
+                //dest[(1+x)*height+y] = array[y*width+(1+x)];
+            }
+            System.arraycopy(dest, 0, array, 0, width*height);
+
+            //Z_Free(dest);
+
+        }",0
+XScrollView.java,Set last refresh time  @param time,"public void setRefreshTime(String time) {
+        mHeaderTime.setText(time);
+    }",1
+XMLList.java,@param xml @return,"boolean contains(Object xml)
+    {
+        boolean result = false;
+
+        for (int i = 0; i < length(); i++)
+        {
+            XML member = getXmlFromAnnotation(i);
+
+            if (member.equivalentXml(xml))
+            {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }",1
+WFSPINCAPS.java,{@link #keyCheckModes},"public void setKeyCheckModes(final Set<PINKeyCheckMode> keyCheckModes) {
+		this.keyCheckModes.set((int) Bitmask.of(keyCheckModes));
+	}",1
+VolumeAttachmentStatus.java,Created by sandorr 2142017.,"public enum VolumeAttachmentStatus {
+    ATTACHING,
+    ATTACHED,
+    DETACHING,
+    DETACHED;
+
+    public static final String INVALID_ATTACHMENT_STATUS_VALUE_FORMAT = ""Invalid attachment.status value: [%s]. Valid values: attaching, attached, detaching, detached."";
+
+    public static String getValue(@NotNull final String input) {
+        if (isBlank(input)) {
+            return NOT_RELEVANT;
+        }
+
+        for (final VolumeAttachmentStatus volumeAttachmentStatus : VolumeAttachmentStatus.values()) {
+            if (volumeAttachmentStatus.name().equalsIgnoreCase(input)) {
+                return volumeAttachmentStatus.name().toLowerCase();
+            }
+        }
+
+        throw new RuntimeException(String.format(INVALID_ATTACHMENT_STATUS_VALUE_FORMAT, input));
+    }",1
+YTThumbnailTask.java,@throws InterruptedException @throws IOException (ConnectException ...) @throws BadResponseException,"@Override
+    @NonNull
+    protected Bitmap
+    doAsync() throws InterruptedException, IOException, BadResponseException {
+        if (!Util.isNetworkAvailable())
+            throw new ConnectException();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
+        NetReadTask.Builder<NetReadTask.Builder> b
+                = new NetReadTask.Builder<>(Util.createNetConn(mUrl), baos);
+        try {
+            b.create().startSync();
+        } catch (IOException | InterruptedException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Bitmap bm = ImgUtil.decodeBitmap(baos.toByteArray(), mW, mH);
+        if (null == bm)
+            throw new BadResponseException(); // data from network is NOT bitmap!
+        mThumbnail = bm;
+        return bm;
+    }",1
+WikiUtil.java,@return System administrator notification web page URL,"public static String getSystemAdminTokenLink() {
+		return new StringBuffer(WebUtil.getHostAppURL()).append(SharedConstants.URL_PAGE).append(""#"")
+		.append(GwtUtils.getCPageToken(SharedConstants.CPAGE_SYSADMIN_NOTIFY)).toString();
+	}",1
+XmlEntityConsumerTest.java,@param inlineEntries @param feed @param entry,"private void getExpandedData(Map<String, Object> inlineEntries, ODataFeed feed) {
+    assertNotNull(feed.getEntries());
+    List<ODataEntry> entries = feed.getEntries();
+    for (ODataEntry entry : entries) {
+      Map<String, ExpandSelectTreeNode> expandNodes = entry.getExpandSelectTree().getLinks();
+      for (Entry<String, ExpandSelectTreeNode> expand : expandNodes.entrySet()) {
+        assertNotNull(expand.getKey());
+        if (inlineEntries.containsKey(expand.getKey() + entry.getMetadata().getId())) {
+          if (inlineEntries.get(expand.getKey() + entry.getMetadata().getId()) instanceof ODataFeed) {
+            ODataFeed innerFeed = (ODataFeed) inlineEntries.get(expand.getKey() + entry.getMetadata().getId());
+            assertNotNull(innerFeed);
+            getExpandedData(inlineEntries, innerFeed);
+            feed.getEntries().get(feed.getEntries().indexOf(entry)).getProperties().put(expand.getKey(), innerFeed);
+          } else if (inlineEntries.get(expand.getKey() + entry.getMetadata().getId()) instanceof ODataEntry) {
+            ODataEntry innerEntry = (ODataEntry) inlineEntries.get(expand.getKey() + entry.getMetadata().getId());
+            assertNotNull(innerEntry);
+            getExpandedData(inlineEntries, innerEntry);
+            feed.getEntries().get(feed.getEntries().indexOf(entry)).getProperties().put(expand.getKey(), innerEntry);
+          }
+        }
+      }
+    }
+  }",1
+WorkspacesApi.java,When set to true the file returned as a PDF.,"public void setPdfVersion(String pdfVersion) {
+		this.pdfVersion = pdfVersion;
+	}",1
+WBSType.java,Sets the value of the summaryStartDateVariance property.  @param value allowed object is {@link Double },"public void setSummaryStartDateVariance(Double value)
+   {
+      this.summaryStartDateVariance = value;
+   }",1
+WavAudioFormat.java,generates a PcmAudioFormat for wav files for 16 bits signed mono data.  @param sampleRate sampling rate. @return new PcmAudioFormat object for given wav header values. .,"public static WavAudioFormat mono16Bit(int sampleRate) {
+        return new WavAudioFormat(sampleRate, 16, 1, true);
+    }",1
+WaveDrawable.java,Set the wave loading in indeterminate mode or not @param indeterminate,"public void setIndeterminate(boolean indeterminate) {
+        mIndeterminate = indeterminate;
+        if (mIndeterminate) {
+            if (mAnimator == null) {
+                mAnimator = getDefaultAnimator();
+            }
+            mAnimator.addUpdateListener(this);
+            mAnimator.start();
+        } else {
+            if (mAnimator != null) {
+                mAnimator.removeUpdateListener(this);
+                mAnimator.cancel();
+            }
+            setLevel(calculateLevel());
+        }
+    }",1
+WorldTypeScary.java,Should world creation GUI show 'Customize' button for this world type?,"public boolean isCustomizable()
+    {
+        return true;
+    }",0
+WKBReader.java,"Parse an Array of ""full"" Geometries  @param data ... @param count ...","private void parseGeometryArray(ValueGetter data, int count, int type) {
+		mGeom.clear();
+
+		for (int i = 0; i < count; i++) {
+			if (i > 0) {
+				if (type == Geometry.LINESTRING)
+					mGeom.startLine();
+				else if (type == Geometry.POLYGON)
+					mGeom.startPolygon();
+				else {
+					mCallback.process(mGeom);
+					mGeom.clear();
+				}
+			}
+			parseGeometry(data, count);
+			// mGeom.index[++mGeom.indexPos] = -1;
+		}
+
+		mCallback.process(mGeom);
+		mGeom.clear();
+	}",1
+AbstractCalendarView.java,Singleton instance.,"public static final X500NameStyle INSTANCE = new BCStyle();
+
+    protected final Hashtable defaultLookUp;
+    protected final Hashtable defaultSymbols;
+
+    protected BCStyle()
+    {
+        defaultSymbols = copyHashTable(DefaultSymbols);
+        defaultLookUp = copyHashTable(DefaultLookUp);
+    }",0
+WallPostFragment.java,"Delete a post, along with a confirmation  @param selectedWallId The id of the post to delete","private void deletePost(final String selectedWallId) {
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+        // set title
+        alertDialogBuilder.setTitle(""Confirm"");
+
+        // set dialog message
+        alertDialogBuilder.setMessage(getResources().getString(R.string.delete_wall_alert_message)).setCancelable(false).setPositiveButton(""Yes"", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+
+                callDeleteApi(selectedWallId);
+                dialog.dismiss();
+            }
+        }).setNegativeButton(""No"", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                // if this button is clicked, just close
+                // the dialog box and do nothing
+                dialog.cancel();
+            }
+        });
+
+        // create alert dialog
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }",1
+WBSType.java,Sets the value of the summaryCostPerformanceIndexByCost property.  @param value allowed object is {@link Double },"public void setSummaryCostPerformanceIndexByCost(Double value)
+   {
+      this.summaryCostPerformanceIndexByCost = value;
+   }",1
+WBSType.java,Gets the value of the summarySchedulePerformanceIndexByLaborUnits property.  @return possible object is {@link Double },"public Double getSummarySchedulePerformanceIndexByLaborUnits()
+   {
+      return summarySchedulePerformanceIndexByLaborUnits;
+   }",1
+WorkerMessages.java,@param lwpc @return,"public static String getNullWorkerDisposalMessage(String lwpcDID) {
+		return ""The consumer ["" + lwpcDID + 
+				""] disposed a null worker. This disposal was ignored."";
+	}",1
+YeloBoardFragment.java,Loads the actual chat screen. This is used in the case where the user taps on an item in the list of chats,"private void loadChat(String wallId, String userId, String chatName, String image, String tagName) {
+
+        final String chatId = Utils
+                .generateChatId(userId, AppConstants.UserInfo.INSTANCE.getId());
+
+        if (getActivity() != null) {
+
+            final Intent chatScreenActivity = new Intent(getActivity(),
+                    ChatScreenActivity.class);
+            chatScreenActivity.putExtra(AppConstants.Keys.USER_ID, userId);
+            chatScreenActivity.putExtra(AppConstants.Keys.CHAT_ID, chatId);
+            chatScreenActivity.putExtra(AppConstants.Keys.CHAT_TITLE, chatName);
+            chatScreenActivity.putExtra(AppConstants.Keys.PROFILE_IMAGE, image);
+            chatScreenActivity.putExtra(AppConstants.Keys.WALL_ID, wallId);
+            chatScreenActivity.putExtra(AppConstants.Keys.FROM_WALL, true);
+            chatScreenActivity.putExtra(AppConstants.Keys.TAG_NAME, tagName);
+            chatScreenActivity.putExtra(AppConstants.Keys.MY_ID, AppConstants.UserInfo.INSTANCE.getId());
+
+            startActivity(chatScreenActivity);
+        }
+    }",1
+WorldProviderTofu.java,creates a new world chunk manager for WorldProvider,"@Override
+    public void registerWorldChunkManager()
+    {
+        this.worldChunkMgr = new WorldChunkManagerTofu(worldObj);
+        this.dimensionId = Settings.tofuDimNo;
+    }",1
+WebViews.java,Converts the specified DOM event to a hyperlink event.  @param domEvent the DOM-{@link Event} from which the {@link HyperlinkEvent} will be created @param source the source of the {@code domEvent} @return a {@link HyperlinkEvent} @throws IllegalArgumentException if the specified event can not be converted to a hyperlink event; this is the case if {@link #canConvertToHyperlinkEvent(Event)} returns false,"public static HyperlinkEvent convertToHyperlinkEvent(Event domEvent, Object source)
+			throws IllegalArgumentException {
+
+		return StaticDomEventConverter.convertToHyperlinkEvent(domEvent, source);
+	}",1
+WikiUtil.java,@param page @return,"public static boolean isHomepage(AbstractPage page) {
+		return page.equals(page.getSpace().getHomepage());
+	}",1
+ZMQ.java,"The ZMQ_RECONNECT_IVL_MAX option shall set the maximum reconnection interval for the specified socket. This is the maximum period ?MQ shall wait between attempts to reconnect. On each reconnect attempt, the previous interval shall be doubled until ZMQ_RECONNECT_IVL_MAX is reached. This allows for exponential backoff strategy. Default value means no exponential backoff is performed and reconnect interval calculations are only based on ZMQ_RECONNECT_IVL.  @return true if the option was set, otherwise false @deprecated this option uses integer range, use {@link #setReconnectIVLMax(int)} instead @see #getReconnectIVLMax()","@Deprecated
+        public boolean setReconnectIVLMax(long value)
+        {
+            return setReconnectIVLMax(Long.valueOf(value).intValue());
+        }",1
+WoTMessageFetcher.java,You have to synchronize on this <code>WoTMessageFetcher<code> when using this function.,"@Override
+	protected void removeFetch(ClientGetter g) {
+		super.removeFetch(g);
+		mMessageLists.remove(g);
+		mMessages.remove(g.getURI());
+	}",0
+WrapperPlayServerCraftProgressBar.java,"Retrieve the new value for the property. <p> For the enchantment table, this is the enchanting level in the given slot. @return The current Value","public short getValue() {
+        return handle.getIntegers().read(2).shortValue();
+    }",1
+XmlTemplateParser.java,"Helper method used to setup a schema aware, validating XML document builder @return @throws SAXException @throws ParserConfigurationException","private DocumentBuilder createDocBuilder() throws SAXException, ParserConfigurationException {
+        // load the template schema
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XML_SCHEMA);
+        URL schemaUrl = ClassLoader.getSystemResource(CONFIG_SCHEMA);
+        Schema schema = schemaFactory.newSchema(schemaUrl);
+   
+        // setup a docBuilder that will validate against the schema
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setValidating(false);
+        factory.setNamespaceAware(true);
+        factory.setSchema(schema);
+        DocumentBuilder docBuilder = factory.newDocumentBuilder();
+        docBuilder.setErrorHandler(new TemplateErrorHander() );
+        return docBuilder;
+    }",0
+XOMTreeBuilder.java,"@see nu.validator.htmlparser.impl.TreeBuilder#createElement(String, java.lang.String, org.xml.sax.Attributes, java.lang.Object)","@Override
+    protected Element createElement(String ns, String name,
+            HtmlAttributes attributes, Element form, Element intendedParent) throws SAXException {
+        try {
+            Element rv = nodeFactory.makeElement(name,
+ ns, form);
+            for (int i = 0; i < attributes.getLength(); i++) {
+                rv.addAttribute(nodeFactory.makeAttribute(
+                        attributes.getLocalName(i),
+                        attributes.getURINoBoundsCheck(i),
+                        attributes.getValueNoBoundsCheck(i),
+                        attributes.getTypeNoBoundsCheck(i) == ""ID"" ? Attribute.Type.ID
+                                : Attribute.Type.CDATA));
+            }
+            return rv;
+        } catch (XMLException e) {
+            fatal(e);
+            throw new RuntimeException(""Unreachable"");
+        }
+    }",1
+WizardStageDialog.java,"Invoked when wizard has reached last step and dialog is closing. If {@link #forceOkProperty} is set to true and the wizard is not on the last step, this will not be invoked.","public void stepsComplete() {
+
+	}",1
+WifiConfigManager.java,"@param value input to check @param allowedLengths allowed lengths, if any @return true if value is a non-null, non-empty string of hex digits, and if allowed lengths are given, has an allowed length","private static boolean isHexOfLength(CharSequence value, int... allowedLengths) {
+    if (value == null || !HEX_DIGITS.matcher(value).matches()) {
+      return false;
+    }
+    if (allowedLengths.length == 0) {
+      return true;
+    }
+    for (int length : allowedLengths) {
+      if (value.length() == length) {
+        return true;
+      }
+    }
+    return false;
+  }",1
+WindowManagerService.java,Create a new TaskStack and place it on a DisplayContent. @param stackId The unique identifier of the new stack. @param displayId The unique identifier of the DisplayContent.,"public void attachStack(int stackId, int displayId) {
+        final long origId = Binder.clearCallingIdentity();
+        try {
+            synchronized (mWindowMap) {
+                final DisplayContent displayContent = mDisplayContents.get(displayId);
+                if (displayContent != null) {
+                    TaskStack stack = mStackIdToStack.get(stackId);
+                    if (stack == null) {
+                        if (DEBUG_STACK) Slog.d(TAG, ""attachStack: stackId="" + stackId);
+                        stack = new TaskStack(this, stackId);
+                        mStackIdToStack.put(stackId, stack);
+                    }
+                    stack.attachDisplayContent(displayContent);
+                    displayContent.attachStack(stack);
+                    moveStackWindowsLocked(displayContent);
+                    final WindowList windows = displayContent.getWindowList();
+                    for (int winNdx = windows.size() - 1; winNdx >= 0; --winNdx) {
+                        windows.get(winNdx).reportResized();
+                    }
+                }
+            }
+        } finally {
+            Binder.restoreCallingIdentity(origId);
+        }
+    }",1
+XmlUtilities.java,@param xmlString xml string @return xml Document object @throws XmlUtilitiesException,"public static Document stringToXmlDocumentObj( String xmlString ) throws XmlUtilitiesException {
+
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            return db.parse( new ByteArrayInputStream( xmlString.getBytes() ) );
+        } catch( Exception e ) {
+            throw new XmlUtilitiesException( ""Error transforming String to XML document"", e );
+        }
+    }",1
+WrapperPlayServerLogin.java,Set the game mode of the initial world. @param value - new value.,"public void setGamemode(NativeGameMode value) {
+        handle.getGameModes().write(0, value);
+    }",1
+WrapperPlayServerWorldParticles.java,Retrieve the random offset that will be multiplied by a random gaussian and applied to each created particle. @return The random offset.,"public Vector getOffset() {
+    	return new Vector(getX(), getY(), getZ());
+    }",1
+WorkQueueFrontier.java,Release resources only needed when running,"public void close() {
+        ArchiveUtils.closeQuietly(uriUniqFilter);     
+        ArchiveUtils.closeQuietly(allQueues);
+    }",1
+WordApiTest.java,"Test of related method, of class WordApi.","@Test
+    public void testRelated_String() throws Exception {
+        System.out.println(""related"");
+        String word = ""cat"";
+        List<Related> result = WordApi.related(word);
+
+        assertNotNull(result);
+        assertTrue(result.get(0).getWords().size() > 0);
+
+		// test ""words"" that are more than one word
+		word = ""baby blue"";
+		result = WordApi.related(word);
+		assertNotNull(result);
+    }",1
+WorldGeneratorMenrilTree.java,Make a new instance.  @param doNotify If the generator should notify the world.,"public WorldGeneratorMenrilTree(boolean doNotify) {
+        super(doNotify);
+    }",1
+TextView.java,"Like #setText(CharSequence, android.widget.TextView.BufferType), except that the cursor position (if any) is retained in the new text.","public final void setTextKeepState(CharSequence text, BufferType type) {
+        int start = getSelectionStart();
+        int end = getSelectionEnd();
+        int len = text.length();
+
+        setText(text, type);
+
+        if (start >= 0 || end >= 0) {
+            if (mText instanceof Spannable) {
+                Selection.setSelection((Spannable) mText,
+                                       Math.max(0, Math.min(start, len)),
+                                       Math.max(0, Math.min(end, len)));
+            }
+        }
+    }",0
+WBSMilestoneType.java,Gets the value of the isTemplate property.  @return possible object is {@link Boolean },"public Boolean isIsTemplate()
+   {
+      return isTemplate;
+   }",1
+WebMercatorTile.java,Tile definition equations from: TODO URL,"public WebMercatorTile(double lat, double lon) {
+        xtile = (int) Math.floor((lon + 180) / 360 * (1 << ZOOM));
+        ytile = (int) Math.floor((1 - Math.log(Math.tan(Math.toRadians(lat))
+                + 1 / Math.cos(Math.toRadians(lat))) / Math.PI) / 2 * (1 << ZOOM));
+    }",0
+WrappedIntegerIdEntity.java,@return the id,"public WrappedIntegerId getId() {
+		return id;
+	}",1
+WrapperPlayServerNamedSoundEffect.java,Set the y coordinate of the effect. <p> Note that the value is rounded of to the nearest 18. @param value - new value.,"public void setEffectPositionY(double value) {
+        handle.getIntegers().write(1, (int) (value * 8.0));
+    }",1
+WBSType.java,Sets the value of the totalBenefitPlanTally property.  @param value allowed object is {@link Double },"public void setTotalBenefitPlanTally(Double value)
+   {
+      this.totalBenefitPlanTally = value;
+   }",1
+XAPKDownloaderActivity.java,Disconnect the stub from our service on stop,"@Override
+    protected void onStop() {
+        if (null != mDownloaderClientStub) {
+            mDownloaderClientStub.disconnect(this);
+        }
+        super.onStop();
+    }",1
+WaterMarkCreator.java,Set the listener for listening to the background task of decoding and sampling the image.  @param listener - listener for decode complete. @return the related WaterMarkCreator,"public WaterMarkCreator setListener(OnDecodeListener listener) {
+        this.mListener = listener;
+        return this;
+    }",1
+WFSPINCAPS.java,{@link #keyImportThroughParts},"public boolean isKeyImportThroughParts() {
+		return keyImportThroughParts.booleanValue();
+	}",1
+XSLFSheet.java,@return  background for this sheet,"public XSLFBackground getBackground() {
+        return null;
+    }",1
+WrapperPlayServerTransaction.java,Retrieve whether or not the action was accepted. @return The current Accepted?,"public boolean getAccepted() {
+        return handle.getSpecificModifier(boolean.class).read(0);
+    }",1
